@@ -96,7 +96,7 @@ JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
 
 #first shortlink
-SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'publicearn.com')
+SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'publicearn.in')
 SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '6ac07ac202019e09497a0daad5abe04e11a98ac2')
 
 #second shortlink 
@@ -169,7 +169,7 @@ QUALITIES = ["360p", "480p", "720p", "1080p", "1440p", "2160p"]
 YEARS = ["1900", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"]
 
 #added shortner in stream and download 
-STREAM_SITE = (environ.get('STREAM_SITE', 'publicearn.com'))
+STREAM_SITE = (environ.get('STREAM_SITE', 'publicearn.in'))
 STREAM_API = (environ.get('STREAM_API', '6ac07ac202019e09497a0daad5abe04e11a98ac2'))
 STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/55'))
 
