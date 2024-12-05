@@ -95,9 +95,14 @@ JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
 
 
+# #first shortlink
+# SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'publicearn.in')
+# SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '6ac07ac202019e09497a0daad5abe04e11a98ac2')
+
+
 #first shortlink
-SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'publicearn.in')
-SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '6ac07ac202019e09497a0daad5abe04e11a98ac2')
+SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'tryshort.in')
+SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5')
 
 #second shortlink 
 SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'shortxlinks.com')
@@ -107,8 +112,10 @@ SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'b474897e83e3e42619c6
 THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'tryshort.in')
 THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5')
 
+
+
 #verify tutorial 
-VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/55')
+VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/57')
 SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/57')
 
