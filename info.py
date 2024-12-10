@@ -81,7 +81,11 @@ DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://
 # MongoDB information
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://rxautofilerbot2:Surajrathod.878@cluster0.vzh047b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
+
+DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://RxAutofiler2_2:Surajrathod.878@cluster0.luijy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
+
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'mynewfiles')
 
 
 
