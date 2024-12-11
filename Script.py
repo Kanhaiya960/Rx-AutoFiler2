@@ -290,11 +290,18 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 • /delallg - <code>Tᴏ ᴅᴇʟᴇᴛᴇ ᴀʟʟ Gғɪʟᴛᴇʀs ғʀᴏᴍ ᴛʜᴇ ʙᴏᴛ's ᴅᴀᴛᴀʙᴀsᴇ.</code>
 • /deletefiles - <code>Tᴏ ᴅᴇʟᴇᴛᴇ CᴀᴍRɪᴘ ᴀɴᴅ PʀᴇDVD Fɪʟᴇs ғʀᴏᴍ ᴛʜᴇ ʙᴏᴛ's ᴅᴀᴛᴀʙᴀsᴇ.</code>"""
 
-    STATUS_TXT = """<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>{}</code>
+    STATUS_TXT = """
 ★ Tᴏᴛᴀʟ Usᴇʀs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Cʜᴀᴛs: <code>{}</code>
 ★ Usᴇᴅ Sᴛᴏʀᴀɢᴇ: <code>{}</code>
-★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b>
+★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b> 
+
+#db 2
+
+<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>{}</code>
+★ Usᴇᴅ Sᴛᴏʀᴀɢᴇ: <code>{}</code>
+★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b> 
+
 Bot : @{}"""
 
     LOG_TEXT_V = """<b>#NewMember_Verified</b> ✅
