@@ -21,6 +21,13 @@ db = client[DATABASE_NAME2]
 instance = Instance.from_db(db)
 
 
+async def get_db_size():
+    stats = await db.command("dbstats")
+    size_in_bytes = stats["dataSize"]
+    return size_in_bytes
+
+
+
 languages = [" Hin ", "Hindi", "हिन्दी", " Eng ", "English", " Tam ", "Tamil", "தமிழ்", " Tel ", "తెలుగు", "Telugu", " Mal ", "മലയാളം", "Malayalam", " Kan ", "ಕನ್ನಡ", "Kannada", " Guj ", "ગુજરાતી", "Gujrati", " Mar ", "मराठी", "Marathi", "Beng", "বাংলা", "Bangla", "Bengali", "Korean", "Japanese", "Chinese", "Punjabi", "Odia", "Assamese", "Bhojpuri", "Spanish", "French", "German", "Russian", "Portuguese", "Arabic", "Fan dub", "Hindi Clean"]
 
 
