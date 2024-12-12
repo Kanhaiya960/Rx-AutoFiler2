@@ -58,7 +58,7 @@ SECOND_AUTH_CHANNEL = int(second_auth_channel) if second_auth_channel and id_pat
 THIRD_AUTH_CHANNEL = int(third_auth_channel) if third_auth_channel and id_pattern.search(third_auth_channel) else None
 
 
-auth_grp = environ.get('AUTH_GROUP')
+auth_grp = environ.get('AUTH_GROUP', '-1002434490630')
 #auth_grp = environ.get('AUTH_GROUP', '-1002105025900 -1002065604244 -1001994677259 -1002121994889 -1001902541817 -1001946073826 -1001959069308 -1001984828576')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1001993304315')
@@ -75,6 +75,8 @@ REFERAL_COUNT = int(environ.get('REFERAL_COUNT', '20')) # number of referal coun
 REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
 
 
+
+
 ## MongoDB information for session files
 DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://rxsessionfiles:Surajrathod.878@cluster0.elccu40.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
@@ -82,10 +84,13 @@ DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://rxautofilerbot2:Surajrathod.878@cluster0.vzh047b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 
+# 2nd MongoDB for only storing telegram files
 DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://RxAutofiler2_2:Surajrathod.878@cluster0.luijy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
 
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'mynewfiles')
+
+
 
 
 
@@ -96,12 +101,6 @@ JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
 
 
-
-
-
-# #first shortlink
-# SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'publicearn.in')
-# SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '6ac07ac202019e09497a0daad5abe04e11a98ac2')
 
 
 #first shortlink
