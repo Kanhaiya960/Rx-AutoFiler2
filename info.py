@@ -47,8 +47,8 @@ PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in envir
 MV_UPDATE_CHANNEL = -1002154519885  # ID of the log of daily movies update CHANNEL
 SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', False)) #send newmovies log to update channel 
 
-auth_channel = environ.get('AUTH_CHANNEL', '-1002368063817')  # public channel 
-second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1001641011626')  # Add the second auth channel or Group (should private)
+auth_channel = environ.get('AUTH_CHANNEL', '-1001641011626')  # public channel 
+second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1002404616346')  # Add the second auth channel or Group (should private)
 third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002342881420')  # Add the third auth channel or Group (should private)
 
 
