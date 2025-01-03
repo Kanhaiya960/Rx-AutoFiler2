@@ -49,7 +49,7 @@ SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', False)) #send newmovies log to u
 
 auth_channel = environ.get('AUTH_CHANNEL', '-1001641011626')  # public channel 
 second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1002404616346')  # Add the second auth channel or Group (should private)
-third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002342881420')  # Add the third auth channel or Group (should private)
+third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002294437833')  # Add the third auth channel or Group (should private)
 
 
 
@@ -112,14 +112,14 @@ SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'shortxlinks.com')
 SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
 
 #third shortlink
-THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'tryshort.in')
-THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5')
+THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'genzurl.com')
+THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
 
 
 #verify tutorial 
 VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
-THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/57')
+THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/55')
 
 
 
