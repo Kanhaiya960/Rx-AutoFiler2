@@ -103,13 +103,23 @@ JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
 
 
+# #first shortlink
+# SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'shortxlinks.com')
+# SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+
+# #second shortlink 
+# SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'shortxlinks.com')
+# SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+
+
 #first shortlink
-SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'shortxlinks.com')
-SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'genzurl.com')
+SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
 
 #second shortlink 
-SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'shortxlinks.com')
-SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'genzurl.com')
+SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
+
 
 #third shortlink
 THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'genzurl.com')
