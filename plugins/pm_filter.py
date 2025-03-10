@@ -1,5 +1,4 @@
 import pytz, traceback, requests, string, tracemalloc, logging, random, math, ast, emoji, os, re, asyncio
-
 from datetime import datetime, timedelta, date, time
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from pyrogram.enums import ChatMemberStatus
@@ -172,46 +171,88 @@ async def give_filter(client, message):
 
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
-async def pm_text(bot, message):
-    content = message.text
-    user = message.from_user.first_name
-    user_id = message.from_user.id
+async def give_filter(client, message):
+    # Check subscription for all channels in FSUB_CHANNELS
+    unjoined_channels = []  # To store channels that are not yet joined
+    invite_links = []
 
-    # Ignore commands and hashtags
-    if content.startswith("/") or content.startswith("#"):
-        return
-
-    # Log the message
-    await bot.send_message(
-        chat_id=PM_MSG_LOG_CHANNEL,
-        text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\nMᴇssᴀɢᴇ : {content}\nNᴀᴍᴇ : {user}\nID : {user_id}\nBᴏᴛ : @{temp.U_NAME}</b>"
-    )
-
-    if PM_SEARCH:
-        # If PM_SEARCH is True, search for the content
-        reply_msg = await bot.send_message(
-            message.from_user.id,
-            f"<b><i>Searching For {content} 🔍</i></b>",
-            reply_to_message_id=message.id
-        )
-        await auto_filter(client, message)
-    else:
-        # If PM_SEARCH is False, send a response and react
-        await message.react(emoji="🔥", big=True)
-        msgr = await message.reply_text(
-            text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/MovieSearchGroupHD>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇\n\nआप यहां पर मूवीज प्राप्त नहीं कर सकते हैं। कृपया हमारे ग्रुप में रिक्वेस्ट करें। 👇</b>",
+    for channel_id in FSUB_CHANNELS:
+        if not await is_subscribed(client, message, [channel_id]):
+            # If user is not subscribed, create an invite link and add to unjoined channels
+            try:
+                invite_link = await client.create_chat_invite_link(channel_id, creates_join_request=True)
+                invite_links.append(invite_link.invite_link)
+                unjoined_channels.append(channel_id)
+            except ChatAdminRequired:
+                logger.error(f"Make sure Bot is admin in channel: {channel_id}")
+                return
+    
+    # If user is not subscribed to any channel, show invite buttons
+    if unjoined_channels and ASKFSUBINGRP:
+        btn = []
+        # Add buttons for only unjoined channels
+        for idx, invite_link in enumerate(invite_links):
+            btn.append([InlineKeyboardButton(f"Jᴏɪɴ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ {idx + 1} ♂️", url=invite_link)])
+            
+        # Add "I'm Subscribed" button only if there are unjoined channels
+        btn.append([InlineKeyboardButton("I'm Subscribed ✅", callback_data=f"groupchecksub")])
+        
+        # Send the subscribe message with user mention
+        subscribe_message = await message.reply(
+            f"🔰 ʜᴇʏ <u><b>{message.from_user.mention}🙋</b></u>,\n\n‣<u><b> ENG:-</b></u> Pʟᴇᴀsᴇ <u>sᴜʙsᴄʀɪʙᴇ</u> ᴀʟʟ ᴄʜᴀɴɴᴇʟs ᴛᴏ ʀᴇǫᴜᴇsᴛ ɪɴ ɢʀᴏᴜᴘ.\nᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ 𝗶'𝗺 𝘀𝘂𝗯𝘀𝗰𝗿𝗶𝗯𝗲𝗱 ʙᴜᴛᴛᴏɴ.\n‣<u><b> हिंदी:-</b></u> ग्रुप में फाइल रिक्वेस्ट करने के लिए, कृपया हमारे अपडेट चैनल को जाईन कीजिए।\n‣<b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u>\n  <a href='https://telegra.ph/Force-subscribe-in-Tamil-09-16'>தமிழ்</a> || <a href='https://telegra.ph/Force-subscribe-in-Telugu-09-16'>తెలుగు</a> || <a href='https://telegra.ph/Force-subscribe-in-Malayalam-09-16'>മലയാളം</a> ||</b>",
+            reply_markup=InlineKeyboardMarkup(btn),
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ♂️", url="https://t.me/MovieSearchGroupHD")]
-            ])
-        )
+            parse_mode=enums.ParseMode.HTML
+        )        
+        temp.DEL_MSG[message.from_user.id] = subscribe_message
 
-        # Wait for 30 seconds before deleting the message
-        await asyncio.sleep(30)
-        await message.delete()
-        await msgr.delete()    
+        try:
+            await asyncio.sleep(60)
+            await message.delete()
+        except Exception as e:
+            logger.error(f"Failed to delete message: {e}")
+            
+        try:
+            await subscribe_message.delete()
+        except Exception as e:
+            logger.error(f"Failed to delete subscribe message: {e}")
+
+        return
         
-        
+    # Continue with the original logic if the user is subscribed
+    if message.chat.id != SUPPORT_CHAT_ID:
+        manual = await manual_filters(client, message)
+        if not manual:
+            settings = await get_settings(message.chat.id)
+            try:
+                if settings['auto_ffilter']:
+                    await auto_filter(client, message)
+            except KeyError:
+                grpid = await active_connection(str(message.from_user.id))
+                await save_group_settings(grpid, 'auto_ffilter', True)
+                settings = await get_settings(message.chat.id)
+                if settings['auto_ffilter']:
+                    await auto_filter(client, message)
+    else:
+        search = message.text
+        temp_files, temp_offset, total_results = await get_search_results(
+            chat_id=message.chat.id, query=search.lower(), offset=0, filter=True
+        )
+        if total_results == 0:
+            return
+        else:
+            await message.reply_text(
+                f"<b>Hey {message.from_user.mention}, {str(total_results)}\n"
+                f"results are found in my database for your query {search}. \n\n"
+                "This is a support group so you can't get files from here...\n\n"
+                "Join and Search Here\n - https://t.me/MovieSearchGroupHD \n\n"
+                "आपके द्वारा की गई सर्च में कूल {str(total_results)} मूवीज खोजी गई है।\n\n"
+                "यह मूवीज रिक्वेस्ट ग्रुप नही हैं तो आप यहां पर मूवीज रिक्वेस्ट नही कर सकते हैं।\n"
+                "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
+            )
+            
+
+
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
     ident, req, key, offset = query.data.split("_")
