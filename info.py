@@ -112,25 +112,24 @@ IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', False))
 
 
 GRP_LNK = environ.get('GRP_LNK', 'https://t.me/MovieSearchGroupHD')
-CHNL_LNK = environ.get('CHNL_LNK', 'https://telegram.me/+JlRNm8AVBpFhNGY1')
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', '+HRKp-WKYjlpkY2Rl')
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001931308157'))
-LOG_CHANNEL_V = int(environ.get('LOG_CHANNEL', '-1002066731808'))
-LOG_CHANNEL_RQ = int(environ.get('LOG_CHANNEL', '-1001859371885'))
-LOG_CHANNEL_NRM = int(environ.get('LOG_CHANNEL', '-1002056784970'))
-PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002010190484'))
-INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1001947068403'))
-PM_MSG_LOG_CHANNEL = int(environ.get('PM_MSG_LOG_CHANNEL', '-1002313334524'))
-LOG_CHANNEL_SESSIONS_FILES = int(environ.get('LOG_CHANNEL_SESSIONS_FILES', '-1002148356355'))
-FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '-1002140395533')).split()]
-DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002071402245').split()]
-
+CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/Movies_4_Download')
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'Kanus_Support')
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+LOG_CHANNEL_V = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+LOG_CHANNEL_RQ = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+LOG_CHANNEL_NRM = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002450886765'))
+INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1002450886765'))
+PM_MSG_LOG_CHANNEL = int(environ.get('PM_MSG_LOG_CHANNEL', '-1002410949273'))
+LOG_CHANNEL_SESSIONS_FILES = int(environ.get('LOG_CHANNEL_SESSIONS_FILES', '-1002450886765'))
+FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '-1002410949273')).split()]
+DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002410949273').split()]
 
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', True))
 MIDVERIFY = bool(environ.get('MIDVERIFY', True))
 VERIFY = bool(environ.get('VERIFY', True))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
-NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))
+NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", False))
 
 MAX_B_TN = environ.get("MAX_B_TN", "10")
 MAX_BTN = is_enabled((environ.get('MAX_BTN', "True")), True)
@@ -166,7 +165,7 @@ STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/57'))
 #old stream codes snippet 
 ON_HEROKU = False
 # for stream #added
-BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1002047582643")
+BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1002410949273")
 if len(BIN_CHANNEL) == 0:
     print('Error - BIN_CHANNEL is missing, exiting now')
     exit()
