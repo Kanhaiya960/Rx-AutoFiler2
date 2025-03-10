@@ -169,7 +169,7 @@ async def give_filter(client, message):
                 "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
             )
 
-@Client.on_message(filters.private & filters.text & filters.incoming)
+"""@Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
     content = message.text
     user = message.from_user.first_name
@@ -194,7 +194,7 @@ async def pm_text(bot, message):
     # Wait for 30 seconds before deleting the message
     await asyncio.sleep(30)
     await message.delete()
-    await msgr.delete()
+    await msgr.delete()"""
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
