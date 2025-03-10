@@ -187,16 +187,15 @@ async def pm_text(bot, message):
     )
     
 
-"""
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
     content = message.text
     user = message.from_user.first_name
     user_id = message.from_user.id
-    
     if content.startswith("/") or content.startswith("#"):
-        return  # Ignore commands and hashtags
-        
+        return  # ignore commands and hashtags
+    if PM_SEARCH == False:
+        ai_search = True
     await message.react(emoji="🔥", big=True)
     # Reply to the user
     msgr = await message.reply_text(
@@ -217,8 +216,6 @@ async def pm_text(bot, message):
     await message.delete()
     await msgr.delete()
     
-"""
-        
         
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
