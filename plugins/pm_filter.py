@@ -170,9 +170,6 @@ async def give_filter(client, message):
                 "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
             )
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-import asyncio
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
