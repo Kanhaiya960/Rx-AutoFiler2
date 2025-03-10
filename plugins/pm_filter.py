@@ -176,7 +176,6 @@ async def pm_text(bot, message):
     user_id = message.from_user.id
     if content.startswith("/") or content.startswith("#"):
         return  # ignore commands and hashtags
-    if PM_SEARCH == False:
     await message.react(emoji="🔥", big=True)
     # Reply to the user
     msgr = await message.reply_text(
