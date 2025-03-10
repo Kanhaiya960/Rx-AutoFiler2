@@ -170,52 +170,50 @@ async def give_filter(client, message):
                 "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
             )
 
-@Client.on_message(filters.private & filters.text & filters.incoming)
-async def pm_text(bot, message):
-    content = message.text
-    user = message.from_user.first_name
-    user_id = message.from_user.id
-    if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
-    if PM_SEARCH == True:
-        ai_search = True
-        reply_msg = await bot.send_message(message.from_user.id, f"<b><i>Searching For {content} 🔍</i></b>", reply_to_message_id=message.id)
-        await auto_filter(bot, content, message, reply_msg, ai_search)
-            # Log the message
-    await bot.send_message(
-        chat_id=PM_MSG_LOG_CHANNEL,
-        text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\nMᴇssᴀɢᴇ : {content}\nNᴀᴍᴇ : {user}\nID : {user_id}\nBᴏᴛ : @{temp.U_NAME}</b>"
-    )
-    
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import asyncio
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
     content = message.text
     user = message.from_user.first_name
     user_id = message.from_user.id
+
+    # Ignore commands and hashtags
     if content.startswith("/") or content.startswith("#"):
-        return  # ignore commands and hashtags
-    if PM_SEARCH == False:
-        ai_search = True
-    await message.react(emoji="🔥", big=True)
-    # Reply to the user
-    msgr = await message.reply_text(
-        text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/MovieSearchGroupHD>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇\n\nआप यहां पर मूवीज प्राप्त नहीं कर सकते हैं। कृपया हमारे ग्रुप में रिक्वेस्ट करें। 👇</b>",
-        disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ♂️", url="https://t.me/MovieSearchGroupHD")]
-        ])
-    )
+        return
 
     # Log the message
     await bot.send_message(
         chat_id=PM_MSG_LOG_CHANNEL,
         text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\nMᴇssᴀɢᴇ : {content}\nNᴀᴍᴇ : {user}\nID : {user_id}\nBᴏᴛ : @{temp.U_NAME}</b>"
     )
-    # Wait for 30 seconds before deleting the message
-    await asyncio.sleep(30)
-    await message.delete()
-    await msgr.delete()
-    
+
+    if PM_SEARCH:
+        # If PM_SEARCH is True, search for the content
+        reply_msg = await bot.send_message(
+            message.from_user.id,
+            f"<b><i>Searching For {content} 🔍</i></b>",
+            reply_to_message_id=message.id
+        )
+        await auto_filter(bot, content, message, reply_msg)
+    else:
+        # If PM_SEARCH is False, send a response and react
+        await message.react(emoji="🔥", big=True)
+        msgr = await message.reply_text(
+            text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/MovieSearchGroupHD>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇\n\nआप यहां पर मूवीज प्राप्त नहीं कर सकते हैं। कृपया हमारे ग्रुप में रिक्वेस्ट करें। 👇</b>",
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ♂️", url="https://t.me/MovieSearchGroupHD")]
+            ])
+        )
+
+        # Wait for 30 seconds before deleting the message
+        await asyncio.sleep(30)
+        await message.delete()
+        await msgr.delete()    
+        
         
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
