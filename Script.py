@@ -400,8 +400,8 @@ Bot - @{}"""
 <u>FɪʟᴇSize</u> : {file_size}
 
 <u>𝗟𝗲𝘁𝗲𝘀𝘁 𝗥𝗲𝗹𝗲𝗮𝘀𝗲 </u> 
-👉 https://desiremovies3.my/
-👉 https://desiremovies3.my/</b>""" 
+👉 https://t.me/Movies_4_Download
+👉 https://t.me/All_Movie_Finder_Bot</b>""" 
 
     IMDB_TEMPLATE_TXT = """
 <b>Query: {qurey}
@@ -867,9 +867,9 @@ Also your tutorial will be Added Your Group..."""
     DEVELOPER_TXT = """
 special Thanks To ❤️ Developers -
 
--Dev 1 [Owner of this bot ]<a href='https://t.me/shaho007'>𝐒𝐡𝐚𝐡𝐨</a>
+-Dev 1 [Owner of this bot ]<a href='https://t.me/TonyStark_Botz'>Tᴏɴʏ Sᴛᴀʀᴋ</a>
 
--Dev 2 <a href='https://t.me/spshah878'>𝐬𝐩𝐬𝐡𝐚𝐡𝟖𝟕𝟖</a>"""
+-Dev 2 <a href='https://t.me/Kanus_Network'>Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™</a>"""
 
 
 # Don't Remove Credit @VJ_Botz
