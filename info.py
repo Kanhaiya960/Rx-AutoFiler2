@@ -52,7 +52,7 @@ support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002281736778')
 SUPPORT_CHAT_ID = int(support_chat_id) if support_chat_id and id_pattern.search(support_chat_id) else None
 
 # This Channel Is For When User Request Any File Name With command or hashtag like - /request or #request
-reqst_channel = environ.get('REQST_CHANNEL_ID', '-1001947068403')
+reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002321570567')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
 
 # Force Subscription
@@ -71,12 +71,12 @@ AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 # MongoDB information for session files
 DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://rxsessionfiles:Surajrathod.878@cluster0.elccu40.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://rxautofilerbot2:Surajrathod.878@cluster0.vzh047b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Kanhaiya:kanhaiya960@cluster0.ljdbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_NAME = environ.get('DATABASE_NAME', "Kanhaiya")
 # 2nd MongoDB for only storing telegram files
-DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://RxAutofiler2_2:Surajrathod.878@cluster0.luijy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'mynewfiles')
+DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://Kanhaiya:kanhaiya960@cluster0.ljdbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Kanhaiya")
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
 # #first shortlink
 # SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'shortxlinks.com')
@@ -108,10 +108,10 @@ IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
 
 TUTORIAL = environ.get('TUTORIAL', 'https://t.me/how2dow/55')
-IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
+IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', False))
 
 
-GRP_LNK = environ.get('GRP_LNK', 'https://telegram.me/+HldvnSK5kV9hMmFl')
+GRP_LNK = environ.get('GRP_LNK', 'https://t.me/MovieSearchGroupHD')
 CHNL_LNK = environ.get('CHNL_LNK', 'https://telegram.me/+JlRNm8AVBpFhNGY1')
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', '+HRKp-WKYjlpkY2Rl')
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001931308157'))
