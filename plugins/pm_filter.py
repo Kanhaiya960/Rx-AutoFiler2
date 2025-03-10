@@ -169,7 +169,6 @@ async def give_filter(client, message):
                 "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
             )
 
-
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def give_filter(client, message):
     # Check subscription for all channels in FSUB_CHANNELS
