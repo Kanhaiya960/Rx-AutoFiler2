@@ -1,10 +1,18 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
-
 class script(object):
-    START_TXT = """<b>👋 Hᴇʟʟᴏ {},\n‣ ᴍʏ ɴᴀᴍᴇ is <a href=https://t.me/{}>{}</a>, ɪᴀᴍ ʟᴀᴛᴇꜱᴛ ᴀᴅᴠᴀɴᴄᴇ ᴀɴᴅ ᴘᴏᴡᴇʀꜰᴜʟ 𝗥𝗫 𝗔𝘂𝘁𝗼𝗳𝗶𝗹𝗲𝗿𝗯𝗼𝘁 𝗕𝗼𝘁 + ꜰɪʟᴇ ꜱᴛᴏʀᴇ ʙᴏᴛ + ᴍᴀɴᴜᴀʟ ꜰɪᴛᴇʀ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ꜱʜᴏʀᴛɴᴇʀ ꜱᴜᴘᴘᴏʀᴛ</b>\n‣ <b>Sᴇᴇ Fᴜʟʟ Usᴀɢᴇ ʜᴇᴀʀ 👉\nhttps://t.me/pikashow2_Updates/3</b>"""
+    START_TXT = """<b><blockquote>ʜᴇʟʟᴏ {} 👋,</blockquote>
+ɪ ᴀᴍ ʟᴀᴛᴇꜱᴛ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴅ ᴘᴏᴡᴇʀꜰᴜʟ ᴀᴜᴛᴏ ꜰɪʟᴛᴇʀ ʙᴏᴛ. ʏᴏᴜ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴛᴏ ᴇᴀʀɴ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏɴᴇʏ...💸
+ɪᴛ'ꜱ ᴇᴀꜱʏ ᴛᴏ ᴜꜱᴇ ᴊᴜsᴛ ᴀᴅᴅ ᴍᴇ ᴀꜱ ᴀᴅᴍɪɴ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ ɪ ᴡɪʟʟ ᴘʀᴏᴠɪᴅᴇ ᴛʜᴇʀᴇ ᴍᴏᴠɪᴇꜱ ᴡɪᴛʜ ʏᴏᴜʀ ʟɪɴᴋ ꜱʜᴏʀᴛᴇɴᴇʀ... ♻️
+
+<b><blockquote>🔰ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇꜱ ꜱᴛᴏʀᴇ [असीमित मूवी स्टोर ]
+
+🔰ꜱᴇᴀʀᴄʜ ʏᴏᴜ'ʀᴇ ꜰᴀᴠᴏʀɪᴛᴇ ɴᴇᴡ ᴀɴᴅ ᴏʟᴅ ᴍᴏᴠɪᴇꜱ [खोजें आपकी पसंदीदा नई और पुरानी फिल्में]
+
+🔰10ᴍ+ ᴍᴏᴠɪᴇꜱ ᴀᴠᴀɪʟᴀʙʟᴇ [10 मिलियन से अधिक फिल्में उपलब्ध ]🔥</b></blockquote>
+
+‣ Oᴡɴᴇʀ :  <a href='https://t.me/Kanus_Network'>Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ</a>
+‣ Gʀᴏᴜᴘ :  <a href='https://t.me/MovieSearchGroupHD'>Mᴏᴠɪᴇ Gʀᴏᴜᴘ</a>
+‣ Mᴏᴠɪᴇ Cʜᴀɴɴᴇʟ :  <a href='https://t.me/Movies_4_Download'>Mᴏᴠɪᴇ Cʜᴀɴɴᴇʟ</a>
+<b><spoiler>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href=https://t.me/Kanus_Network>Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ</b></spoiler></a>"""
 
 
     RQ_ACCEPT_MSG = """<b>Hello {},
@@ -16,16 +24,14 @@ Your Can Start Bot By 👉 /start """
     HELP_TXT = """<b>Hᴇʏ {}
 Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
-    ABOUT_TXT = """<b>⍟───[ MY ᴅᴇᴛᴀɪʟꜱ ]───⍟
-‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://telegram.me/@Pikashow_Movie_Bot>𝗣𝗶𝗸𝗮𝘀𝗵𝗼𝘄 𝟭.𝟬</a>
- ‣ My best friend : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a> 
- ‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/shaho007'>ⁱᵗᶻ ᵐᵉ $Hàhó</a> 
- ‣ ʟɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>ᴘʏʀᴏɢʀᴀᴍ</a> 
- ‣ ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 3</a> 
- ‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a> 
- ‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='cloud.google.com'>Gᴄʟᴏᴜᴅ</a> 
- ‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.2 [sᴛᴀʙʟᴇ]></b>"""
- 
+    ABOUT_TXT = """<b>
+‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/{}>{}</a>
+‣ ᴄʀᴇᴀᴛᴏʀ : <a href=https://t.me/Kanus_Network>Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ</a>
+‣ ʟɪʙʀᴀʀʏ : ᴘʏʀᴏɢʀᴀᴍ
+‣ ʟᴀɴɢᴜᴀɢᴇ : ᴘʏᴛʜᴏɴ
+‣ ᴅᴀᴛᴀ ʙᴀsᴇ : ᴍᴏɴɢᴏ ᴅʙ
+‣ ʜᴏsᴛᴇᴅ ᴏɴ  : VPS
+‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ40.2 [sᴛᴀʙʟᴇ]</b>""" 
 
     PURCHASE_TXT = """<b>👋 ʜᴇʏ {},
     ꜱᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅ.</b>"""
