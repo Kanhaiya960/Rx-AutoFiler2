@@ -64,8 +64,8 @@ AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_chan
 SECOND_AUTH_CHANNEL = int(second_auth_channel) if second_auth_channel and id_pattern.search(second_auth_channel) else None
 THIRD_AUTH_CHANNEL = int(third_auth_channel) if third_auth_channel and id_pattern.search(third_auth_channel) else None
 
-#auth_grp = environ.get('AUTH_GROUP', '-1002105025900 -1002065604244 -1001994677259 -1002121994889 -1001902541817 -1001946073826 -1001959069308 -1001984828576')
-auth_grp = environ.get('AUTH_GROUP')
+#auth_grp = environ.get('AUTH_GROUP')
+auth_grp = environ.get('AUTH_GROUP', '-1002281736778 -1002256368276 -1002152101562 -1002446715566')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information for session files
