@@ -36,66 +36,81 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
     PURCHASE_TXT = """<b>👋 ʜᴇʏ {},
     ꜱᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅ.</b>"""
     
-    UPI_TXT = """<b>👋 ʜᴇʏ {},
-    
+    UPI_TXT = """<b>   
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-➣  UPI ID :  sandipshah878@axisbank
+💵 ᴜᴘɪ ɪᴅ -
+Fᴏʀ UPI ID Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @rj_09_kanhaiya
 
-➣  Must Take a Screenshot after Payment and Send it to @spshah878 or @RX_SupportBot To Activate Your Subscription</b>"""
-    
-    QR_TXT = """<b>👋 ʜᴇʏ {},
-    
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
+<i>पेमेंट होने के बाद हमे स्क्रीन शॉट भेजें</i>.</b>"""
+
+    QR_TXT = """<b>
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
+💵 QR Cᴏᴅᴇ -
+Fᴏʀ QR Cᴏᴅᴇ Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @rj_09_kanhaiya
 
-‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
+<i>पेमेंट होने के बाद हमे स्क्रीन शॉट भेजें</i>.</b>"""
 
-    PREPLANS_TXT = """<b>👋 ʜᴇʏ</b> {}
+    PREPLANS_TXT = """<b>
+💵 <i> ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs </ɪ>
+
+₹𝟹𝟶  ➪ 𝟷 Wᴇᴇᴋ's
+₹𝟽𝟶  ➪ 𝟷 Mᴏɴᴛʜ's
+₹𝟷𝟹𝟶 ➪ 𝟸 Mᴏɴᴛʜ's
+₹𝟷𝟾𝟶 ➪ 𝟹 Mᴏɴᴛʜ's
+₹𝟹𝟶𝟶 ➪ 𝟼 Mᴏɴᴛʜ's
+₹xxx ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴ
+
+⏰ ᴄᴜꜱᴛᴏᴍɪꜱᴇᴅ ᴅᴀʏꜱ
+💸 Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.
+👨‍💻 ᴄᴏɴᴛᴀᴄᴛ ᴛʜᴇ ᴏᴡɴᴇʀ ᴛᴏ ɢᴇᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴ.
+==========================
+🎁 <u>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</u> :
+
+○ sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ
+○ ɴᴏ ғɪʟᴇ ʟɪᴍɪᴛs
+○ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ғɪʟᴇs
+○ ɴᴏ ʟɪᴍɪᴛs ғᴏʀ sᴇɴᴅ ᴀʟʟ ʙᴜᴛᴛᴏɴ
+○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
+○ ɴᴏ ɴᴇᴇᴅ ᴠᴇʀɪғʏ
+○ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
+○ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
+○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs        
+==========================
+
+➛ ᴄʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
+
+➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a></b>"""
     
-‣ <b>Priumum Plan Details :-</b>
-• Bronze - 15 Days | 20₹ low budget plans
-• Silver - 1 Month | ₹40
-• Gold - 2 Month | ₹80
-• Platinum - 4 Month | ₹140 (Recommended)
-• Diamond 💎 - 6 Month | ₹200
-
-‣ <b>Premium Plan Benefits :-</b>
-➣  No need verify
-➣ Movies (Original Prints And Theatre Prints)
-➣ Unlimited Request For Movies No Limit  
-➣ Online Stream And Fast Download Service  
-➣ Premium Support 🙋
-➣ Request Will Be Completed in 1Hour [ if Available ]
-➣ Direct Files No Links
-
-‣ <b>Payment methods :-</b>
-➣  UPI ID :  sandipshah878@axisbank
-  📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
-➣  Must Take a Screenshot after Payment and Send it to @spshah878 or @RX_SupportBot To Activate Your Subscription 
-➣ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
-
-‣ <b><a href='https://telegra.ph/Refferal-offer-09-13'>Refferal offer</a></b> 👈
-
-‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
-➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%AE%A4%E0%AE%9F%E0%AE%9F-%E0%AE%B5%E0%AE%B5%E0%AE%B0%E0%AE%99%E0%AE%95%E0%AE%B3-09-13'>தமிழ்</a>
-➣ <a href='https://telegra.ph/%E0%B0%AA%E0%B0%B0%E0%B0%AE%E0%B0%AF-%E0%B0%AA%E0%B0%B2%E0%B0%A8-%E0%B0%B5%E0%B0%B5%E0%B0%B0%E0%B0%B2-09-13'>తెలుగు</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a></b>""" 
+#‣ <b>Payment methods :-</b>
+#➣  UPI ID :  sandipshah878@axisbank
+#  📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
+#➣  Must Take a Screenshot after Payment and Send it to @spshah878 or @RX_SupportBot To Activate Your Subscription 
+#➣ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+#‣ <b><a href='https://telegra.ph/Refferal-offer-09-13'>Refferal offer</a></b> 👈
+#‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
+#➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
+#➣ <a href='https://telegra.ph/Priumum-%E0%AE%A4%E0%AE%9F%E0%AE%9F-%E0%AE%B5%E0%AE%B5%E0%AE%B0%E0%AE%99%E0%AE%95%E0%AE%B3-09-13'>தமிழ்</a>
+#➣ <a href='https://telegra.ph/%E0%B0%AA%E0%B0%B0%E0%B0%AE%E0%B0%AF-%E0%B0%AA%E0%B0%B2%E0%B0%A8-%E0%B0%B5%E0%B0%B5%E0%B0%B0%E0%B0%B2-09-13'>తెలుగు</a>
+#➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a></b>""" 
 
     PLAN_TXT = """<b>
     
-<u>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</u>
+🎁 <u>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</u> :
 
+○ sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ
+○ ɴᴏ ғɪʟᴇ ʟɪᴍɪᴛs
+○ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ғɪʟᴇs
+○ ɴᴏ ʟɪᴍɪᴛs ғᴏʀ sᴇɴᴅ ᴀʟʟ ʙᴜᴛᴛᴏɴ
 ○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
+○ ɴᴏ ɴᴇᴇᴅ ᴠᴇʀɪғʏ
 ○ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
 ○ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-○ ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
-○ ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
-○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs 
-○ ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
-○ ʀᴇǫᴜᴇsᴛ ᴡɪʟʟ ʙᴇ ᴄᴏᴍᴘʟᴇᴛᴇᴅ ɪɴ 1ʜ [ ɪꜰ ᴀᴠᴀɪʟᴀʙʟᴇ ]
+○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs        
 
 ʀᴇғᴇʀʀᴇ ʏᴏᴜʀ ʟɪɴᴋ ᴛᴏ ʏᴏᴜʀ ғʀɪᴇɴᴅs, ғᴀᴍɪʟʏ, ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ɢʀᴏᴜᴘ ᴛᴏ ɢᴇᴛ ғʀᴇᴇ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ {}
 ʀᴇғᴇʀᴀʟ ʟɪɴᴋ - https://telegram.me/{}?start=VJ-{}
@@ -197,6 +212,7 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 ➛ ᴜꜱᴇ /plan ᴛᴏ ꜱᴇᴇ ᴀʟʟ ᴏᴜʀ ᴘʟᴀɴꜱ ᴀᴛ ᴏɴᴄᴇ.
 ➛ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan</b>"""
 
+    
     MANUELFILTER_TXT = """ʜᴇʟᴘ: <b>ꜰɪʟᴛᴇʀꜱ</b>
 - ꜰɪʟᴛᴇʀ ɪꜱ ᴀ ꜰᴇᴀᴛᴜʀᴇ ᴡᴇʀᴇ ᴜꜱᴇʀꜱ ᴄᴀɴ ꜱᴇᴛ ᴀᴜᴛᴏᴍᴀᴛᴇᴅ ʀᴇᴘʟɪᴇꜱ ꜰᴏʀ ᴀ ᴘᴀʀᴛɪᴄᴜʟᴀʀ ᴋᴇʏᴡᴏʀᴅ ᴀɴᴅ ɪ ᴡɪʟʟ ʀᴇꜱᴘᴏɴᴅ ᴡʜᴇɴᴇᴠᴇʀ ᴀ ᴋᴇʏᴡᴏʀᴅ ɪꜱ ꜰᴏᴜɴᴅ ɪɴ ᴛʜᴇ ᴍᴇꜱꜱᴀɢᴇ
 <b>ɴᴏᴛᴇ:</b>
