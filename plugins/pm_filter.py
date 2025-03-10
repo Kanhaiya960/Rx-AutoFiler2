@@ -170,8 +170,24 @@ async def give_filter(client, message):
                 "कृपया इस ग्रुप को ज्वाइन करें ,और इस ग्रुप में मूवीज सर्च करें।</b>"
             )
 
+@Client.on_message(filters.private & filters.text & filters.incoming)
+async def pm_text(bot, message):
+    content = message.text
+    user = message.from_user.first_name
+    user_id = message.from_user.id
+    if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
+    if PM_SEARCH == True:
+        ai_search = True
+        reply_msg = await bot.send_message(message.from_user.id, f"<b><i>Searching For {content} 🔍</i></b>", reply_to_message_id=message.id)
+        await auto_filter(bot, content, message, reply_msg, ai_search)
+            # Log the message
+    await bot.send_message(
+        chat_id=PM_MSG_LOG_CHANNEL,
+        text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\nMᴇssᴀɢᴇ : {content}\nNᴀᴍᴇ : {user}\nID : {user_id}\nBᴏᴛ : @{temp.U_NAME}</b>"
+    )
+    
 
-
+"""
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
     content = message.text
@@ -200,6 +216,8 @@ async def pm_text(bot, message):
     await asyncio.sleep(30)
     await message.delete()
     await msgr.delete()
+    
+"""
         
         
 @Client.on_callback_query(filters.regex(r"^next"))
