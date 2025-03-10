@@ -194,7 +194,7 @@ async def pm_text(bot, message):
             f"<b><i>Searching For {content} 🔍</i></b>",
             reply_to_message_id=message.id
         )
-        await auto_filter(bot, content, message, reply_msg)
+        await auto_filter(client, message)
     else:
         # If PM_SEARCH is False, send a response and react
         await message.react(emoji="🔥", big=True)
