@@ -69,12 +69,12 @@ auth_grp = environ.get('AUTH_GROUP')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information for session files
-DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://rxsessionfiles:Surajrathod.878@cluster0.elccu40.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://Database2:Kanhaiya@cluster0.ie0wq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Kanhaiya:kanhaiya960@cluster0.ljdbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Database2:Kanhaiya@cluster0.ie0wq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Kanhaiya")
 # 2nd MongoDB for only storing telegram files
-DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://Kanhaiya:kanhaiya960@cluster0.ljdbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://Database2:Kanhaiya@cluster0.ie0wq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Kanhaiya")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
