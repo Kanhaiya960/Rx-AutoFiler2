@@ -84,12 +84,12 @@ async def notify_user(client: Client, message: ChatJoinRequest):
 
         
 #private(PM) filter on mode👇
-
-# @Client.on_message(filters.group | filters.private & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group) 
-# async def give_filter(client, message):
-
-@Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group) 
+#@Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group) 
+#async def give_filter(client, message):
+   
+@Client.on_message(filters.group | filters.private & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group) 
 async def give_filter(client, message):
+    
     # Check subscription for all channels in FSUB_CHANNELS
     unjoined_channels = []  # To store channels that are not yet joined
     invite_links = []
