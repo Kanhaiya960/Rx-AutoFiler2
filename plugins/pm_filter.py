@@ -1,3 +1,5 @@
+# Currently file
+
 import pytz, traceback, requests, string, tracemalloc, logging, random, math, ast, emoji, os, re, asyncio
 from datetime import datetime, timedelta, date, time
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
