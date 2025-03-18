@@ -153,7 +153,7 @@ btn = [[
     ]]
     reply_markup = InlineKeyboardMarkup(btn)
     await message.reply_photo(
-	    photo=PAYMENT_QR,
+	    photo=CODE,
 	    caption=PREPLANS_TXT,
 	    reply_markup=reply_markup
     )
