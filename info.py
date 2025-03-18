@@ -16,8 +16,8 @@ SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '21187284'))
 API_HASH = environ.get('API_HASH', 'dd55d48a8c624dae7d34dcffe07034b8')
 BOT_TOKEN = environ.get('BOT_TOKEN', "")
-BOT_USERNAME = environ.get('BOT_USERNAME', 'All_Movie_Finder_Bot')
-MEDIATOR_BOT = environ.get('MEDIATOR_BOT', 'Pikashow_Movies_Bot')
+BOT_USERNAME = environ.get('BOT_USERNAME', 'Filmyzilla_Movie_Bot')
+MEDIATOR_BOT = environ.get('MEDIATOR_BOT', 'Filmyzilla_Movie_Bot')
 FORWARD_LINK = "https://vegamovies4u.xyz/wait?Autofiler2"
 
 # Bot settings
