@@ -84,10 +84,9 @@ async def notify_user(client: Client, message: ChatJoinRequest):
 
 
 #private(PM) filter on mode👇
-#@Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group)
+#@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
 
-
-@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
+@Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group)
 async def give_filter(client, message):
     if not await is_req_subscribed(client, message) and ASKFSUBINGRP == True:
         try:
