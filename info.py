@@ -78,24 +78,24 @@ REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
 
 
 ## MongoDB information for session files
-DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://rxsessionfiles:Surajrathod.878@cluster0.elccu40.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI_SESSIONS_F = environ.get('DATABASE_URI_SESSIONS_F', "mongodb+srv://Filmyzilla_Movie_Bot:Kanhaiya@cluster0.i6q14.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://rxautofilerbot2:Surajrathod.878@cluster0.vzh047b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Filmyzilla_Movie_Bot:Kanhaiya@cluster0.i6q14.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 
 # 2nd MongoDB for only storing telegram files
-DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://RxAutofiler2_2:Surajrathod.878@cluster0.luijy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://Filmyzilla_Movie_Bot_2:Kanhaiya@cluster0.wnzjd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
 
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'mynewfiles')
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
 
 
 
 
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', True))
-MIDVERIFY = bool(environ.get('MIDVERIFY', True))
+MIDVERIFY = bool(environ.get('MIDVERIFY', False))
 VERIFY = bool(environ.get('VERIFY', True))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
