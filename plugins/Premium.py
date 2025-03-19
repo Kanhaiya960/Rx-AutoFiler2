@@ -139,8 +139,20 @@ async def premium_user(client, message):
             outfile.write(new)
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
-
 @Client.on_message(filters.command("plan"))
+async def plans_cmd_handler(client, message): 
+    btn = [            
+        [InlineKeyboardButton("ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ʀᴇᴄᴇɪᴘᴛ 🧾", url=OWNER_LNK)],
+        [InlineKeyboardButton("⚠️ ᴄʟᴏsᴇ / ᴅᴇʟᴇᴛᴇ ⚠️", callback_data="close_data")]
+    ]
+    reply_markup = InlineKeyboardMarkup(btn)
+    await message.reply_photo(
+        photo=CODE,
+        caption=PLAN_TXT,
+        reply_markup=reply_markup
+)
+	
+@Client.on_message(filters.command("plans"))
 async def plan(client, message):
     user_id = message.from_user.id 
     users = message.from_user.mention 
