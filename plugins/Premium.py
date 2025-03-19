@@ -157,8 +157,7 @@ async def plan(client, message):
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
 
-    caption_text = "💵 <b>ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs</b> 💵\n\n<b>₹20</b> ➪ 1 Wᴇᴇᴋ\n\n<b>₹60</b> ➪ 1 Mᴏɴᴛʜ\n\n<b>₹110</b> ➪ 2 Mᴏɴᴛʜs\n\n<b>₹150</b> ➪ 3 Mᴏɴᴛʜs\n\n<b>₹250</b> ➪ 6 Mᴏɴᴛʜs\n\n<b>₹xxx</b> ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴs\n\n⏰ <i>ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ᴅᴀʏs ᴀᴠᴀɪʟᴀʙʟᴇ!</i>\n\n💸 <i>Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.</i>\n\n👨‍💻 <i>Cᴏɴᴛᴀᴄᴛ Oᴡɴᴇʀ ғᴏʀ ᴏᴛʜᴇʀ ᴘʟᴀɴs.</i>\n\n==========================\n\n🎁 <u><b>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</b></u>\n\n○ 🔍 Sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇs ɪɴ ʙᴏᴛ\n\n○ 🔓 Uɴʟɪᴍɪᴛᴇᴅ Fɪʟᴇs\n\n○ 🚀 Nᴏ Fɪʟᴇ Lɪᴍɪᴛs\n\n○ ⛔ Nᴏ Aᴅs\n\n○ ✅ Nᴏ Vᴇʀɪғʏ Rᴇǫᴜɪʀᴇᴅ\n\n\n\n○ ⏬ Dɪʀᴇᴄᴛ Fɪʟᴇs\n\n○ 🎞️ Uɴʟɪᴍɪᴛᴇᴅ Mᴏᴠɪᴇs & Sᴇʀɪᴇs\n\n==========================\n\n💵 <b>QR Cᴏᴅᴇ</b> - <a href='https://i.ibb.co/3ySgX3LY/photo-2025-03-16-06-18-55-7482288059942174724.jpg'>Click Here</a>\n\n💵 <b>UPI ID</b> - <code>kanus-network@axl</code>\n\n‼️<b>ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ</b>\n\n➪ <b>Oᴡɴᴇʀ:</b> <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a>"
-
+    caption_text = "💵 Premium Plans 💵\n\n₹20 ➪ 1 Week | ₹60 ➪ 1 Month | ₹110 ➪ 2 Months | ₹150 ➪ 3 Months | ₹250 ➪ 6 Months"
     await message.reply_photo(
         photo=CODE,  
         caption=caption_text,
