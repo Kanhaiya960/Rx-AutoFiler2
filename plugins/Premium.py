@@ -140,18 +140,16 @@ async def premium_user(client, message):
             outfile.write(new)
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from info import CODE  # Ensure info.py properly imported
 
 @Client.on_message(filters.command("plan"))
 async def plan(client, message):
-    print("✅ Plan command received!")  # Debugging ke liye
+    user_id = message.from_user.id 
+    users = message.from_user.mention 
     
-    btn = [[
+    btn = [[    	
         InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url="https://t.me/TonyStark_Botz")
     ],[
-        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇʀᴇ", url="https://t.me/RX_SupportBot")
+        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇʀᴇ", url="https://t.me/Kanus_Network_Bot")
     ],[
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
