@@ -18,9 +18,9 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '904789'))
 API_HASH = environ.get('API_HASH', '2262ef67ced426b9eea57867b11666a1')
-BOT_TOKEN = environ.get('BOT_TOKEN', "7433379680:AAFc1L6WKo2iUFQFcm87Y3bkC9CkByCXNJA")
-BOT_USERNAME = environ.get('BOT_USERNAME', 'RX_Autofiler2_bot')
-MEDIATOR_BOT = environ.get('MEDIATOR_BOT', 'Pikashow_Movie_Bot')
+BOT_TOKEN = environ.get('BOT_TOKEN', "")
+BOT_USERNAME = environ.get('BOT_USERNAME', 'Filmyzilla_Movie_Bot')
+MEDIATOR_BOT = environ.get('MEDIATOR_BOT', 'Filmyzilla_Movie_Bot')
 FORWARD_LINK = "https://vegamovies4u.xyz/wait?Autofiler2"
 
 
@@ -37,19 +37,19 @@ SPELL_IMG = environ.get("SPELL_IMG", "https://te.legra.ph/file/15c1ad448dfe472a5
 
 
 # Admins, Channels & Users
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '622730585 1003337276 5414689790 5059740089 5739623984').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002140395533').split()]
-auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '622730585 1003337276').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6552970915').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '').split()]
+auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 #504856206 1year primium plane starting on 22nov2023.
-PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '622730585 1003337276').split()]
+PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '').split()]
 
-MV_UPDATE_CHANNEL = -1002154519885  # ID of the log of daily movies update CHANNEL
-SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', False)) #send newmovies log to update channel 
+MV_UPDATE_CHANNEL = -1002412021360  # ID of the log of daily movies update CHANNEL
+SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', True)) #send newmovies log to update channel 
 
-auth_channel = environ.get('AUTH_CHANNEL', '-1001641011626')  # public channel 
-second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1002462555158')  # Add the second auth channel or Group (should private)
-third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002321963128')  # Add the third auth channel or Group (should private)
+auth_channel = environ.get('AUTH_CHANNEL', '-1002090374492')  # public channel 
+second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1002341031402')  # Add the second auth channel or Group (should private)
+third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002177289371')  # Add the third auth channel or Group (should private)
 
 
 
@@ -58,11 +58,11 @@ SECOND_AUTH_CHANNEL = int(second_auth_channel) if second_auth_channel and id_pat
 THIRD_AUTH_CHANNEL = int(third_auth_channel) if third_auth_channel and id_pattern.search(third_auth_channel) else None
 
 
-auth_grp = environ.get('AUTH_GROUP')
-#auth_grp = environ.get('AUTH_GROUP', '-1002105025900 -1002065604244 -1001994677259 -1002121994889 -1001902541817 -1001946073826 -1001959069308 -1001984828576')
+#auth_grp = environ.get('AUTH_GROUP')
+auth_grp = environ.get('AUTH_GROUP', '-1002152101562 -1002446715566 -1002439377758 -1002427871451')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
-support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1001993304315')
-reqst_channel = environ.get('REQST_CHANNEL_ID', '-1001947068403')
+support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002281736778')
+reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002412021360')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
 SUPPORT_CHAT_ID = int(support_chat_id) if support_chat_id and id_pattern.search(support_chat_id) else None
 NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))
@@ -140,25 +140,25 @@ IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
 
 
-DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002071402245').split()]
+DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002412021360').split()]
 MAX_B_TN = environ.get("MAX_B_TN", "10")
 MAX_BTN = is_enabled((environ.get('MAX_BTN', "True")), True)
 PORT = environ.get("PORT", "8080")
-GRP_LNK = environ.get('GRP_LNK', 'https://telegram.me/+HldvnSK5kV9hMmFl')
-CHNL_LNK = environ.get('CHNL_LNK', 'https://telegram.me/+JlRNm8AVBpFhNGY1')
+GRP_LNK = environ.get('GRP_LNK', 'https://t.me/Blockbuster_Movies_Club')
+CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/Movies_4_Download')
 
 TUTORIAL = environ.get('TUTORIAL', 'https://t.me/how2dow/55')
 IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
 MSG_ALRT = environ.get('MSG_ALRT', 'Hello My Dear Friends ❤️')
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001931308157'))
-LOG_CHANNEL_V = int(environ.get('LOG_CHANNEL', '-1002066731808'))
-LOG_CHANNEL_RQ = int(environ.get('LOG_CHANNEL', '-1001859371885'))
-LOG_CHANNEL_NRM = int(environ.get('LOG_CHANNEL', '-1002056784970'))
-PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002010190484'))
-LOG_CHANNEL_SESSIONS_FILES = int(environ.get('LOG_CHANNEL_SESSIONS_FILES', '-1002148356355'))
-PM_MSG_LOG_CHANNEL = int(environ.get('PM_MSG_LOG_CHANNEL', '-1002313334524'))
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '1002321570567'))
+LOG_CHANNEL_V = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+LOG_CHANNEL_RQ = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+LOG_CHANNEL_NRM = int(environ.get('LOG_CHANNEL', '-1002321570567'))
+PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002450886765'))
+LOG_CHANNEL_SESSIONS_FILES = int(environ.get('LOG_CHANNEL_SESSIONS_FILES', '-1002450886765'))
+PM_MSG_LOG_CHANNEL = int(environ.get('PM_MSG_LOG_CHANNEL', '1002412021360'))
 
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', '+HRKp-WKYjlpkY2Rl')
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'Kanus_Support')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
 IMDB = is_enabled((environ.get('IMDB', "False")), False)
 AUTO_FFILTER = is_enabled((environ.get('AUTO_FFILTER', "True")), True)
@@ -170,8 +170,8 @@ IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", f"{script.IMDB_TEMPLATE_TXT}")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "False"), False)
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
-INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1001947068403'))
-FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '-1002140395533')).split()]
+INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1002450886765'))
+FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
@@ -196,7 +196,7 @@ STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/57'))
 #old stream codes snippet 
 ON_HEROKU = False
 # for stream #added
-BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1002047582643")
+BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1002412021360")
 if len(BIN_CHANNEL) == 0:
     print('Error - BIN_CHANNEL is missing, exiting now')
     exit()
