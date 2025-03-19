@@ -160,10 +160,9 @@ async def plan(client, message):
 ₹110 ➪ 2 Mᴏɴᴛʜs
 ₹150 ➪ 3 Mᴏɴᴛʜs
 ₹250 ➪ 6 Mᴏɴᴛʜ
-₹xxx ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴs
 
-👨‍💻 Cᴏɴᴛᴀᴄᴛ Oᴡɴᴇʀ ғᴏʀ ᴏᴛʜᴇʀ ᴘʟᴀɴs
-==========================
+💵 UPI ID - <code>kanus-network@axl</code>
+
 🎁 ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs 🎁
 ○ 🔍 Sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇs ɪɴ ʙᴏᴛ
 ○ 🔓 Uɴʟɪᴍɪᴛᴇᴅ Fɪʟᴇs
@@ -172,9 +171,6 @@ async def plan(client, message):
 ○ ✅ Nᴏ Vᴇʀɪғʏ Rᴇǫᴜɪʀᴇᴅ
 ○ ⏬ Dɪʀᴇᴄᴛ Fɪʟᴇs
 ○ 🎞️ Uɴʟɪᴍɪᴛᴇᴅ Mᴏᴠɪᴇs & Sᴇʀɪᴇs
-==========================  
-💵 UPI ID - <code>kanus-network@axl</code>
-
 ‼️ ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ"""
 
     await message.reply_photo(
