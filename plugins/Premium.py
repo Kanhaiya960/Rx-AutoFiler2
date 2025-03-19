@@ -140,16 +140,24 @@ async def premium_user(client, message):
             outfile.write(new)
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from info import CODE  # Ensure info.py properly imported
+
 @Client.on_message(filters.command("plan"))
 async def plan(client, message):
-    user_id = message.from_user.id 
-    users = message.from_user.mention 
-    btn = [[    	
-        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(622730585))
-        ],[
-        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇᴀʀ", url=f"t.me/RX_SupportBot")
-        ],[
+    print("✅ Plan command received!")  # Debugging ke liye
+    
+    btn = [[
+        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url="https://t.me/TonyStark_Botz")
+    ],[
+        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇʀᴇ", url="https://t.me/RX_SupportBot")
+    ],[
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
-    await message.reply_photo(photo="https://graph.org/file/2dce415ac8d303ee7c7ca.jpg", caption=script.PREPLANS_TXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn))
-    
+
+    await message.reply_photo(
+        photo=CODE,  
+        caption="Here is your plan details!",  # Yeh caption customize kar sakte ho
+        reply_markup=InlineKeyboardMarkup(btn)
+    )
