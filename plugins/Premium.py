@@ -5,7 +5,7 @@ from datetime import timedelta
 import pytz
 import datetime, time
 from Script import script 
-from info import ADMINS, BOT_USERNAME, PREMIUM_LOGS
+from info import ADMINS, BOT_USERNAME, PREMIUM_LOGS, CODE
 from utils import get_seconds
 from database.users_chats_db import db 
 from pyrogram import Client, filters 
