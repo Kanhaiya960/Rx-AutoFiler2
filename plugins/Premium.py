@@ -140,14 +140,15 @@ async def premium_user(client, message):
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
 @Client.on_message(filters.command("plan"))
-async def plans_cmd_handler(client, message): 
-    btn = [            
-        [InlineKeyboardButton("ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ʀᴇᴄᴇɪᴘᴛ 🧾", url=OWNER_LNK)],
-        [InlineKeyboardButton("⚠️ ᴄʟᴏsᴇ / ᴅᴇʟᴇᴛᴇ ⚠️", callback_data="close_data")]
-    ]
-    reply_markup = InlineKeyboardMarkup(btn)
-    await message.reply_photo(
-        photo=CODE,
-        caption=PLAN_TXT,
-        reply_markup=reply_markup
-    )
+async def plan(client, message):
+    user_id = message.from_user.id 
+    users = message.from_user.mention 
+    btn = [[    	
+        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(622730585))
+        ],[
+        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇᴀʀ", url=f"t.me/RX_SupportBot")
+        ],[
+        InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
+    ]]
+    await message.reply_photo(photo="https://graph.org/file/2dce415ac8d303ee7c7ca.jpg", caption=script.PLAN_TXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn))
+	
