@@ -153,9 +153,7 @@ async def plan(client, message):
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
 
-    caption_text = """💵 ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs 💵
-    
-₹20 ➪ 1 Wᴇᴇᴋ"""
+    caption_text = """💵 ᴘʀᴇᴍɪᴜᴍ"""
 
     await message.reply_photo(
         photo=CODE,  
