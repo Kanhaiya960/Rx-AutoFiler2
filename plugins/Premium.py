@@ -164,7 +164,7 @@ async def plan(client, message):
 
 👨‍💻 <i>Cᴏɴᴛᴀᴄᴛ Oᴡɴᴇʀ ғᴏʀ ᴏᴛʜᴇʀ ᴘʟᴀɴs.</i>  
 ==========================  
-🎁 <u><b>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</b></u>  
+🎁 ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs 🎁
 ○ 🔍 Sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇs ɪɴ ʙᴏᴛ  
 ○ 🔓 Uɴʟɪᴍɪᴛᴇᴅ Fɪʟᴇs  
 ○ 🚀 Nᴏ Fɪʟᴇ Lɪᴍɪᴛs  
@@ -173,11 +173,9 @@ async def plan(client, message):
 ○ ⏬ Dɪʀᴇᴄᴛ Fɪʟᴇs  
 ○ 🎞️ Uɴʟɪᴍɪᴛᴇᴅ Mᴏᴠɪᴇs & Sᴇʀɪᴇs  
 ==========================  
-💵 <b>QR Cᴏᴅᴇ</b> - ऊपर दिया है।  
 💵 <b>UPI ID</b> - <code>kanus-network@axl</code>  
 
-‼️ <b>ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ</b>  
-➪ <b>Oᴡɴᴇʀ:</b> <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a>"""
+‼️ <b>ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ</b>"""
 
     await message.reply_photo(
         photo=CODE,  
