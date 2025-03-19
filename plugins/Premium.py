@@ -1,4 +1,3 @@
-
 # SPECIAL THANKS TO [Rishikesh Sharma] @Rk_botowner FOR THESE AMAZING CODES
 # SPECIAL THANKS TO @DeletedFromEarth FOR MODIFYING THESE AMAZING CODES
 
@@ -156,6 +155,35 @@ async def plan(client, message):
 
     await message.reply_photo(
         photo=CODE,  
-        caption="Here is your plan details!",  # Yeh caption customize kar sakte ho
+        caption="""💵 ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs 💵
+
+₹𝟸𝟶  ➪ 𝟷 Wᴇᴇᴋ's
+₹𝟼𝟶  ➪ 𝟷 Mᴏɴᴛʜ's
+₹𝟷𝟷𝟶 ➪ 𝟸 Mᴏɴᴛʜ's
+₹𝟷𝟻𝟶 ➪ 𝟹 Mᴏɴᴛʜ's
+₹𝟸𝟻𝟶 ➪ 𝟼 Mᴏɴᴛʜ's
+₹xxx ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴ
+
+⏰ ᴄᴜꜱᴛᴏᴍɪꜱᴇᴅ ᴅᴀʏꜱ
+💸 Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.
+👨‍💻 ᴄᴏɴᴛᴀᴄᴛ ᴛʜᴇ ᴏᴡɴᴇʀ ᴛᴏ ɢᴇᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴ.
+==========================
+🎁 <u>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</u> :
+
+○ sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ
+○ ɴᴏ ғɪʟᴇ ʟɪᴍɪᴛs
+○ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ғɪʟᴇs
+○ ɴᴏ ʟɪᴍɪᴛs ғᴏʀ sᴇɴᴅ ᴀʟʟ ʙᴜᴛᴛᴏɴ
+○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
+○ ɴᴏ ɴᴇᴇᴅ ᴠᴇʀɪғʏ
+○ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
+○ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
+○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs        
+==========================
+💵 QR Cᴏᴅᴇ - <a href='https://i.ibb.co/3ySgX3LY/photo-2025-03-16-06-18-55-7482288059942174724.jpg'>Click Here or (ऊपर दिया है)</a>
+💵 ᴜᴘɪ ɪᴅ - <code>kanus-network@axl</code>
+
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
+➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a>""",  # Yeh caption customize kar sakte ho
         reply_markup=InlineKeyboardMarkup(btn)
     )
