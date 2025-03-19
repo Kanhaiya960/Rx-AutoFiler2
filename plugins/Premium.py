@@ -142,20 +142,4 @@ async def premium_user(client, message):
 
 @Client.on_message(filters.command("plan"))
 async def plan(client, message):
-    print("✅ Plan command received!")  # Debugging ke liye
-    user_id = message.from_user.id
-    users = message.from_user.mention 
-
-    btn = [[
-        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url=f"tg://user?id=622730585")
-    ],[
-        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇʀᴇ", url="https://t.me/RX_SupportBot")
-    ],[
-        InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
-    ]]
-
-    await message.reply_photo(
-        photo=CODE,  
-        caption=PLAN_TXT.format(users),  
-        reply_markup=InlineKeyboardMarkup(btn)
-    )
+    await message.reply_text("Plan command is working!")
