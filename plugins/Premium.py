@@ -153,37 +153,39 @@ async def plan(client, message):
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
 
+    caption_text = """💵 <b>ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs</b> 💵
+
+<b>₹20</b> ➪ 1 Wᴇᴇᴋ  
+<b>₹60</b> ➪ 1 Mᴏɴᴛʜ  
+<b>₹110</b> ➪ 2 Mᴏɴᴛʜs  
+<b>₹150</b> ➪ 3 Mᴏɴᴛʜs  
+<b>₹250</b> ➪ 6 Mᴏɴᴛʜs  
+<b>₹xxx</b> ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴs  
+
+⏰ <i>ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ᴅᴀʏs ᴀᴠᴀɪʟᴀʙʟᴇ!</i>  
+💸 <i>Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.</i>  
+👨‍💻 <i>Cᴏɴᴛᴀᴄᴛ Oᴡɴᴇʀ ғᴏʀ ᴏᴛʜᴇʀ ᴘʟᴀɴs.</i>  
+
+==========================  
+🎁 <u><b>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</b></u>  
+○ 🔍 Sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇs ɪɴ ʙᴏᴛ  
+○ 🔓 Uɴʟɪᴍɪᴛᴇᴅ Fɪʟᴇs  
+○ 🚀 Nᴏ Fɪʟᴇ Lɪᴍɪᴛs  
+○ ⛔ Nᴏ Aᴅs  
+○ ✅ Nᴏ Vᴇʀɪғʏ Rᴇǫᴜɪʀᴇᴅ  
+○ ⏬ Dɪʀᴇᴄᴛ Fɪʟᴇs  
+○ 🎞️ Uɴʟɪᴍɪᴛᴇᴅ Mᴏᴠɪᴇs & Sᴇʀɪᴇs  
+
+==========================  
+💵 <b>QR Cᴏᴅᴇ</b> - <a href='https://i.ibb.co/3ySgX3LY/photo-2025-03-16-06-18-55-7482288059942174724.jpg'>Click Here</a>  
+💵 <b>UPI ID</b> - <code>kanus-network@axl</code>  
+
+‼️ <b>ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ</b>  
+➪ <b>Oᴡɴᴇʀ:</b> <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a>"""
+
     await message.reply_photo(
         photo=CODE,  
-        caption="""💵 ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs 💵
-
-₹𝟸𝟶  ➪ 𝟷 Wᴇᴇᴋ's
-₹𝟼𝟶  ➪ 𝟷 Mᴏɴᴛʜ's
-₹𝟷𝟷𝟶 ➪ 𝟸 Mᴏɴᴛʜ's
-₹𝟷𝟻𝟶 ➪ 𝟹 Mᴏɴᴛʜ's
-₹𝟸𝟻𝟶 ➪ 𝟼 Mᴏɴᴛʜ's
-₹xxx ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴ
-
-⏰ ᴄᴜꜱᴛᴏᴍɪꜱᴇᴅ ᴅᴀʏꜱ
-💸 Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.
-👨‍💻 ᴄᴏɴᴛᴀᴄᴛ ᴛʜᴇ ᴏᴡɴᴇʀ ᴛᴏ ɢᴇᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴ.
-==========================
-🎁 <u>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</u> :
-
-○ sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ
-○ ɴᴏ ғɪʟᴇ ʟɪᴍɪᴛs
-○ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ғɪʟᴇs
-○ ɴᴏ ʟɪᴍɪᴛs ғᴏʀ sᴇɴᴅ ᴀʟʟ ʙᴜᴛᴛᴏɴ
-○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
-○ ɴᴏ ɴᴇᴇᴅ ᴠᴇʀɪғʏ
-○ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
-○ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs        
-==========================
-💵 QR Cᴏᴅᴇ - <a href='https://i.ibb.co/3ySgX3LY/photo-2025-03-16-06-18-55-7482288059942174724.jpg'>Click Here or (ऊपर दिया है)</a>
-💵 ᴜᴘɪ ɪᴅ - <code>kanus-network@axl</code>
-
-‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
-➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/rj_09_kanhaiya'>Kᴀɴʜᴀɪʏᴀ</a>""",  # Yeh caption customize kar sakte ho
-        reply_markup=InlineKeyboardMarkup(btn)
+        caption=caption_text,
+        reply_markup=InlineKeyboardMarkup(btn),
+        parse_mode="html"
     )
