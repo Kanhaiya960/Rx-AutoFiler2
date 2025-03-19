@@ -140,10 +140,6 @@ async def premium_user(client, message):
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from info import CODE  # Ensure `CODE` is properly imported
-
 @Client.on_message(filters.command("plan"))
 async def plan(client, message):
     user_id = message.from_user.id 
@@ -157,10 +153,42 @@ async def plan(client, message):
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
 
-    caption_text = "💵 Premium Plans 💵\n\n₹20 ➪ 1 Week | ₹60 ➪ 1 Month | ₹110 ➪ 2 Months | ₹150 ➪ 3 Months | ₹250 ➪ 6 Months"
+    caption = f"""
+💵 <b>ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs</b> 💵
+
+<b>₹20</b> ➪ 1 Wᴇᴇᴋ  
+<b>₹60</b> ➪ 1 Mᴏɴᴛʜ  
+<b>₹110</b> ➪ 2 Mᴏɴᴛʜs  
+<b>₹150</b> ➪ 3 Mᴏɴᴛʜs  
+<b>₹250</b> ➪ 6 Mᴏɴᴛʜs  
+<b>₹XXX</b> ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴs  
+
+⏰ ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ᴅᴀʏs ᴀᴠᴀɪʟᴀʙʟᴇ  
+💸 Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's  
+👨‍💻 Cᴏɴᴛᴀᴄᴛ Oᴡɴᴇʀ ғᴏʀ ᴏᴛʜᴇʀ ᴘʟᴀɴs  
+
+=========================  
+🎁 <b>ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs</b> 🎁  
+
+○ 🔍 Sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇs ɪɴ ʙᴏᴛ  
+○ 🔓 Uɴʟɪᴍɪᴛᴇᴅ Fɪʟᴇs  
+○ 🚀 Nᴏ Fɪʟᴇ Lɪᴍɪᴛs  
+○ ⛔ Nᴏ Aᴅs  
+○ ✅ Nᴏ Vᴇʀɪғʏ Rᴇǫᴜɪʀᴇᴅ  
+○ 📥 Dɪʀᴇᴄᴛ Fɪʟᴇs  
+○ 🎞️ Uɴʟɪᴍɪᴛᴇᴅ Mᴏᴠɪᴇs & Sᴇʀɪᴇs  
+
+=========================  
+
+💵 <b>QR Cᴏᴅᴇ</b> - <a href='https://i.ibb.co/3ySgX3LY/photo-2025-03-16-06-18-55-7482288059942174724.jpg'>Click Here</a>  
+💵 <b>UPI ID</b> - <code>kanus-network@axl</code>  
+
+‼️ <b>ᴍᴜsᴛ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ sᴄʀᴇᴇɴsʜᴏᴛ</b> ‼️
+"""
+
     await message.reply_photo(
         photo=CODE,  
-        caption=caption_text,
+        caption=caption,
         reply_markup=InlineKeyboardMarkup(btn),
         parse_mode="html"
     )
