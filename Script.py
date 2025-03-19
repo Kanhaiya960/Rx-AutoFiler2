@@ -48,24 +48,9 @@ Fᴏʀ QR Cᴏᴅᴇ Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @TonyStark_Botz
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
 <i>पेमेंट होने के बाद हमे स्क्रीन शॉट भेजें</i>.</b>"""
 
+    
     PREPLANS_TXT = """<b>👋 ʜᴇʏ</b> {}
     
-‣ <b>Priumum Plan Details :-</b>
-• Bronze - 15 Days | 20₹ low budget plans
-• Silver - 1 Month | ₹40
-• Gold - 2 Month | ₹80
-• Platinum - 4 Month | ₹140 (Recommended)
-• Diamond 💎 - 6 Month | ₹200
-
-‣ <b>Premium Plan Benefits :-</b>
-➣  No need verify
-➣ Movies (Original Prints And Theatre Prints)
-➣ Unlimited Request For Movies No Limit  
-➣ Online Stream And Fast Download Service  
-➣ Premium Support 🙋
-➣ Request Will Be Completed in 1Hour [ if Available ]
-➣ Direct Files No Links
-
 ‣ <b>Payment methods :-</b>
 ➣  UPI ID :  sandipshah878@axisbank
   📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
