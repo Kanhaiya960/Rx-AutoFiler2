@@ -28,15 +28,22 @@ FORWARD_LINK = "https://vegamovies4u.xyz/wait?Autofiler2"
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
-
 PICS = (environ.get('PICS' ,'https://graph.org/file/040c13521abcaf21a4adb.jpg https://graph.org/file/d3ce0fbe68fad09c3cfd1.jpg')).split() #SAMPLE PIC
 NOR_IMG = environ.get("NOR_IMG", "https://te.legra.ph/file/a27dc8fe434e6b846b0f8.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://telegram.me/shaho_movie_request")
 SPELL_IMG = environ.get("SPELL_IMG", "https://te.legra.ph/file/15c1ad448dfe472a5cbb8.jpg")
 
+# Premium And Referal Settings
+CODE = (environ.get('CODE', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
+PREMIUM_PIC = (environ.get('PREMIUM_PIC', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
+SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://graph.org/file/35323f5f7bb90113b4337.jpg'))
+REFERAL_COUNT = int(environ.get('REFERAL_COUNT', '20')) # number of referal count
+REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
+
 
 
 # Admins, Channels & Users
+OWNER_USER_NAME = environ.get("OWNER_USER_NAME", "rj_09_kanhaiya")
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6552970915').split()]
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
@@ -66,16 +73,6 @@ reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002412021360')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
 SUPPORT_CHAT_ID = int(support_chat_id) if support_chat_id and id_pattern.search(support_chat_id) else None
 NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))
-
-
-# Premium And Referal Settings
-CODE = (environ.get('CODE', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
-PREMIUM_PIC = (environ.get('PREMIUM_PIC', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
-SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://graph.org/file/35323f5f7bb90113b4337.jpg'))
-REFERAL_COUNT = int(environ.get('REFERAL_COUNT', '20')) # number of referal count
-REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
-
-
 
 
 ## MongoDB information for session files
