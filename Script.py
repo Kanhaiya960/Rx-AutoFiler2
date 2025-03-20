@@ -46,7 +46,7 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
 
-    PREPLANS_TXT = """<b>👋 ʜᴇʏ</b> {}
+    SUBSCRIPTION_TXT = """<b>👋 ʜᴇʏ</b> {}
     
 ‣ <b>Priumum Plan Details :-</b>
 • Bronze - 15 Days | 20₹ low budget plans
@@ -101,7 +101,7 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 ‼️ ᴀғᴛᴇʀ sᴇɴᴅɪɴɢ ᴀ sᴄʀᴇᴇɴsʜᴏᴛ ᴘʟᴇᴀsᴇ ɢɪᴠᴇ ᴜs sᴏᴍᴇ ᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴛʜᴇ ᴘʀᴇᴍɪᴜᴍ ʟɪsᴛ.</b>"""
 
 
-    SUBSCRIPTION_TXT = """
+    PREPLANS_TXT = """
 <b><u>🔰 Oᴜʀ Rᴇғғᴇʀᴀʟ Pʀᴏɢʀᴀᴍ :-</b></u>
 
 ‣ <b>Rᴇғғᴇʀ Tʜɪs Bᴏᴛ Tᴏ Yᴏᴜʀ Fʀɪᴇɴᴅs, Fᴀᴍɪʟʏ Aɴᴅ Gʀᴏᴜᴘs Tᴏ Gᴇᴛ Pʀᴇᴍɪᴜᴍ Mᴇᴍʙᴇʀsʜɪᴘ ɪɴ Fʀᴇᴇ Fᴏʀ {}</b>
