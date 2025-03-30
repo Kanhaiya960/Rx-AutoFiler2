@@ -4,7 +4,12 @@
 
 
 class script(object):
-    START_TXT = """<b>👋 Hᴇʟʟᴏ {},\n‣ ᴍʏ ɴᴀᴍᴇ is <a href=https://t.me/{}>{}</a>, ɪᴀᴍ ʟᴀᴛᴇꜱᴛ ᴀᴅᴠᴀɴᴄᴇ ᴀɴᴅ ᴘᴏᴡᴇʀꜰᴜʟ 𝗥𝗫 𝗔𝘂𝘁𝗼𝗳𝗶𝗹𝗲𝗿𝗯𝗼𝘁 𝗕𝗼𝘁 + ꜰɪʟᴇ ꜱᴛᴏʀᴇ ʙᴏᴛ + ᴍᴀɴᴜᴀʟ ꜰɪᴛᴇʀ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ꜱʜᴏʀᴛɴᴇʀ ꜱᴜᴘᴘᴏʀᴛ</b>\n‣ <b>Sᴇᴇ Fᴜʟʟ Usᴀɢᴇ ʜᴇᴀʀ 👉\nhttps://t.me/pikashow2_Updates/3</b>"""
+    START_TXT = """<b><blockquote>ʜᴇʟʟᴏ {} 😎</blockquote>
+    
+    <b>‣ ᴍʏ ɴᴀᴍᴇ is <a href=https://t.me/{}>{}</a>,
+    ɪᴀᴍ ʟᴀᴛᴇꜱᴛ ᴀᴅᴠᴀɴᴄᴇ ᴀɴᴅ ᴘᴏᴡᴇʀꜰᴜʟ 𝗔𝘂𝘁𝗼𝗳𝗶𝗹𝗲𝗿𝗯𝗼𝘁 𝗕𝗼𝘁 + ꜰɪʟᴇ ꜱᴛᴏʀᴇ ʙᴏᴛ + ᴍᴀɴᴜᴀʟ ꜰɪᴛᴇʀ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍɪᴢᴇᴅ ꜱʜᴏʀᴛɴᴇʀ ꜱᴜᴘᴘᴏʀᴛ
+    
+    ‣ Sᴇᴇ Fᴜʟʟ Usᴀɢᴇ ʜᴇᴀʀ 👉\nhttps://t.me/Movies_4_Download/621</b>"""
 
 
     RQ_ACCEPT_MSG = """<b>Hello {},
@@ -46,64 +51,38 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
 
-    PREPLANS_TXT = """<b>👋 ʜᴇʏ</b> {}
+    PREPLANS_TXT = """<b>💵  ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs 💵
     
-‣ <b>Priumum Plan Details :-</b>
-• Bronze - 15 Days | 20₹ low budget plans
-• Silver - 1 Month | ₹40
-• Gold - 2 Month | ₹80
-• Platinum - 4 Month | ₹140 (Recommended)
-• Diamond 💎 - 6 Month | ₹200
+💵  ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs 
 
-‣ <b>Premium Plan Benefits :-</b>
-➣  No need verify
-➣ Movies (Original Prints And Theatre Prints)
-➣ Unlimited Request For Movies No Limit  
-➣ Online Stream And Fast Download Service  
-➣ Premium Support 🙋
-➣ Request Will Be Completed in 1Hour [ if Available ]
-➣ Direct Files No Links
+₹𝟹𝟶  ➪ 𝟷 Wᴇᴇᴋ's
+₹𝟼𝟶  ➪ 𝟷 Mᴏɴᴛʜ's
+₹𝟷𝟷𝟶 ➪ 𝟸 Mᴏɴᴛʜ's
+₹𝟷𝟻𝟶 ➪ 𝟹 Mᴏɴᴛʜ's
+₹𝟸𝟻𝟶 ➪ 𝟼 Mᴏɴᴛʜ's
+₹xxx ➪ ᴏᴛʜᴇʀ ᴘʟᴀɴ
 
-‣ <b>Payment methods :-</b>
-➣  UPI ID :  sandipshah878@axisbank
-  📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
-➣  Must Take a Screenshot after Payment and Send it to @spshah878 or @RX_SupportBot To Activate Your Subscription 
-➣ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+⏰ ᴄᴜꜱᴛᴏᴍɪꜱᴇᴅ ᴅᴀʏꜱ
+💸 Pʀɪᴄᴇ Aᴄᴄᴏʀᴅɪɴɢ Tᴏ Dᴀʏ's.
+👨‍💻 ᴄᴏɴᴛᴀᴄᴛ ᴛʜᴇ ᴏᴡɴᴇʀ ᴛᴏ ɢᴇᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴ.
+======================================
 
-‣ <b><a href='https://telegra.ph/Refferal-offer-09-13'>Refferal offer</a></b> 👈
+🎁 ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇs :
 
-‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
-➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%AE%A4%E0%AE%9F%E0%AE%9F-%E0%AE%B5%E0%AE%B5%E0%AE%B0%E0%AE%99%E0%AE%95%E0%AE%B3-09-13'>தமிழ்</a>
-➣ <a href='https://telegra.ph/%E0%B0%AA%E0%B0%B0%E0%B0%AE%E0%B0%AF-%E0%B0%AA%E0%B0%B2%E0%B0%A8-%E0%B0%B5%E0%B0%B5%E0%B0%B0%E0%B0%B2-09-13'>తెలుగు</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a></b>"""
-    
-    
-    PREMIUM_CMD = """<b>👋 ʜᴇʏ</b> {}
-    
-‣ <b>Priumum Plan Details :-</b>
-• Bronze - 15 Days | 20₹ low budget plans
-• Silver - 1 Month | ₹40
-• Gold - 2 Month | ₹80
-• Platinum - 4 Month | ₹140 (Recommended)
-• Diamond 💎 - 6 Month | ₹200
+➣ sᴇᴀʀᴄʜ ᴍᴏᴠɪᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ
+➣ ɴᴏ ғɪʟᴇ ʟɪᴍɪᴛs
+➣ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ғɪʟᴇs
+➣ ɴᴏ ʟɪᴍɪᴛs ғᴏʀ sᴇɴᴅ ᴀʟʟ ʙᴜᴛᴛᴏɴ
+➣ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
+➣ ɴᴏ ɴᴇᴇᴅ ᴠᴇʀɪғʏ
+➣ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
+➣ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
+➣ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs        
+======================================
 
-‣ <b>Premium Plan Benefits :-</b>
-➣  No need verify
-➣ Movies (Original Prints And Theatre Prints)
-➣ Unlimited Request For Movies No Limit  
-➣ Online Stream And Fast Download Service  
-➣ Premium Support 🙋
-➣ Request Will Be Completed in 1Hour [ if Available ]
-➣ Direct Files No Links
-
-‣ <b>Payment methods :-</b>
-➣  UPI ID :  sandipshah878@axisbank
-  📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
-➣  Must Take a Screenshot after Payment and Send it to @spshah878 or @RX_SupportBot To Activate Your Subscription 
-➣ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
-
-‣ <b><a href='https://telegra.ph/Refferal-offer-09-13'>Refferal offer</a></b> 👈
+➛ ᴄʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
+➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/TonyStark_Botz'>ᴛᴏɴʏ sᴛᴀʀᴋ</a>
 
 ‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
 ➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
