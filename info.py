@@ -43,7 +43,7 @@ REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
 
 
 # Admins, Channels & Users
-OWNER_USER_NAME = environ.get("OWNER_USER_NAME", "rj_09_kanhaiya")
+OWNER_LNK = environ.get('OWNER_LNK', 'https://t.me/TonyStark_Botz')
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6552970915').split()]
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
