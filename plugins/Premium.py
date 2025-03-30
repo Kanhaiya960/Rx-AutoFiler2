@@ -4,7 +4,7 @@ from datetime import timedelta, datetime, time
 import pytz
 from Script import script
 from asyncio import sleep
-from info import ADMINS, PREMIUM_LOGS, OWNER_LNK, PREMIUM_PIC
+from info import ADMINS, PREMIUM_LOGS, OWNER_LNK, CODE
 from utils import get_seconds
 from database.users_chats_db import db 
 from pyrogram import Client, filters 
