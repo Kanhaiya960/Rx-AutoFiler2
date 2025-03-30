@@ -4,7 +4,7 @@ from datetime import timedelta, datetime, time
 import pytz
 from Script import script
 from asyncio import sleep
-from info import ADMINS, PREMIUM_LOGS, OWNER_USER_NAME, PREMIUM_PIC
+from info import ADMINS, PREMIUM_LOGS, OWNER_LNK, PREMIUM_PIC
 from utils import get_seconds
 from database.users_chats_db import db 
 from pyrogram import Client, filters 
@@ -163,9 +163,9 @@ async def premium_user(client, message):
 async def plan(client, message):
     user_id = message.from_user.id 
     users = message.from_user.mention 
-    btn = [[    	
-        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(622730585))
-        ],[
+    btn = [[
+	InlineKeyboardButton("ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ʀᴇᴄᴇɪᴘᴛ 🧾", url=OWNER_LNK)
+	],[
         InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇᴀʀ", url=f"t.me/RX_SupportBot")
         ],[
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
