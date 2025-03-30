@@ -46,7 +46,7 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕', url=f'http://telegram.me/{temp.U_NAME}?startgroup=true&admin=post_messages+delete_messages+edit_messages+invite_users+promote_members+pin_messages')
         ],[
-            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://telegra.ph/Rx-Movies-Bot-Disclaimer-09-13')
+            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://graph.org/Movies-Bot-Disclaimer-03-30')
         ],[
             InlineKeyboardButton('Eᴀʀɴ Mᴏɴᴇʏ 🤑', callback_data="shortlink_info"),
             InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=GRP_LNK)
@@ -72,7 +72,7 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕', url=f'http://telegram.me/{temp.U_NAME}?startgroup=true&admin=post_messages+delete_messages+edit_messages+invite_users+promote_members+pin_messages')
         ],[
-            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://telegra.ph/Rx-Movies-Bot-Disclaimer-09-13')
+            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://graph.org/Movies-Bot-Disclaimer-03-30')
         ],[
             InlineKeyboardButton('Eᴀʀɴ Mᴏɴᴇʏ 🤑', callback_data="shortlink_info"),
             InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=GRP_LNK)
@@ -145,7 +145,7 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕', url=f'http://telegram.me/{temp.U_NAME}?startgroup=true&admin=post_messages+delete_messages+edit_messages+invite_users+promote_members+pin_messages')
         ],[
-            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://telegra.ph/Rx-Movies-Bot-Disclaimer-09-13')
+            InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://graph.org/Movies-Bot-Disclaimer-03-30')
         ],[
             InlineKeyboardButton('Eᴀʀɴ Mᴏɴᴇʏ 🤑', callback_data="shortlink_info"),
             InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=GRP_LNK)
@@ -220,7 +220,7 @@ async def start(client, message):
             buttons = [[
                     InlineKeyboardButton('➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕', url=f'http://telegram.me/{temp.U_NAME}?startgroup=true&admin=post_messages+delete_messages+edit_messages+invite_users+promote_members+pin_messages')
                 ],[
-                  InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://telegra.ph/Rx-Movies-Bot-Disclaimer-09-13')
+                  InlineKeyboardButton('‼️ DISCLAIMER ⁉️ ', url=f'https://graph.org/Movies-Bot-Disclaimer-03-30')
                 ],[
                     InlineKeyboardButton('Eᴀʀɴ Mᴏɴᴇʏ 🤑', callback_data="shortlink_info"),
                     InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=GRP_LNK)
