@@ -166,7 +166,7 @@ async def plan(client, message):
     btn = [[
 	InlineKeyboardButton("ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ʀᴇᴄᴇɪᴘᴛ 🧾", url=OWNER_LNK)
 	],[
-        InlineKeyboardButton("📲 ɪғ ʏᴏᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ, sᴇɴᴅ ʜᴇʀᴇ", url=f"t.me/Premium_Movies_RoBot")
+        InlineKeyboardButton("📲 ɪғ ʏᴏᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ, sᴇɴᴅ ʜᴇʀᴇ", url=f"t.me/Kanus_Network_Bot")
         ],[
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
