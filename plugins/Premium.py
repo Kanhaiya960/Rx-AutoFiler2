@@ -159,14 +159,16 @@ async def premium_user(client, message):
         await message.reply_document('usersplan.txt', caption="Paid Users:")
 
 
-@Client.on_message(filters.command("plans"))
+@Client.on_message(filters.command("plan"))
 async def plan(client, message):
     user_id = message.from_user.id 
     users = message.from_user.mention 
-    btn = [[
-        InlineKeyboardButton("🔲 Qʀ ", callback_data='qr_info'),
-        InlineKeyboardButton("💳 Uᴘɪ ", callback_data='upi_info')],
-	[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
+    btn = [[    	
+        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(622730585))
+        ],[
+        InlineKeyboardButton("📲 ɪғ ᴜ ᴀʀᴇ ʟɪᴍɪᴛᴇᴅ sᴇɴᴅ ʜᴇᴀʀ", url=f"t.me/RX_SupportBot")
+        ],[
+        InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
     await message.reply_photo(photo=(PREMIUM_PIC), caption=script.PREMIUM_CMD, reply_markup=InlineKeyboardMarkup(btn))
     
