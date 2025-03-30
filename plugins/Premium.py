@@ -170,7 +170,7 @@ async def plan(client, message):
         ],[
         InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")        
     ]]
-    await message.reply_photo(photo=(CODE), caption=script.PREMIUM_CMD, reply_markup=InlineKeyboardMarkup(btn))
+    await message.reply_photo(photo=(CODE), caption=script.PREPLANS_TXT, reply_markup=InlineKeyboardMarkup(btn))
     
 # This code has been modified by @Safaridev
 # Please do not remove this credit
