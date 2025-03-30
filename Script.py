@@ -78,23 +78,24 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-💵 QR Cᴏᴅᴇ -
-Fᴏʀ QR Cᴏᴅᴇ Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @TonyStark_Botz
-
+💵 QR Cᴏᴅᴇ - ऊपर इमेज में 
 💵 ᴜᴘɪ ɪᴅ -
 Fᴏʀ UPI ID Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @TonyStark_Botz
 
 ==================================
 
-➛ ᴄʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
 ➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/TonyStark_Botz'>ᴛᴏɴʏ sᴛᴀʀᴋ</a>
+
+==================================
 
 ‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
 ➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
 ➣ <a href='https://telegra.ph/Priumum-%E0%AE%A4%E0%AE%9F%E0%AE%9F-%E0%AE%B5%E0%AE%B5%E0%AE%B0%E0%AE%99%E0%AE%95%E0%AE%B3-09-13'>தமிழ்</a>
 ➣ <a href='https://telegra.ph/%E0%B0%AA%E0%B0%B0%E0%B0%AE%E0%B0%AF-%E0%B0%AA%E0%B0%B2%E0%B0%A8-%E0%B0%B5%E0%B0%B5%E0%B0%B0%E0%B0%B2-09-13'>తెలుగు</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a></b>"""
+➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a>
+
+➛ ᴄʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan</b>"""
 
     PLAN_TXT = """<b>
     
