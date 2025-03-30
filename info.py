@@ -24,7 +24,6 @@ MEDIATOR_BOT = environ.get('MEDIATOR_BOT', 'Filmyzilla_Movie_Bot')
 FORWARD_LINK = "https://vegamovies4u.xyz/wait?Autofiler2"
 
 
-
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
@@ -34,35 +33,30 @@ MELCOW_VID = environ.get("MELCOW_VID", "https://telegram.me/shaho_movie_request"
 SPELL_IMG = environ.get("SPELL_IMG", "https://te.legra.ph/file/15c1ad448dfe472a5cbb8.jpg")
 
 # Premium And Referal Settings
-CODE = (environ.get('CODE', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
-PREMIUM_PIC = (environ.get('PREMIUM_PIC', 'https://graph.org/file/2dce415ac8d303ee7c7ca.jpg'))
+CODE = (environ.get('CODE', 'https://i.ibb.co/ZpG44PGN/photo-2025-03-30-13-18-00-7487591227861237788.jpg'))
 SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://graph.org/file/35323f5f7bb90113b4337.jpg'))
 REFERAL_COUNT = int(environ.get('REFERAL_COUNT', '20')) # number of referal count
 REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1_Month')
 
 
-
-# Admins, Channels & Users
+# Admins, Channels & Premium Users
 OWNER_LNK = environ.get('OWNER_LNK', 'https://t.me/TonyStark_Botz')
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6552970915').split()]
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-#504856206 1year primium plane starting on 22nov2023.
 PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '').split()]
-
-MV_UPDATE_CHANNEL = -1002412021360  # ID of the log of daily movies update CHANNEL
-SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', True)) #send newmovies log to update channel 
-
 auth_channel = environ.get('AUTH_CHANNEL', '-1002090374492')  # public channel 
 second_auth_channel = environ.get('SECOND_AUTH_CHANNEL', '-1002341031402')  # Add the second auth channel or Group (should private)
 third_auth_channel = environ.get('THIRD_AUTH_CHANNEL', '-1002177289371')  # Add the third auth channel or Group (should private)
-
-
-
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 SECOND_AUTH_CHANNEL = int(second_auth_channel) if second_auth_channel and id_pattern.search(second_auth_channel) else None
 THIRD_AUTH_CHANNEL = int(third_auth_channel) if third_auth_channel and id_pattern.search(third_auth_channel) else None
+
+
+# Movies Update Channel
+MV_UPDATE_CHANNEL = -1002412021360  # ID of the log of daily movies update CHANNEL
+SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', True)) #send newmovies log to update channel 
 
 
 #auth_grp = environ.get('AUTH_GROUP')
@@ -85,20 +79,13 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 # 2nd MongoDB for only storing telegram files
 DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://Filmyzilla_Movie_Bot_2:Kanhaiya@cluster0.wnzjd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
-
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
-
-
-
 
 
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', True))
 MIDVERIFY = bool(environ.get('MIDVERIFY', False))
 VERIFY = bool(environ.get('VERIFY', True))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
-
-
-
 
 
 # #first shortlink
@@ -128,9 +115,6 @@ THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', 'ca1672e0cf3d48a903fab7
 VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/55')
-
-
-
 
 
 #shortlink on for file2link 
@@ -214,8 +198,6 @@ URL = environ.get("URL", "http://109.107.186.165:6979")  #if heroku then paste t
         # print('Error - URL is not valid, exiting now')
         # exit()
         
-
-
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
 LOG_STR += ("IMDB Results are enabled, Bot will be showing imdb details for you queries.\n" if IMDB else "IMBD Results are disabled.\n")
