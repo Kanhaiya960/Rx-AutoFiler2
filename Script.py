@@ -40,7 +40,7 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
     
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-➣  UPI ID :  
+💵 ᴜᴘɪ ɪᴅ - <code>kanus-network@axl</code> (ᴛᴀᴘ ᴏɴ ᴜᴘɪ ɪᴅ ᴛᴏ ᴄᴏᴘʏ)
 
 ➣  Must Take a Screenshot after Payment and Send it to @TonyStark_Botz or @Kanus_Network_Bot To Activate Your Subscription</b>"""
     
@@ -48,7 +48,7 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
     
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-📸 ǫʀ ᴄᴏᴅᴇ - <a href='qrlink'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
+📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://i.ibb.co/ZpG44PGN/photo-2025-03-30-13-18-00-7487591227861237788.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
 
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
 
@@ -78,9 +78,9 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-💵 QR Cᴏᴅᴇ - ऊपर इमेज में 
-💵 ᴜᴘɪ ɪᴅ -
-Fᴏʀ UPI ID Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @TonyStark_Botz
+💵 ᴜᴘɪ ɪᴅ - <code>kanus-network@axl</code> (ᴛᴀᴘ ᴏɴ ᴜᴘɪ ɪᴅ ᴛᴏ ᴄᴏᴘʏ)
+
+📸 QR Cᴏᴅᴇ - ➣ <a href='https://i.ibb.co/ZpG44PGN/photo-2025-03-30-13-18-00-7487591227861237788.jpg'>𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a> ᴀɴᴅ ɪɴ ᴛʜᴇ ɪᴍᴀɢᴇ ᴀʙᴏᴠᴇ
 
 ==================================
 
@@ -88,12 +88,6 @@ Fᴏʀ UPI ID Cᴏɴᴛᴀᴄᴛ Aᴅᴍɪɴ Aᴛ ➪ @TonyStark_Botz
 ➪ Oᴡɴᴇʀ/Aᴅᴍɪɴ:  <a href='https://t.me/TonyStark_Botz'>ᴛᴏɴʏ sᴛᴀʀᴋ</a>
 
 ==================================
-
-‣ <b><u> Tʀᴀɴsʟᴀᴛᴇ Tʜɪs Mᴇssᴀɢᴇ ɪɴ :-</u> 
-➣ <a href='https://telegra.ph/%E0%A4%AA%E0%A4%B0%E0%A4%87%E0%A4%AE%E0%A4%AE-%E0%A4%AF%E0%A4%9C%E0%A4%A8-%E0%A4%B5%E0%A4%B5%E0%A4%B0%E0%A4%A3-09-13'>हिंदी</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%AE%A4%E0%AE%9F%E0%AE%9F-%E0%AE%B5%E0%AE%B5%E0%AE%B0%E0%AE%99%E0%AE%95%E0%AE%B3-09-13'>தமிழ்</a>
-➣ <a href='https://telegra.ph/%E0%B0%AA%E0%B0%B0%E0%B0%AE%E0%B0%AF-%E0%B0%AA%E0%B0%B2%E0%B0%A8-%E0%B0%B5%E0%B0%B5%E0%B0%B0%E0%B0%B2-09-13'>తెలుగు</a>
-➣ <a href='https://telegra.ph/Priumum-%E0%B4%AA%E0%B4%B2%E0%B5%BB-%E0%B4%B5%E0%B4%B6%E0%B4%A6%E0%B4%B6%E0%B4%99%E0%B4%99%E0%B5%BE-09-13'>മലയാളം</a>
 
 ➛ ᴄʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan</b>"""
 
@@ -222,10 +216,7 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 • /del - <code>ᴅᴇʟᴇᴛᴇ ᴀ ꜱᴘᴇᴄɪꜰɪᴄ ꜰɪʟᴛᴇʀ ɪɴ ᴀ ᴄʜᴀᴛ</code>
 • /delall - <code>ᴅᴇʟᴇᴛᴇ ᴛʜᴇ ᴡʜᴏʟᴇ ꜰɪʟᴛᴇʀꜱ ɪɴ ᴀ ᴄʜᴀᴛ (ᴄʜᴀᴛ ᴏᴡɴᴇʀ ᴏɴʟʏ)</code>"""
 
-    # Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
+    
     BUTTON_TXT = """ʜᴇʟᴘ: <b>ʙᴜᴛᴛᴏɴꜱ</b>
 - ᴛʜɪꜱ ʙᴏᴛ ꜱᴜᴘᴘᴏʀᴛꜱ ʙᴏᴛʜ ᴜʀʟ ᴀɴᴅ ᴀʟᴇʀᴛ ɪɴʟɪɴᴇ ʙᴜᴛᴛᴏɴꜱ.
 <b>ɴᴏᴛᴇ:</b>
@@ -259,9 +250,6 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 • /disconnect  - <code>ᴅɪꜱᴄᴏɴɴᴇᴄᴛ ꜰʀᴏᴍ ᴀ ᴄʜᴀᴛ</code>
 • /connections - <code>ʟɪꜱᴛ ᴀʟʟ ʏᴏᴜʀ ᴄᴏɴɴᴇᴄᴛɪᴏɴꜱ</code>"""
 
-    # Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
 
     EXTRA_TXT = """ʜᴇʟᴘ: Exᴛʀᴀ Mᴏᴅᴜʟᴇs
 <b>ɴᴏᴛᴇ:</b>
@@ -387,7 +375,7 @@ Bot - @{}"""
 
     SHORTLINK_INFO = """
 
-🫵 Select Your Language And Earn Money 💰"""
+🫵sᴇʟᴇᴄᴛ ʏᴏᴜʀ ʟᴀɴɢᴜᴀɢᴇ ᴀɴᴅ ᴇᴀʀɴ ᴍᴏɴᴇʏ🫵"""
 
     REQINFO = """
 ⚠ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ⚠
@@ -423,7 +411,7 @@ IMDb Data:
 📀 RunTime: {runtime} Minutes
 📆 Release Info : {release_date}
 🎛 Countries : <code>{countries}</code>
-🤖 𝗕𝗢𝗧 :- @{}
+🤖 𝗕𝗢𝗧 :- @Kanus_Network
 
 ⏰Result Shown in: {remaining_seconds} <i>seconds</i> 🔥
 
