@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from urllib.parse import quote
 import re
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputMediaPhoto
-from info import CHANNELS, MV_UPDATE_CHANNEL, LOG_CHANNEL, FILE_STORE_CHANNEL, PUBLIC_FILE_STORE, SEND_MV_LOGS
+from info import CHANNELS, MV_UPDATE_CHANNEL, LOG_CHANNEL, FILE_STORE_CHANNEL, PUBLIC_FILE_STORE, ADMINS, SEND_MV_LOGS
 from database.ia_filterdb import save_file, unpack_new_file_id, get_search_results
 from utils import get_poster, temp
 
@@ -136,7 +136,7 @@ if os.path.exists(LOGGED_FILES_PATH):
         logged_files = set(json.load(file))
 
 # List of admin user IDs
-ADMINS = [622730585, 1003337276]  # Replace with actual admin user IDs
+#ADMINS = [622730585, 1003337276]  # Replace with actual admin user IDs
 
 # Command to clear the logged files
 @Client.on_message(filters.command("clear_logs") & filters.user(ADMINS))
@@ -239,7 +239,7 @@ async def media_handler(bot, message):
             button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
             #creat button with file id
           #  button1 = InlineKeyboardButton('Get This File♂️', url=f'https://telegram.me/{temp.U_NAME}?start=file_{file_id}')
-            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://telegram.me/+HldvnSK5kV9hMmFl')
+            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/MovieSearchGroupHD')
             
             # Arrange the buttons in a single keyboard
             keyboard = InlineKeyboardMarkup([[button1], [button2]])
@@ -253,7 +253,7 @@ async def media_handler(bot, message):
                 # Send the log message with the movie poster
                 await bot.send_photo(
                     chat_id=MV_UPDATE_CHANNEL,
-                    photo="https://graph.org/file/ea47958580d0fc1deb463.jpg",
+                    photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
                     caption=(f"#𝗡𝗲𝘄𝗙𝗶𝗹𝗲_𝗔𝗱𝗱𝗲𝗱\n"
                              f"𝗙𝗶𝗹𝗲 𝗡𝗮𝗺𝗲: {filename}\n"
                              f"𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝗹𝗲𝘀 𝗜𝗻 𝗗𝗕: {total_results}\n"
@@ -262,7 +262,8 @@ async def media_handler(bot, message):
                              f"𝗙𝗶𝗹𝗲 𝗦𝗶𝘇𝗲: {size_str}\n"
                              f"𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n"
                              f"𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n"
-                             f"𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}"),
+                             f"𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n"
+                             f"𝗧𝗚: @Kanus_Network"),
                     reply_markup=keyboard
                 )
                 print(f"Movie Log‼️ Sended For FileName:- {filename}, {size_str}, {quality_str}, {resolution_str}, {language_str}")
