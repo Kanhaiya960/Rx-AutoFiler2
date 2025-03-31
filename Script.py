@@ -23,14 +23,14 @@ Your Can Start Bot By 👉 /start """
 Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
     ABOUT_TXT = """<b>⍟───[ MY ᴅᴇᴛᴀɪʟꜱ ]───⍟
-‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://telegram.me/@Pikashow_Movie_Bot>𝗣𝗶𝗸𝗮𝘀𝗵𝗼𝘄 𝟭.𝟬</a>
+‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://telegram.me/Filmyzilla_Movie_Bot>𝗣𝗶𝗸𝗮𝘀𝗵𝗼𝘄 𝟭.𝟬</a>
  ‣ My best friend : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a> 
- ‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/shaho007'>ⁱᵗᶻ ᵐᵉ $Hàhó</a> 
+ ‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/TonyStark_Botz'>ⁱᵗᶻ ᵐᵉ Tᴏɴʏ Sᴛᴀʀᴋ</a> 
  ‣ ʟɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>ᴘʏʀᴏɢʀᴀᴍ</a> 
  ‣ ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 3</a> 
  ‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a> 
  ‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='cloud.google.com'>Gᴄʟᴏᴜᴅ</a> 
- ‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.2 [sᴛᴀʙʟᴇ]></b>"""
+ ‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ22.11 [sᴛᴀʙʟᴇ]></b>"""
  
 
     PURCHASE_TXT = """<b>👋 ʜᴇʏ {},
@@ -233,7 +233,7 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 2. ᴛʜɪꜱ ʙᴏᴛ ꜱᴜᴘᴘᴏʀᴛꜱ ʙᴜᴛᴛᴏɴꜱ ᴡɪᴛʜ ᴀɴʏ ᴛᴇʟᴇɢʀᴀᴍ ᴍᴇᴅɪᴀ ᴛʏᴘᴇ.
 3. ʙᴜᴛᴛᴏɴꜱ ꜱʜᴏᴜʟᴅ ʙᴇ ᴘʀᴏᴘᴇʀʟʏ ᴘᴀʀꜱᴇᴅ ᴀꜱ ᴍᴀʀᴋᴅᴏᴡɴ ꜰᴏʀᴍᴀᴛ
 <b>ᴜʀʟ ʙᴜᴛᴛᴏɴꜱ:</b>
-<code>[Button Text](buttonurl:https://t.me/pikashow_Movies_Update/3)</code>
+<code>[Button Text](buttonurl:https://t.me/Movies_4_Download/621)</code>
 <b>ᴀʟᴇʀᴛ ʙᴜᴛᴛᴏɴꜱ:</b>
 <code>[Button Text](buttonalert:ᴛʜɪꜱ ɪꜱ ᴀɴ ᴀʟᴇʀᴛ ᴍᴇꜱꜱᴀɢᴇ)</code>"""
 
@@ -266,9 +266,8 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
     EXTRA_TXT = """ʜᴇʟᴘ: Exᴛʀᴀ Mᴏᴅᴜʟᴇs
 <b>ɴᴏᴛᴇ:</b>
 my features Stay here new features coming soon...  
- <b>✯ Maintained by : <a href=https://t.me/shaho007>𝐒𝐡𝐚𝐡𝐨</a></b>
-  
- <b>✯ Join here : <a href=https://t.me/pikashow_Movies_Update>☢Join my updateds☢</a></b> 
+ <b>✯ Maintained by : <a href=https://t.me/TonyStark_Botz>Tᴏɴʏ Sᴛᴀʀᴋ</a></b>
+ <b>✯ Join here : <a href=https://t.me/Movies_4_Download/>☢Join my updateds☢</a></b> 
   
  ./id - <code>ɢᴇᴛ ɪᴅ ᴏꜰ ᴀ ꜱᴘᴇᴄɪꜰɪᴇᴅ ᴜꜱᴇʀ.</ 
  code> 
@@ -408,8 +407,8 @@ Bot - @{}"""
 <u>FɪʟᴇSize</u> : {file_size}
 
 <u>𝗟𝗲𝘁𝗲𝘀𝘁 𝗥𝗲𝗹𝗲𝗮𝘀𝗲 </u> 
-👉 https://desiremovies3.my/
-👉 https://desiremovies3.my/</b>""" 
+👉 https://t.me/Kanus_Network
+👉 https://t.me/Movies_4_Download</b>""" 
 
     IMDB_TEMPLATE_TXT = """
 <b>Query: {qurey}
@@ -424,7 +423,7 @@ IMDb Data:
 📀 RunTime: {runtime} Minutes
 📆 Release Info : {release_date}
 🎛 Countries : <code>{countries}</code>
-
+🤖 𝗕𝗢𝗧 :- @{}
 
 ⏰Result Shown in: {remaining_seconds} <i>seconds</i> 🔥
 
@@ -623,7 +622,7 @@ Aᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs:
 📅 Dᴀᴛᴇ : <code>{}</code>
 ⏰ Tɪᴍᴇ : <code>{}</code>
 🌐 Tɪᴍᴇᴢᴏɴᴇ : <code>Asia/Kolkata</code>
-🛠️ Bᴜɪʟᴅ Sᴛᴀᴛᴜs: <code>v2.7.1 [ Sᴛᴀʙʟᴇ ]</code>
+🛠️ Bᴜɪʟᴅ Sᴛᴀᴛᴜs: <code>v22.11 [ Sᴛᴀʙʟᴇ ]</code>
 🤖 Bot : @{}</b>"""
 
     LOGO = """
@@ -875,9 +874,9 @@ Also your tutorial will be Added Your Group..."""
     DEVELOPER_TXT = """
 special Thanks To ❤️ Developers -
 
--Dev 1 [Owner of this bot ]<a href='https://t.me/shaho007'>𝐒𝐡𝐚𝐡𝐨</a>
+-Dev 1 [Owner of this bot ]<a href='https://t.me/Kanus_Network'>Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™</a>
 
--Dev 2 <a href='https://t.me/spshah878'>𝐬𝐩𝐬𝐡𝐚𝐡𝟖𝟕𝟖</a>"""
+-Dev 2 <a href='https://t.me/TonyStark_Botz'>Tᴏɴʏ Sᴛᴀʀᴋ</a>"""
 
 
 # Don't Remove Credit @VJ_Botz
