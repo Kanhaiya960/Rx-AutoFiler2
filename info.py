@@ -61,10 +61,10 @@ SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', True)) #send newmovies log to up
 
 
 #auth_grp = environ.get('AUTH_GROUP')
-auth_grp = environ.get('AUTH_GROUPS', '')
+auth_grp = environ.get('AUTH_GROUP', '-1002152101562')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002281736778')
-reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002412021360')
+reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002321570567')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
 SUPPORT_CHAT_ID = int(support_chat_id) if support_chat_id and id_pattern.search(support_chat_id) else None
 NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))
@@ -83,7 +83,7 @@ DATABASE_NAME2 = environ.get('DATABASE_NAME2', "Cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
 
-ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', True))
+ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', False))
 MIDVERIFY = bool(environ.get('MIDVERIFY', False))
 VERIFY = bool(environ.get('VERIFY', True))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
@@ -101,27 +101,27 @@ JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 #first shortlink
 SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'genzurl.com')
 SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
+VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 
 #second shortlink 
 SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'genzurl.com')
 SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
+SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 
 
 #third shortlink
 THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'genzurl.com')
 THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
-
-
-#verify tutorial 
-VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
-SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
 THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/55')
 
+#added shortner in stream and download 
+STREAM_SITE = (environ.get('STREAM_SITE', 'tryshort.in'))
+STREAM_API = (environ.get('STREAM_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5'))
+STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/57'))
 
 #shortlink on for file2link 
 IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
-
 
 DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002412021360').split()]
 MAX_B_TN = environ.get("MAX_B_TN", "10")
@@ -161,20 +161,10 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
 #filters added 
 LANGUAGES = ["malayalam", "mal", "tamil", "tam" ,"english", "eng", "hindi", "hin", "telugu", "tel", "kannada", "kan"]
-
 SEASONS = ["season 1" , "season 2" , "season 3" , "season 4", "season 5" , "season 6" , "season 7" , "season 8" , "season 9" , "season 10"]
-
 EPISODES = ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10", "E11", "E12", "E13", "E14", "E15", "E16", "E17", "E18", "E19", "E20", "E21", "E22", "E23", "E24", "E25", "E26", "E27", "E28", "E29", "E30", "E31", "E32", "E33", "E34", "E35", "E36", "E37", "E38", "E39", "E40"]
-
 QUALITIES = ["360p", "480p", "720p", "1080p", "1440p", "2160p"]
-
 YEARS = ["1900", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"]
-
-#added shortner in stream and download 
-STREAM_SITE = (environ.get('STREAM_SITE', 'tryshort.in'))
-STREAM_API = (environ.get('STREAM_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5'))
-STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/57'))
-
 
 #old stream codes snippet 
 ON_HEROKU = False
@@ -199,7 +189,6 @@ URL = environ.get("URL", "http://109.107.186.165:6979")  #if heroku then paste t
         # print('Error - URL is not valid, exiting now')
         # exit()
         
-
 LOG_STR = "Current Cusomized Configurations are:-\n"
 LOG_STR += ("IMDB Results are enabled, Bot will be showing imdb details for you queries.\n" if IMDB else "IMBD Results are disabled.\n")
 LOG_STR += ("P_TTI_SHOW_OFF found , Users will be redirected to send /start to Bot PM instead of sending file file directly\n" if P_TTI_SHOW_OFF else "P_TTI_SHOW_OFF is disabled files will be send in PM, instead of sending start.\n")
@@ -209,7 +198,6 @@ LOG_STR += ("Long IMDB storyline enabled." if LONG_IMDB_DESCRIPTION else "LONG_I
 LOG_STR += ("Spell Check Mode Is Enabled, bot will be suggesting related movies if movie not found\n" if SPELL_CHECK_REPLY else "SPELL_CHECK_REPLY Mode disabled\n")
 LOG_STR += (f"MAX_LIST_ELM Found, long list will be shortened to first {MAX_LIST_ELM} elements\n" if MAX_LIST_ELM else "Full List of casts and crew will be shown in imdb template, restrict them by adding a value to MAX_LIST_ELM\n")
 LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
-
 
 # Don't Remove Credit @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot @Tech_VJ
