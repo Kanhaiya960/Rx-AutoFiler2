@@ -61,7 +61,7 @@ SEND_MV_LOGS = bool(environ.get('SEND_MV_LOGS', True)) #send newmovies log to up
 
 
 #auth_grp = environ.get('AUTH_GROUP')
-auth_grp = environ.get('AUTH_GROUP', '-1002152101562')
+auth_grp = environ.get('AUTH_GROUP', '-1002152101562 -1002427871451')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002281736778')
 reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002321570567')
