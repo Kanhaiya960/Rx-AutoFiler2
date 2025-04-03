@@ -85,7 +85,7 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', False))
 MIDVERIFY = bool(environ.get('MIDVERIFY', False))
-VERIFY = bool(environ.get('VERIFY', False)
+VERIFY = bool(environ.get('VERIFY', False))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
 
