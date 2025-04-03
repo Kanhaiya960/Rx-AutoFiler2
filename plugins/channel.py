@@ -263,7 +263,7 @@ async def media_handler(bot, message):
                              f"💻 𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n"
                              f"📜 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n"
                              f"📽️ 𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n\n"
-                             f"𝗧𝗚: @Kanus_Network"),
+                             f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nOᑌᖇ Tᘜ ᑕOᗰᗰᑌᑎITY : @Kanus_Network\nBY : Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™"),
                     reply_markup=keyboard
                 )
                 print(f"Movie Log‼️ Sended For FileName:- {filename}, {size_str}, {quality_str}, {resolution_str}, {language_str}")
