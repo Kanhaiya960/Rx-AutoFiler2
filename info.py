@@ -84,44 +84,45 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 
 
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', False))
-MIDVERIFY = bool(environ.get('MIDVERIFY', False))
-VERIFY = bool(environ.get('VERIFY', False))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
+VERIFY = bool(environ.get('VERIFY', False))
+MIDVERIFY = bool(environ.get('MIDVERIFY', False))
 
 # #first shortlink
-# SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'shortxlinks.com')
-# SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+# SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'techvjlink.site')
+# SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
 
 # #second shortlink 
-# SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'shortxlinks.com')
-# SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'b474897e83e3e42619c67d2f56648aac5bb767ea')
+# SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'techvjlink.site')
+# SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
 
 
 #first shortlink
-SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'genzurl.com')
-SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
-VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
+SHORTLINK_URL = environ.get('FIRST_SHORTLINK_URL', 'techvjlink.site')
+SHORTLINK_API = environ.get('FIRST_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
+VERIFY_TUTORIAL = environ.get('FIRST_VERIFY_TUTORIAL', 'https://t.me/Movies_4_Download/614')
 
 #second shortlink 
-SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'genzurl.com')
-SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
-SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/how2dow/76')
+SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'techvjlink.site')
+SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
+SECOND_VERIFY_TUTORIAL = environ.get('SECOND_VERIFY_TUTORIAL', 'https://t.me/Movies_4_Download/615')
 
 
 #third shortlink
-THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'genzurl.com')
-THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', 'ca1672e0cf3d48a903fab7fe451c1a627e0e8e2c')
-THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/how2dow/55')
-
-#added shortner in stream and download 
-STREAM_SITE = (environ.get('STREAM_SITE', 'tryshort.in'))
-STREAM_API = (environ.get('STREAM_API', '3058e5209596c0369b6ed7681b22f5e8216e02b5'))
-STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/how2dow/57'))
+THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'techvjlink.site')
+THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
+THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/Movies_4_Download/616')
 
 #shortlink on for file2link 
 IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
+
+#added shortner in stream and download 
+STREAM_SITE = (environ.get('STREAM_SITE', 'techvjlink.site'))
+STREAM_API = (environ.get('STREAM_API', '5d84c45bd97704c052ca8355670f0d024083f3fb'))
+STREAMHTO = (environ.get('STREAMHTO', 'https://t.me/Movies_4_Download/617'))
+
 
 DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002412021360').split()]
 MAX_B_TN = environ.get("MAX_B_TN", "10")
