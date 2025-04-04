@@ -239,7 +239,7 @@ async def media_handler(bot, message):
             button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
             #creat button with file id
           #  button1 = InlineKeyboardButton('Get This File♂️', url=f'https://telegram.me/{temp.U_NAME}?start=file_{file_id}')
-            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/MovieSearchGroupHD')
+            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/HD_Filmyzilla_Movies')
             
             # Arrange the buttons in a single keyboard
             keyboard = InlineKeyboardMarkup([[button1], [button2]])
