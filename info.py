@@ -86,7 +86,7 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Kanhaiya')
 ASKFSUBINGRP = bool(environ.get('ASKFSUBINGRP', False))
 JOINREQ_MSG = bool(environ.get('JOINREQ_MSG', False))
 
-VERIFY = bool(environ.get('VERIFY', False))
+VERIFY = bool(environ.get('VERIFY', True))
 MIDVERIFY = bool(environ.get('MIDVERIFY', False))
 
 # #first shortlink
@@ -114,9 +114,9 @@ THIRD_SHORTLINK_URL = environ.get('THIRD_SHORTLINK_URL', 'techvjlink.site')
 THIRD_SHORTLINK_API = environ.get('THIRD_SHORTLINK_API', '5d84c45bd97704c052ca8355670f0d024083f3fb')
 THIRD_VERIFY_TUTORIAL = environ.get('THIRD_VERIFY_TUTORIAL', 'https://t.me/Movies_4_Download/616')
 
-#shortlink on for file2link 
-IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
+#shortlink on for file2link
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
+IS_SREAM_SHORTLINK = bool(environ.get('IS_SREAM_SHORTLINK', False))
 
 #added shortner in stream and download 
 STREAM_SITE = (environ.get('STREAM_SITE', 'techvjlink.site'))
