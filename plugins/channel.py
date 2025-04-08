@@ -234,23 +234,22 @@ async def media_handler(bot, message):
             files, offset, total_results = await get_search_results(message.chat.id, search, offset=0, filter=True)
 
             # Create the buttons
-            
-            #creat button with getfile function 
-            button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
-            #creat button with file id
-          #  button1 = InlineKeyboardButton('Get This File♂️', url=f'https://telegram.me/{temp.U_NAME}?start=file_{file_id}')
-            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/HD_Filmyzilla_Movies')
-            
+        button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
+        button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/HD_Filmyzilla_Movies')
+
             # Arrange the buttons in a single keyboard
-            keyboard = InlineKeyboardMarkup([[button1], [button2]])
+        keyboard = InlineKeyboardMarkup([[button1], [button2]])
 
-            try:
-                # Fetch the IMDb data
-                poster_data = await get_poster(clean_filename)
-                rating = poster_data.get('rating', 'N/A') if poster_data else 'N/A'
-                genres = poster_data.get('genres', 'N/A') if poster_data else 'N/A'
+        try:
+            # Fetch the IMDb data
+            poster_data = await get_poster(clean_filename)
+            rating = poster_data.get('rating', 'N/A') if poster_data else 'N/A'
+            genres = poster_data.get('genres', 'N/A') if poster_data else 'N/A'
 
-                # Send the log message with the movie poster
+            # Create the Get Files link
+            get_files_link = f"https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}"
+    
+            # Send the log message with the movie poster
                 await bot.send_photo(
                     chat_id=MV_UPDATE_CHANNEL,
                     photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
@@ -263,9 +262,10 @@ async def media_handler(bot, message):
                              f"💻 𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n\n"
                              f"📜 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n\n"
                              f"📽️ 𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n\n"
-                             <a href='https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}'>𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a>
+                             f"🔗 𝗚𝗲𝘁 𝗙𝗶𝗹𝗲𝘀: [Click Here]({get_files_link})\n\n"
                              f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nOᑌᖇ Tᘜ ᑕOᗰᗰᑌᑎITY : @Kanus_Network\nBY : Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™"),
-                    reply_markup=keyboard
+                    reply_markup=keyboard,
+                    parse_mode="Markdown"  # Make sure to enable Markdown parsing for the link
                 )
                 print(f"Movie Log‼️ Sended For FileName:- {filename}, {size_str}, {quality_str}, {resolution_str}, {language_str}")
             except FloodWait as e:
