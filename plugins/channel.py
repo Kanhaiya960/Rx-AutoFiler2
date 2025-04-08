@@ -263,6 +263,7 @@ async def media_handler(bot, message):
                              f"💻 𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n\n"
                              f"📜 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n\n"
                              f"📽️ 𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n\n"
+                             <a href='https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}'>𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a>
                              f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nOᑌᖇ Tᘜ ᑕOᗰᗰᑌᑎITY : @Kanus_Network\nBY : Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™"),
                     reply_markup=keyboard
                 )
