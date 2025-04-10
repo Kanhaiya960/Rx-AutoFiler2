@@ -240,31 +240,36 @@ async def media_handler(bot, message):
             # Arrange the buttons in a single keyboard
         keyboard = InlineKeyboardMarkup([[button1], [button2]])
 
-        try:
-            # Fetch the IMDb data
-            poster_data = await get_poster(clean_filename)
-            rating = poster_data.get('rating', 'N/A') if poster_data else 'N/A'
-            genres = poster_data.get('genres', 'N/A') if poster_data else 'N/A'
+# ... (previous code remains the same until line 253)
 
-            # Create the Get Files link
-            get_files_link = f"https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}"
-    
-            # Send the log message with the movie poster
+            try:
+                # Fetch the IMDb data
+                poster_data = await get_poster(clean_filename)
+                rating = poster_data.get('rating', 'N/A') if poster_data else 'N/A'
+                genres = poster_data.get('genres', 'N/A') if poster_data else 'N/A'
+
+                # Create the Get Files link
+                get_files_link = f"https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}"
+                
+                # Send the log message with the movie poster
                 await bot.send_photo(
-                    chat_id=MV_UPDATE_CHANNEL,                    photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
-                    caption=(f"#𝗡𝗲𝘄𝗠𝗼𝘃𝗶𝗲_𝗔𝗱𝗱𝗲𝗱\n\n"
-                             f"🔖 𝗠𝗼𝘃𝗶𝗲 𝗧𝗶𝘁𝗹𝗲: {filename}\n\n"
-                             f"🗂️ 𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝗹𝗲𝘀: {total_results}\n\n"
-                             f"⭐️ 𝗜𝗠𝗗𝗕 𝗥𝗮𝘁𝗶𝗻𝗴: {rating}\n\n"
-                             f"🎬 𝗚𝗲𝗻𝗿𝗲: {genres}\n\n"
-                             f"💾 𝗙𝗶𝗹𝗲 𝗦𝗶𝘇𝗲: {size_str}\n\n"
-                             f"💻 𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n\n"
-                             f"📜 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n\n"
-                             f"📽️ 𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n\n"
-                             f"🔗 𝗚𝗲𝘁 𝗙𝗶𝗹𝗲𝘀: [Click Here]({get_files_link})\n\n"
-                             f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nOᑌᖇ Tᘜ ᑕOᗰᗰᑌᑎITY : @Kanus_Network\nBY : Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™"),
+                    chat_id=MV_UPDATE_CHANNEL,
+                    photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
+                    caption=(
+                        f"#𝗡𝗲𝘄𝗠𝗼𝘃𝗶𝗲_𝗔𝗱𝗱𝗲𝗱\n\n"
+                        f"🔖 𝗠𝗼𝘃𝗶𝗲 𝗧𝗶𝘁𝗹𝗲: {filename}\n\n"
+                        f"🗂️ 𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝗹𝗲𝘀: {total_results}\n\n"
+                        f"⭐️ 𝗜𝗠𝗗𝗕 𝗥𝗮𝘁𝗶𝗻𝗴: {rating}\n\n"
+                        f"🎬 𝗚𝗲𝗻𝗿𝗲: {genres}\n\n"
+                        f"💾 𝗙𝗶𝗹𝗲 𝗦𝗶𝘇𝗲: {size_str}\n\n"
+                        f"💻 𝗤𝘂𝗮𝗹𝗶𝘁𝘆: {quality_str}\n\n"
+                        f"📜 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: {language_str}\n\n"
+                        f"📽️ 𝗙𝗶𝗹𝗲 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻: {resolution_str}\n\n"
+                        f"🔗 𝗚𝗲𝘁 𝗙𝗶𝗹𝗲𝘀: [Click Here]({get_files_link})\n\n"
+                        f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nOᑌᖇ Tᘜ ᑕOᗰᗰᑌᑎITY : @Kanus_Network\nBY : Kᴀɴᴜs Nᴇᴛᴡᴏʀᴋ™"
+                    ),
                     reply_markup=keyboard,
-                    parse_mode="Markdown"  # Make sure to enable Markdown parsing for the link
+                    parse_mode="Markdown"
                 )
                 print(f"Movie Log‼️ Sended For FileName:- {filename}, {size_str}, {quality_str}, {resolution_str}, {language_str}")
             except FloodWait as e:
@@ -272,5 +277,5 @@ async def media_handler(bot, message):
                 await asyncio.sleep(e.x)
             except Exception as e:
                 print(f"Failed to send message to {MV_UPDATE_CHANNEL}: {e}")           
-    else:
-        return
+        else:
+            return
