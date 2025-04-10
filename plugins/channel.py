@@ -233,14 +233,14 @@ async def media_handler(bot, message):
             search = filename
             files, offset, total_results = await get_search_results(message.chat.id, search, offset=0, filter=True)
 
+# ... (previous code remains the same until line 253)
+
             # Create the buttons
-        button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
-        button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/HD_Filmyzilla_Movies')
+            button1 = InlineKeyboardButton('Gᴇᴛ Aʟʟ Fɪʟᴇs ♂️', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{filenames}')
+            button2 = InlineKeyboardButton('Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ ♂️', url=f'https://t.me/HD_Filmyzilla_Movies')
 
             # Arrange the buttons in a single keyboard
-        keyboard = InlineKeyboardMarkup([[button1], [button2]])
-
-# ... (previous code remains the same until line 253)
+            keyboard = InlineKeyboardMarkup([[button1], [button2]])
 
             try:
                 # Fetch the IMDb data
