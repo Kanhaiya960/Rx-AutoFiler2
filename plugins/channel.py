@@ -251,8 +251,7 @@ async def media_handler(bot, message):
     
             # Send the log message with the movie poster
                 await bot.send_photo(
-                    chat_id=MV_UPDATE_CHANNEL,
-                    photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
+                    chat_id=MV_UPDATE_CHANNEL,                    photo="https://i.ibb.co/Dfyxkg5W/photo-2025-03-31-03-05-42-7487804546001928212.jpg",
                     caption=(f"#𝗡𝗲𝘄𝗠𝗼𝘃𝗶𝗲_𝗔𝗱𝗱𝗲𝗱\n\n"
                              f"🔖 𝗠𝗼𝘃𝗶𝗲 𝗧𝗶𝘁𝗹𝗲: {filename}\n\n"
                              f"🗂️ 𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝗹𝗲𝘀: {total_results}\n\n"
