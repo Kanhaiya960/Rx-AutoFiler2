@@ -23,7 +23,7 @@ from pyrogram.errors import (
     FloodWait,
     SessionRevoked
 )
-from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
+from info import API_ID, ADMINS, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
 from pymongo import MongoClient
 
 # MongoDB Setup
