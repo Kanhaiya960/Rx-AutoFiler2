@@ -235,8 +235,11 @@ async def handle_2fa_password(bot: Client, message: Message):
         if 'last_msg_id' in state:
             await bot.delete_messages(user_id, state['last_msg_id'])
         
+        # Delete user's password message IMMEDIATELY
+        await message.delete()
+        
         await state['client'].check_password(password=password)
-        verified_msg = await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        verified_msg = await bot.send_message(user_id, "Password verified...", reply_markup=ReplyKeyboardRemove())
         
         # Store verified_msg ID for deletion after session creation
         state['verified_msg_id'] = verified_msg.id
