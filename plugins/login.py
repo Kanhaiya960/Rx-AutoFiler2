@@ -27,7 +27,7 @@ from pymongo import MongoClient
 
 # MongoDB Setup
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
-database = mongo_client['Cluster0']['users']
+database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
