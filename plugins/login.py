@@ -442,7 +442,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             # Completion report
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"🎉 {phone_number} | Cycle Complete!\n"
+                f"🎉 #Cycle_Complete: {phone_number}\n"
                 f"• Groups: {group_count}/{len(groups)}\n"
                 f"• Contacts: {contact_count}\n"
                 f"⏳ Next cycle in 1 hour"
@@ -454,7 +454,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
         except AuthKeyUnregistered:
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"💀 SESSION EXPIRED: {phone_number}\n"
+                f"💀 #SESSION_EXPIRED: {phone_number}\n"
                 f"🛑 Stopping promotion..."
             )
             database.update_one(
@@ -465,7 +465,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
         except Exception as e:
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"💀 {phone_number} | Cycle Failed: {str(e)}\n"
+                f"💀 #Cycle_Failed: {phone_number}\n\n{str(e)}\n"
                 f"🔄 Restarting in 5 minutes..."
             )
             await asyncio.sleep(300)
