@@ -447,12 +447,9 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"🎉 #Cycle_Complete: {phone_number}
-"
-                f"• Groups: {group_count}/{len(groups)}
-"
-                f"• Contacts: {contact_count}
-"
+                f"🎉 #Cycle_Complete: {phone_number}"
+                f"• Groups: {group_count}/{len(groups)}"
+                f"• Contacts: {contact_count}"
                 f"⏳ Next cycle in 1 hour"
             )
 
@@ -468,10 +465,8 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
-                    f"💀 #{error_type}: {phone_number}
-"
-                    f"❌ Error: {str(e)}
-"
+                    f"💀 #{error_type}: {phone_number}"
+                    f"❌ Error: {str(e)}"
                     f"🛑 Auto-disabled promotion"
                 )
                 database.update_one(
@@ -485,10 +480,8 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             if "AUTH_KEY_UNREGISTERED" in str(e) and not already_notified:
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
-                    f"💀 #SESSION_TERMINATED: {phone_number}
-"
-                    f"❌ Error: {str(e)}
-"
+                    f"💀 #SESSION_TERMINATED: {phone_number}"
+                    f"❌ Error: {str(e)}"
                     f"🛑 Emergency stop"
                 )
                 database.update_one(
@@ -500,10 +493,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"💀 #Cycle_Failed: {phone_number}
-
-{str(e)}
-"
+                f"💀 #Cycle_Failed: {phone_number}{str(e)}"
                 f"🔄 Restarting in 5 minutes..."
             )
             await asyncio.sleep(300)
