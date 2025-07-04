@@ -91,7 +91,7 @@ async def check_login_status(user_id):
 async def cleanup_user_state(user_id):
     if user_id in user_states:
         state = user_states[user_id]
-        if 'client' in state and not state['client'].is_disconnected:
+        if 'client' in state and state['client'].is_connected:  # FIXED: Changed is_disconnected to is_connected
             await state['client'].disconnect()
         del user_states[user_id]
 
