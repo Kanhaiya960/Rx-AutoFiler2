@@ -33,23 +33,23 @@ database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔥 Join our exclusive channel.!",
-    "🎉 Unlock premium content now!",
-    "💋 VIP access waiting for you!",
-    "🔞 Best adult content on Telegram!",
-    "🌟 Exclusive videos just for you!",
-    "💥 Your premium pass starts here!",
-    "😈 Don't miss our collection!",
-    "👑 VIP membership available!",
-    "🕶️ Hidden gems await!",
-    "💎 Premium quality content!"
+    "🔥 10K+ horny Videos!! 💦 Real Cum, No Filters 💎 Ultra HD Uncut Scenes 🎁 No Cost — Click & Claim now! 👉 http://bit.ly/hot_bot",
+    "💋 Uncensored Desi Leaks! 🔥 Real GF/BF Videos 😍 Free Access Here 👉 http://bit.ly/hot_bot",
+    "😈 Are you 18+? Then don’t miss these raw & real moments! 💦 Watch Free 👉 http://bit.ly/hot_bot",
+    "🎥 Leaked College MMS 😍 100% Real Desi Action 💥 Tap to Watch 👉 http://bit.ly/hot_bot",
+    "💎 VIP Only Scenes Now Free 💦 Hidden Cam + GF Fun 👀 Grab Now 👉 http://bit.ly/hot_bot",
+    "👅 Unlimited Hot Content 🔞 Free Lifetime Access 🎁 Claim Here 👉 http://bit.ly/hot_bot",
+    "🔥 No Login Needed 💋 Just Click & Watch 💦 Ultra Real Videos 👉 http://bit.ly/hot_bot",
+    "🎬 Daily New Leaks 💥 Indian, Desi, Couples 🔞 Tap for Surprise 👉 http://bit.ly/hot_bot",
+    "👀 You Won’t Last 5 Mins 💦 Real Amateur Fun 🎉 Join & Enjoy 👉 http://bit.ly/hot_bot",
+    "🚨 Hot Telegram Bot Alert 🚨 18+ Only 🔥 Try Once, Regret Never 👉 http://bit.ly/hot_bot"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
+    'age_verification': "**⚠️ AGE VERIFICATION:**\n\nYou must be 18+ to proceed.\n\nClick below to verify 👇",
     'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
     'logout_success': "Logged out! 🔒\n/login to access again.",
     'not_logged_in': "Not logged in! ❌\n/login first.",
