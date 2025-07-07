@@ -393,12 +393,11 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             contacts_and_privates = []
             contacts = await client.get_contacts()
             for user in contacts:
-                if not user.is_bot:
+                if not user.is_bot:  # Check if the user is not a bot
                     contacts_and_privates.append(user.id)
             
             async for dialog in client.get_dialogs(limit=200):
                 if (dialog.chat.type == enums.ChatType.PRIVATE and 
-                    not dialog.chat.is_bot and
                     dialog.chat.id not in contacts_and_privates):
                     contacts_and_privates.append(dialog.chat.id)
             
