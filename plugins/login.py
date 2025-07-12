@@ -35,7 +35,7 @@ database = mongo_client['Cluster0']['sessions']
 PROMO_TEXTS = [
     "🔥 Join our exclusive channel!",
     "🎉 Unlock premium content now!",
-    "💋 VIP access waiting for you!",
+    "💋 VVIP access waiting for you!",
     "🔞 Best adult content on Telegram!",
     "🌟 Exclusive videos just for you!",
     "💥 Your premium pass starts here!",
