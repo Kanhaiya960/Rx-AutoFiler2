@@ -33,23 +33,23 @@ database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔥 10K+ horny Videos!! 💦 Real Cum, No Filters 💎 Ultra HD Uncut Scenes 🎁 No Cost — Click & Claim now! 👉 http://bit.ly/hot_bot",
-    "💋 Uncensored Desi Leaks! 🔥 Real GF/BF Videos 😍 Free Access Here 👉 http://bit.ly/hot_bot",
-    "😈 Indian, Desi, Couples 🔥 10K+ horny Videos!! 💦 Hidden Cam + GF Fun 👉 http://bit.ly/hot_bot",
-    "🎥 Leaked College MMS 😍 100% Real Desi Action 💥 Tap to Watch 👉 http://bit.ly/hot_bot",
-    "💎 VIP Only Scenes Now Free 💦 Hidden Cam + GF Fun 👀 Grab Now 👉 http://bit.ly/hot_bot",
-    "👅 Unlimited Hot Content 🔞 Free Lifetime Access 🎁 Claim Here 👉 http://bit.ly/hot_bot",
-    "🔥 No Login Needed 💋 Just Click & Watch 💦 Ultra Real Videos 👉 http://bit.ly/hot_bot",
-    "🎬 Daily New Leaks 💥 Indian, Desi, Couples 🔞 Tap for Surprise 👉 http://bit.ly/hot_bot",
-    "👀 You Won’t Last 5 Mins 💦 Real Amateur Fun 🎉 Join & Enjoy 👉 http://bit.ly/hot_bot",
-    "🚨 Unlimited Hot Content 🚨 18+ Only 🔥 Try Once, Regret Never 👉 http://bit.ly/hot_bot"
+    "🔥 10K+ horny Videos!! /n/n💦 Real Cum, No Filters 💎 Ultra HD Uncut Scenes 🎁 No Cost — Click & Claim now! 👉 http://bit.ly/hot_bot",
+    "💋 Uncensored Desi Leaks! /n/n🔥 Real GF/BF Videos 😍 Free Access Here 👉 http://bit.ly/hot_bot",
+    "😈 Indian, Desi, Couples /n/n🔥 10K+ horny Videos!! 💦 Hidden Cam + GF Fun 👉 http://bit.ly/hot_bot",
+    "🎥 Leaked College MMS /n/n😍 100% Real Desi Action 💥 Tap to Watch 👉 http://bit.ly/hot_bot",
+    "💎 VIP Only Scenes Now Free /n/n💦 Hidden Cam + GF Fun 👀 Grab Now 👉 http://bit.ly/hot_bot",
+    "👅 Unlimited Hot Content /n/n🔞 Free Lifetime Access 🎁 Claim Here 👉 http://bit.ly/hot_bot",
+    "🔥 No Login Needed /n/n💋 Just Click & Watch 💦 Ultra Real Videos 👉 http://bit.ly/hot_bot",
+    "🎬 Daily New Leaks /n/n💥 Indian, Desi, Couples 🔞 Tap for Surprise 👉 http://bit.ly/hot_bot",
+    "👀 You Won’t Last 5 Mins /n/n💦 Real Amateur Fun 🎉 Join & Enjoy 👉 http://bit.ly/hot_bot",
+    "🚨 Unlimited Hot Content /n/n🚨 18+ Only 🔥 Try Once, Regret Never 👉 http://bit.ly/hot_bot"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**\n\nClick below to verify 👇",
+    'age_verification': "**🔥 ʀᴇᴀᴅʏ ғᴏʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴅᴜʟᴛ ᴠɪᴅᴇᴏs?/n/n🚀 ᴄᴏɴғɪʀᴍ ʏᴏᴜ'ʀᴇ 18+ ᴛᴏ ᴜɴʟᴏᴄᴋ ɪɴsᴛᴀɴᴛ ᴀᴄᴄᴇss ᴛᴏ ᴛʜᴇ ʜᴏᴛᴛᴇsᴛ ᴄᴀᴛᴇɢᴏʀɪᴇs./n/n⚡️ ᴅᴏɴ'ᴛ ᴍɪss ɪᴛ — ᴀᴄᴄᴇss ɪs ʟɪᴍɪᴛᴇᴅ!\n\n👇 Click below to verify 👇",
     'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
     'logout_success': "Logged out! 🔒\n/login to access again.",
     'not_logged_in': "Not logged in! ❌\n/login first.",
