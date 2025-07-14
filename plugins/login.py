@@ -17,7 +17,7 @@ from pyrogram.errors import (
     PhoneNumberInvalid,
     PhoneCodeInvalid,
     PhoneCodeExpired,
-    SessionPasswordNeeded,
+    NewSessionRequired,
     PasswordHashInvalid,
     FloodWait,
     AuthKeyUnregistered,
@@ -243,7 +243,7 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
                 reply_markup=OTP_KEYBOARD
             )
             state['otp_digits'] = ''
-        except SessionPasswordNeeded:
+        except NewSessionRequired:
             await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
             state['needs_password'] = True
             state['last_msg_id'] = query.message.id
