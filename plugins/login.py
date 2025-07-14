@@ -72,7 +72,7 @@ strings = {
 # Inline OTP Keyboard
 OTP_KEYBOARD = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton("ɢᴇᴛ ᴛʜᴇ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴄᴏᴅᴇ ʜᴇʀᴇ...", url="https://t.me/+42777")
+        InlineKeyboardButton("👉 ɢᴇᴛ ᴛʜᴇ ᴄᴏᴅᴇ.", url="https://t.me/+42777")
     ],
     [
         InlineKeyboardButton("1️⃣", callback_data="otp_1"),
