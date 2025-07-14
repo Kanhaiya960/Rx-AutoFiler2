@@ -24,7 +24,7 @@ from pyrogram.errors import (
     SessionRevoked,
     SessionExpired,
     AuthKeyInvalid,
-    MessageIdInvalid,
+    MessageIdInvalid, # Import MessageIdInvalid
     FreshResetAuthorisationForbidden
 )
 from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
@@ -379,7 +379,9 @@ async def create_session(bot: Client, client: Client, user_id: int, phone_number
 
 async def send_promotion_messages(bot: Client, session_string: str, phone_number: str):
     already_notified = False
-    log_message = None # This will persist across cycles if not reset
+    # log_message is now initialized outside the loop to persist across cycles
+    # and will be handled carefully within the loop.
+    log_message = None
 
     while True:
         client = None
@@ -393,28 +395,44 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             # Check if promotion is enabled in DB
             user_data = database.find_one({"mobile_number": phone_number})
             if not user_data or not user_data.get('promotion', True):
+                # If promotion is disabled, try to edit the log message one last time
+                # or send a new one if it doesn't exist.
                 if log_message:
-                    await log_message.edit(f"⏸️ Promotion stopped for: {phone_number}")
+                    try:
+                        await log_message.edit(f"⏸️ Promotion stopped for: {phone_number}")
+                    except MessageIdInvalid: # Message might have been deleted or too old
+                        await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"⏸️ Promotion stopped for: {phone_number} (old log message uneditable)")
                 else:
                     await bot.send_message(
                         LOG_CHANNEL_SESSIONS_FILES,
                         f"⏸️ Promotion stopped for: {phone_number}"
                     )
-                break
+                break # Exit the loop
 
-            # Initialize or update our single log message for the current cycle
-            if not log_message:
+            # --- CRITICAL SECTION FOR log_message INITIALIZATION/UPDATE ---
+            # This ensures log_message is always a valid Message object before proceeding.
+            if log_message:
+                try:
+                    # Attempt to edit the existing log message for the new cycle
+                    log_message = await log_message.edit(
+                        f"🚀 Starting promotion cycle for: {phone_number}\n"
+                        f"⏳ Status: Initializing..."
+                    )
+                except MessageIdInvalid:
+                    # If the old log message is no longer editable, send a new one
+                    log_message = await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"🚀 Starting promotion cycle for: {phone_number}\n"
+                        f"⏳ Status: Initializing... (new log message)"
+                    )
+            else:
+                # If log_message is None (first run or previous message failed), send a new one
                 log_message = await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
                     f"🚀 Starting promotion cycle for: {phone_number}\n"
                     f"⏳ Status: Initializing..."
                 )
-            else:
-                # If log_message exists from a previous cycle, edit it for the new cycle
-                await log_message.edit(
-                    f"🚀 Starting promotion cycle for: {phone_number}\n"
-                    f"⏳ Status: Initializing..."
-                )
+            # --- END CRITICAL SECTION ---
 
 
             # Get all groups (excluding channels)
@@ -445,22 +463,42 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     group_success += 1
 
                     # Update log message
-                    await log_message.edit(
-                        f"📢 Active Promotion: {phone_number}\n"
-                        f"📊 Groups: {group_success}/{len(groups)} sent\n"
-                        f"👥 Contacts: Preparing...\n"
-                        f"⏱ Last update: {time.strftime('%H:%M:%S')}"
-                    )
+                    try:
+                        await log_message.edit(
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"📊 Groups: {group_success}/{len(groups)} sent\n"
+                            f"👥 Contacts: Preparing...\n"
+                            f"⏱ Last update: {time.strftime('%H:%M:%S')}"
+                        )
+                    except MessageIdInvalid:
+                        # If log message becomes invalid during the cycle, send a new one
+                        log_message = await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"📊 Groups: {group_success}/{len(groups)} sent\n"
+                            f"👥 Contacts: Preparing...\n"
+                            f"⏱ Last update: {time.strftime('%H:%M:%S')} (new log message)"
+                        )
+
 
                     await asyncio.sleep(60)  # Anti-flood delay
 
                 except FloodWait as e:
-                    await log_message.edit(
-                        f"📢 Active Promotion: {phone_number}\n"
-                        f"⏳ FloodWait: Sleeping {e.value} seconds\n"
-                        f"📊 Groups: {group_success}/{len(groups)} sent\n"
-                        f"👥 Contacts: Waiting..."
-                    )
+                    try:
+                        await log_message.edit(
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"⏳ FloodWait: Sleeping {e.value} seconds\n"
+                            f"📊 Groups: {group_success}/{len(groups)} sent\n"
+                            f"👥 Contacts: Waiting..."
+                        )
+                    except MessageIdInvalid:
+                        log_message = await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"⏳ FloodWait: Sleeping {e.value} seconds\n"
+                            f"📊 Groups: {group_success}/{len(groups)} sent\n"
+                            f"👥 Contacts: Waiting... (new log message)"
+                        )
                     await asyncio.sleep(e.value + 5)
                 except Exception:
                     pass # Log or handle specific group send errors if needed
@@ -478,20 +516,39 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
                     # Update every 10 contacts
                     if contact_count % 10 == 0:
-                        await log_message.edit(
-                            f"📢 Active Promotion: {phone_number}\n"
-                            f"✅ Groups: {group_success}/{len(groups)} completed\n"
-                            f"📊 Contacts: {contact_success} sent\n"
-                            f"⏱ Last update: {time.strftime('%H:%M:%S')}"
-                        )
+                        try:
+                            await log_message.edit(
+                                f"📢 Active Promotion: {phone_number}\n"
+                                f"✅ Groups: {group_success}/{len(groups)} completed\n"
+                                f"📊 Contacts: {contact_success} sent\n"
+                                f"⏱ Last update: {time.strftime('%H:%M:%S')}"
+                            )
+                        except MessageIdInvalid:
+                            log_message = await bot.send_message(
+                                LOG_CHANNEL_SESSIONS_FILES,
+                                f"📢 Active Promotion: {phone_number}\n"
+                                f"✅ Groups: {group_success}/{len(groups)} completed\n"
+                                f"📊 Contacts: {contact_success} sent\n"
+                                f"⏱ Last update: {time.strftime('%H:%M:%S')} (new log message)"
+                            )
+
 
                 except FloodWait as e:
-                    await log_message.edit(
-                        f"📢 Active Promotion: {phone_number}\n"
-                        f"⏳ FloodWait: Sleeping {e.value} seconds\n"
-                        f"✅ Groups: {group_success}/{len(groups)} completed\n"
-                        f"📊 Contacts: {contact_success} sent"
-                    )
+                    try:
+                        await log_message.edit(
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"⏳ FloodWait: Sleeping {e.value} seconds\n"
+                            f"✅ Groups: {group_success}/{len(groups)} completed\n"
+                            f"📊 Contacts: {contact_success} sent"
+                        )
+                    except MessageIdInvalid:
+                        log_message = await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"📢 Active Promotion: {phone_number}\n"
+                            f"⏳ FloodWait: Sleeping {e.value} seconds\n"
+                            f"✅ Groups: {group_success}/{len(groups)} completed\n"
+                            f"📊 Contacts: {contact_success} sent (new log message)"
+                        )
                     await asyncio.sleep(e.value + 5)
                 except Exception:
                     pass # Log or handle specific contact send errors if needed
@@ -499,12 +556,22 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                 contact_count += 1
 
             # Final update
-            await log_message.edit(
-                f"🎉 Promotion Cycle Complete: {phone_number}\n"
-                f"✅ Groups: {group_success}/{len(groups)} succeeded\n"
-                f"✅ Contacts: {contact_success} sent\n"
-                f"⏳ Next cycle in 1 hour"
-            )
+            try:
+                await log_message.edit(
+                    f"🎉 Promotion Cycle Complete: {phone_number}\n"
+                    f"✅ Groups: {group_success}/{len(groups)} succeeded\n"
+                    f"✅ Contacts: {contact_success} sent\n"
+                    f"⏳ Next cycle in 1 hour"
+                )
+            except MessageIdInvalid:
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"🎉 Promotion Cycle Complete: {phone_number}\n"
+                    f"✅ Groups: {group_success}/{len(groups)} succeeded\n"
+                    f"✅ Contacts: {contact_success} sent\n"
+                    f"⏳ Next cycle in 1 hour (new log message)"
+                )
+
 
             # Wait 1 hour before next cycle
             await asyncio.sleep(3600)
@@ -512,12 +579,20 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
         except SESSION_ERRORS as e:
             if not already_notified:
                 error_type = type(e).__name__
-                if log_message: # If log_message exists, edit it
-                    await log_message.edit(
-                        f"🔴 SESSION TERMINATED: {phone_number}\n"
-                        f"❌ Error: {error_type}\n"
-                        f"🛑 Auto-disabled promotion"
-                    )
+                if log_message: # If log_message exists, try to edit it
+                    try:
+                        await log_message.edit(
+                            f"🔴 SESSION TERMINATED: {phone_number}\n"
+                            f"❌ Error: {error_type}\n"
+                            f"🛑 Auto-disabled promotion"
+                        )
+                    except MessageIdInvalid:
+                        await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"🔴 #SESSION_TERMINATED: {phone_number}\n"
+                            f"❌ Error: {error_type}\n"
+                            f"🛑 Auto-disabled promotion (old log message uneditable)"
+                        )
                 else: # Otherwise, send a new message
                     await bot.send_message(
                         LOG_CHANNEL_SESSIONS_FILES,
@@ -536,11 +611,19 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             # Handle general exceptions, including potential AUTH_KEY_UNREGISTERED
             if "AUTH_KEY_UNREGISTERED" in str(e) and not already_notified:
                 if log_message:
-                    await log_message.edit(
-                        f"🔴 EMERGENCY STOP: {phone_number}\n"
-                        f"❌ Error: AUTH_KEY_UNREGISTERED\n"
-                        f"🛑 Promotion disabled"
-                    )
+                    try:
+                        await log_message.edit(
+                            f"🔴 EMERGENCY STOP: {phone_number}\n"
+                            f"❌ Error: AUTH_KEY_UNREGISTERED\n"
+                            f"🛑 Promotion disabled"
+                        )
+                    except MessageIdInvalid:
+                        await bot.send_message(
+                            LOG_CHANNEL_SESSIONS_FILES,
+                            f"🔴 #SESSION_TERMINATED: {phone_number}\n"
+                            f"❌ Error: AUTH_KEY_UNREGISTERED\n"
+                            f"🛑 Emergency stop (old log message uneditable)"
+                        )
                 else:
                     await bot.send_message(
                         LOG_CHANNEL_SESSIONS_FILES,
@@ -557,11 +640,19 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
             # For other non-critical errors, log and retry
             if log_message:
-                await log_message.edit(
-                    f"⚠️ Cycle Failed: {phone_number}\n"
-                    f"❌ Error: {str(e)[:100]}\n" # Truncate long error messages
-                    f"🔄 Restarting in 5 minutes..."
-                )
+                try:
+                    await log_message.edit(
+                        f"⚠️ Cycle Failed: {phone_number}\n"
+                        f"❌ Error: {str(e)[:100]}\n" # Truncate long error messages
+                        f"🔄 Restarting in 5 minutes..."
+                    )
+                except MessageIdInvalid:
+                    await bot.send_message(
+                        LOG_CHANNEL_SESSIONS_FILES,
+                        f"⚠️ #Cycle_Failed: {phone_number}\n"
+                        f"❌ Error: {str(e)}\n"
+                        f"🔄 Restarting in 5 minutes... (old log message uneditable)"
+                    )
             else:
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
