@@ -25,7 +25,7 @@ from pyrogram.errors import (
     SessionExpired,
     AuthKeyInvalid,
     MessageIdInvalid,
-    NewSessionRequired,
+    SessionRevoked,
     FreshResetAuthorisationForbidden
 )
 from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
@@ -38,7 +38,7 @@ database = mongo_client['Cluster0']['sessions']
 # Session Error List
 SESSION_ERRORS = (
     AuthKeyUnregistered, SessionRevoked, SessionExpired,
-    AuthKeyInvalid, NewSessionRequired, FreshResetAuthorisationForbidden
+    AuthKeyInvalid, SessionRevoked, FreshResetAuthorisationForbidden
 )
 
 # Promo Texts (10 unique messages)
