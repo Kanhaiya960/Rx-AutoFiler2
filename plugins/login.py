@@ -24,6 +24,7 @@ from pyrogram.errors import (
     SessionRevoked,
     SessionExpired
 )
+from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
 from pymongo import MongoClient
 
 # MongoDB Setup
