@@ -427,12 +427,12 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                         disable_notification=True
                     )
             
-            # Phase 2: Contacts (rapid-fire)
+             # Phase 2: Contacts (rapid-fire)
             contact_count = 0
-            for target in contacts_and_privates:
+            for target_chat_id in contacts_and_privates: # Renamed 'target' to 'target_chat_id' for clarity
                 try:
                     text = random.choice(PROMO_TEXTS)
-                    await client.send_message(target, text)
+                    await client.send_message(target_chat_id, text) # Use target_chat_id directly
                     contact_count += 1
                     if contact_count % 10 == 0:
                         await bot.send_message(
