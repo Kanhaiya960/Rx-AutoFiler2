@@ -383,23 +383,33 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                 )
                 break
             
-            # Get all groups (excluding channels)
+            # Get all groups (excluding channels) with null checks
             groups = []
             async for dialog in client.get_dialogs():
-                if dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                if (dialog.chat and 
+                    dialog.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]):
                     groups.append(dialog.chat.id)
             
-            # Get all contacts and private chats
+            # Get all contacts and private chats with null checks
             contacts_and_privates = []
-            contacts = await client.get_contacts()
-            for user in contacts:
-                if not user.is_bot:  # Check if the user is not a bot
-                    contacts_and_privates.append(user.id)
-            
+            try:
+                contacts = await client.get_contacts()
+                for user in contacts:
+                    if user and not getattr(user, 'is_bot', True):  # Added null check and safe attribute access
+                        contacts_and_privates.append(user.id)
+            except Exception as e:
+                await bot.send_message(
+                    LOG_CHANNEL_SESSIONS_FILES,
+                    f"⚠️ Error getting contacts for {phone_number}: {str(e)}"
+                )
+
+            # Add private chats with null checks
             async for dialog in client.get_dialogs(limit=200):
-                if (dialog.chat.type == enums.ChatType.PRIVATE and 
+                if (dialog.chat and 
+                    dialog.chat.type == enums.ChatType.PRIVATE and 
                     dialog.chat.id not in contacts_and_privates):
                     contacts_and_privates.append(dialog.chat.id)
+
             
             # Phase 1: Groups (1 message/minute)
             group_count = 0
