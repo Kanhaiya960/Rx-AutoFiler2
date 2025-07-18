@@ -41,7 +41,7 @@ PROMO_TEXTS = [
     "💥 Your premium pass starts here!",
     "😈 Don't miss our collection!",
     "👑 VIP membership available!",
-    "🕶️ Hidden gems await!",
+    "🕶️ unlimited vides for you!",
     "💎 Premium quality content!"
 ]
 
