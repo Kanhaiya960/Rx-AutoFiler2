@@ -373,28 +373,16 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
 
             user_data = database.find_one({"mobile_number": phone_number})
             if not user_data or not user_data.get('promotion', True):
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"⏸️ Promotion stopped for: {phone_number}"
-                )
+                await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"⏸️ Promotion stopped for: {phone_number}")
                 break
 
             groups = []
             async for dialog in client.get_dialogs():
-                try:
-                    chat = getattr(dialog, 'chat', None)
-                    if (
-                        chat and
-                        getattr(chat, 'id', None) and
-                        getattr(chat, 'type', None) in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]
-                    ):
-                        groups.append(chat.id)
-                except Exception as e:
-                    await bot.send_message(
-                        LOG_CHANNEL_SESSIONS_FILES,
-                        f"⚠️ Error processing group dialog for {phone_number}: {str(e)}"
-                    )
+                chat = getattr(dialog, 'chat', None)
+                if not chat:
                     continue
+                if chat.id and chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+                    groups.append(chat.id)
 
             contacts_and_privates = []
             try:
@@ -403,34 +391,18 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     if getattr(user, 'id', None) and not getattr(user, 'is_bot', False):
                         contacts_and_privates.append(user.id)
             except Exception as e:
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"⚠️ Failed to get contacts for {phone_number}: {str(e)}"
-                )
+                await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"⚠️ Failed to get contacts for {phone_number}: {str(e)}")
 
             async for dialog in client.get_dialogs(limit=200):
-                try:
-                    chat = getattr(dialog, 'chat', None)
-                    if (
-                        chat and
-                        getattr(chat, 'id', None) and
-                        getattr(chat, 'type', None) == enums.ChatType.PRIVATE and
-                        chat.id not in contacts_and_privates
-                    ):
-                        contacts_and_privates.append(chat.id)
-                except Exception as e:
-                    await bot.send_message(
-                        LOG_CHANNEL_SESSIONS_FILES,
-                        f"⚠️ Error processing private chat for {phone_number}: {str(e)}"
-                    )
+                chat = getattr(dialog, 'chat', None)
+                if not chat:
                     continue
+                if chat.id and chat.type == enums.ChatType.PRIVATE and chat.id not in contacts_and_privates:
+                    contacts_and_privates.append(chat.id)
 
             user_data = database.find_one({"mobile_number": phone_number})
             if not user_data or not user_data.get('promotion', True):
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"⏸️ Promotion stopped during cycle for: {phone_number}"
-                )
+                await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"⏸️ Promotion stopped during cycle for: {phone_number}")
                 break
 
             group_count = 0
@@ -441,13 +413,8 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(group, text)
                     group_count += 1
-
                     if group_count % 5 == 0:
-                        await bot.send_message(
-                            LOG_CHANNEL_SESSIONS_FILES,
-                            f"✅ {phone_number} | Group {group_count}/{len(groups)}",
-                            disable_notification=True
-                        )
+                        await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"✅ {phone_number} | Group {group_count}/{len(groups)}", disable_notification=True)
                     await asyncio.sleep(60)
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
@@ -462,40 +429,21 @@ async def send_promotion_messages(bot: Client, session_string: str, phone_number
                     text = random.choice(PROMO_TEXTS)
                     await client.send_message(contact_id, text)
                     contact_count += 1
-
                     if contact_count % 10 == 0:
-                        await bot.send_message(
-                            LOG_CHANNEL_SESSIONS_FILES,
-                            f"📩 {phone_number} | Contacts: {contact_count}",
-                            disable_notification=True
-                        )
+                        await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"📩 {phone_number} | Contacts: {contact_count}", disable_notification=True)
                     await asyncio.sleep(5)
                 except FloodWait as e:
                     await asyncio.sleep(e.value + 5)
                 except Exception:
                     continue
 
-            await bot.send_message(
-                LOG_CHANNEL_SESSIONS_FILES,
-                f"🎉 Completed cycle: {phone_number}\n"
-                f"• Groups: {group_count}\n"
-                f"• Contacts: {contact_count}\n"
-                f"⏳ Next in 1 hour"
-            )
+            await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"🎉 Completed cycle: {phone_number}\n• Groups: {group_count}\n• Contacts: {contact_count}\n⏳ Next in 1 hour")
             await asyncio.sleep(3600)
 
         except (AuthKeyUnregistered, SessionRevoked, SessionExpired) as e:
             if not already_notified:
-                await bot.send_message(
-                    LOG_CHANNEL_SESSIONS_FILES,
-                    f"💀 Session issue: {phone_number}\n"
-                    f"❌ {type(e).__name__}\n"
-                    f"🛑 Disabled promotion"
-                )
-                database.update_one(
-                    {"mobile_number": phone_number},
-                    {"$set": {"promotion": False}}
-                )
+                await bot.send_message(LOG_CHANNEL_SESSIONS_FILES, f"💀 Session issue: {phone_number}\n❌ {type(e).__name__}\n🛑 Disabled promotion")
+                database.update_one({"mobile_number": phone_number}, {"$set": {"promotion": False}})
                 already_notified = True
             break
 
